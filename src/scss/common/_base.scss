@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  color: #fff;
+  font-family: $AvenirDemi;
+  font-size: 1.6rem;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+canvas {
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+::-moz-scrollbar {
+  display: none;
+}
+
+.body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
