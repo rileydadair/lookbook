@@ -25,3 +25,8 @@
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
+
+// site
+@mixin pos-right {
+  right: 20px;
+}

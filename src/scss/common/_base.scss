@@ -2,6 +2,8 @@
 *::before,
 *::after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -10,13 +12,12 @@ html {
 }
 
 body {
+  background-color: $color-black;
   color: #fff;
-  font-family: $AvenirDemi;
-  font-size: 1.6rem;
+  font-family: $font-avenir-demi;
+  font-size: 1.5rem;
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
-  -ms-overflow-style: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,6 +25,8 @@ body {
 button {
   border: 0;
   background: transparent;
+  cursor: pointer;
+  font-family: inherit;
   outline: 0;
 }
 

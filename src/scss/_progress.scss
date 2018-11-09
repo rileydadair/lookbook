@@ -1,0 +1,16 @@
+.progress {
+  position: absolute;
+  bottom: 24px;
+  left: 20px;
+  overflow: hidden;
+  transform: rotate(-90deg) translate(0,100%);
+  transform-origin: bottom left;
+  z-index: 9999;
+
+  &__label {
+    padding: 0;
+    font-size: 3.4rem;
+    position: relative;
+    display: inline-block;
+  }
+}

@@ -40,7 +40,7 @@ export default {
     },
 
     show(direction) {
-      setTimeout(() => this.$refs.slide.style.zIndex = 1000);
+      setTimeout(() => this.$refs.slide.style.zIndex = 100);
 
       return this.toggle('show', direction);
     },
@@ -71,7 +71,7 @@ export default {
             this.$refs.slide.style.opacity = 1;
           },
           onComplete: () => {
-            this.$refs.slide.style.zIndex = 999;
+            this.$refs.slide.style.zIndex = 99;
             this.$refs.slide.style.opacity = action === 'hide' ? 0 : 1;
           }
         });

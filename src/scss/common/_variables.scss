@@ -10,6 +10,9 @@ $screen-md-max:               ($screen-lg-min - 1) !default;
 $screen-lg-max:               ($screen-xl-min - 1) !default;
 
 // Font families
-$AvenirDemi: 'AvenirNext-Demi', Futura, "Trebuchet MS", Arial, sans-serif;
-$AvenirMedium: 'AvenirNext-Medium', Futura, "Trebuchet MS", Arial, sans-serif;
-$Din: 'Din1451', Futura, "Trebuchet MS", Arial, sans-serif;
+$font-avenir-demi: 'AvenirNext-Demi', Futura, "Trebuchet MS", Arial, sans-serif;
+$font-avenir-medium: 'AvenirNext-Medium', Futura, "Trebuchet MS", Arial, sans-serif;
+$font-din: 'Din1451', Futura, "Trebuchet MS", Arial, sans-serif;
+
+// colors
+$color-black: #101010;

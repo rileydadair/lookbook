@@ -24,4 +24,16 @@
   bottom: 0;
   right: 0;
   z-index: 9999;
+
+  &__btn {
+    display: block;
+    padding: 15px 22px;
+    // 52
+
+  }
+
+  &__plus {
+    color: #fff;
+    font-size: 3.4rem;
+  }
 }
