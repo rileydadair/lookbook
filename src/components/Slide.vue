@@ -1,7 +1,7 @@
 <template>
   <div class="slide" :class="{ 'is-active': active }" ref="slide">
     <div class="slide__wrap" ref="wrap">
-      <div class="slide__img" :style="{ backgroundImage: backgroundImage }" ref="img"></div>
+      <div class="slide__img" :style="{ backgroundImage: bgImage, backgroundPosition: bgPosition }" ref="img"></div>
     </div>
   </div>
 </template>
@@ -27,11 +27,20 @@ export default {
     }
   },
   computed: {
-    backgroundImage() {
+    bgImage() {
       if (States.deviceType === 'mobile') {
         return `url('${this.bgMobile}')`
       } else {
         return `url('${this.bgDesktop}')`
+      }
+    },
+    bgPosition() {
+      if (this.bgDesktop.includes('michelangelo/main')) {
+        return '50% 0%'
+      } else if (this.bgDesktop.includes('donatello/main')) {
+        return '50% 100%'
+      } else {
+        return '50% 50%'
       }
     }
   },

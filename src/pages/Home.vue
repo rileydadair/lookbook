@@ -19,11 +19,7 @@
     </SlideMaster>
     <div class="titles">
       <template v-for="item in items">
-        <Title
-          :titleVal="item.title"
-          :key="`title-${item.id}`"
-          ref="titles"
-        />
+        <Title :titleVal="item.title" :key="`title-${item.id}`" ref="titles" />
       </template>
     </div>
     <Progress ref="progress" />
