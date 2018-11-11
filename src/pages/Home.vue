@@ -1,15 +1,29 @@
 <template>
   <div class="section">
-    <SlideMaster className="slider--main" @onSliderEvent="onSliderEvent" @onSliderMount="onSliderMount" ref="slider">
+    <SlideMaster
+      className="slider--main"
+      @onSliderEvent="onSliderEvent"
+      @onSliderMount="onSliderMount"
+      ref="slider"
+    >
       <template slot="slides" v-for="item in items">
-        <Slide :item="item" :key="`slide-${item.id}`" ref="slides" />
+        <Slide 
+          :bgMobile="item.main_image_mobile" 
+          :bgDesktop="item.main_image_desktop" 
+          :key="`slide-${item.id}`" 
+          ref="slides"
+        />
       </template>
       <span slot="prevButton" class="controls__plus">+</span>
       <span slot="nextButton" class="controls__plus">+</span>
     </SlideMaster>
     <div class="titles">
       <template v-for="item in items">
-        <Title :titleVal="item.title" :key="`title-${item.id}`" ref="titles" />
+        <Title
+          :titleVal="item.title"
+          :key="`title-${item.id}`"
+          ref="titles"
+        />
       </template>
     </div>
     <Progress ref="progress" />

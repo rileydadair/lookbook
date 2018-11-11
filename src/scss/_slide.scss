@@ -8,13 +8,6 @@
   pointer-events: none;
   opacity: 0;
 
-  // &.is-active {
-  //   opacity: 1;
-  //   z-index: 99;
-  //   pointer-events: auto;
-  //   position: relative;
-  // }
-
   &__wrap {
     background-color: $color-black;
     height: 100%;
@@ -32,7 +25,6 @@
     background-position: 50% 0%;
     position: absolute;
     pointer-events: none;
-
     opacity: 0.7;
   }
 

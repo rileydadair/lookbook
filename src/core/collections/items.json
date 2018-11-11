@@ -3,24 +3,32 @@
     "id": 1,
     "title": "Michelangelo",
     "description": "Pivot gnarly ho-ho drop in mute-air shoveit airwalk",
-    "image": "1.jpg"
+    "image": "1.jpg",
+    "main_image_mobile": "/images/michelangelo/main_m.jpg",
+    "main_image_desktop": "/images/michelangelo/main.jpg"
   },
   {
     "id": 2,
     "title": "Leonardo",
     "description": "Christ air pivot nose bone feeble quarter pipe",
-    "image": "2.jpg"
+    "image": "2.jpg",
+    "main_image_desktop": "/images/michelangelo/michelangelo_main.jpg",
+    "main_image_mobile": "/images/michelangelo/michelangelo_main_m.jpg"
   },
   {
     "id": 3,
     "title": "Donatello",
     "description": "Nollie risers salad grind fridgid air the faction",
-    "image": "3.jpg"
+    "image": "3.jpg",
+    "main_image_desktop": "/images/michelangelo/michelangelo_main.jpg",
+    "main_image_mobile": "/images/michelangelo/michelangelo_main_m.jpg"
   },
   {
     "id": 4,
     "title": "Raphael",
     "description": "Layback goofy footed transfer birdie Julien Stranger",
-    "image": "4.jpg"
+    "image": "4.jpg",
+    "main_image_desktop": "/images/michelangelo/michelangelo_main.jpg",
+    "main_image_mobile": "/images/michelangelo/michelangelo_main_m.jpg"
   }
 ]
