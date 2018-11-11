@@ -15,8 +15,9 @@ body {
   background-color: $color-black;
   color: #fff;
   font-family: $font-avenir-demi;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   min-height: 100vh;
+  overflow: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,8 +47,8 @@ canvas {
   display: none;
 }
 
-.body {
-  position: absolute;
+.section {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

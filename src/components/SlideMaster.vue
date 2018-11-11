@@ -161,6 +161,7 @@ export default {
     },
 
     onKeydown(e) {
+      e.preventDefault()
       // Navigate to next slide on cursor key "up" or "right".
       if (e.keyCode === 39 || e.keyCode === 40) this.nextSlide(e)
       // Navigate to previous slide on with cursor key "left" or "down".

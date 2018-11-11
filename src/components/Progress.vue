@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     setCurrent(val ,direction) {
-      TweenMax.to(this.$refs.currentEl, 0.5, {
+      TweenMax.to(this.$refs.currentEl, 0.6, {
         ease: 'Expo.easeIn',
         y: direction === 'next' ? '-100%' : '100%',
         onComplete: () => {

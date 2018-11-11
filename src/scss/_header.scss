@@ -1,29 +1,32 @@
-.nav {
+.header {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 200;
 
   &__link {
     color: #fff;
     position: absolute;
-    top: 22px;
+    top: 13px;
+    padding: 13px;
 
     &:focus {
       color: #fff;
     }
   }
 
+  $sides-value: 12px;
+
   &__link--title {
-    left: 20px;
+    left: $sides-value;
   }
 
   &__link--about {
-    left: 146px;
+    left: 130px;
   }
 
   &__link--all {
-    @include pos-right;
+    right: $sides-value;
   }
 }

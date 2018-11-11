@@ -1,0 +1,49 @@
+.title {
+  @include center-xy;
+  cursor: pointer;
+  font-family: $font-din;
+  font-weight: 400;
+  font-size: 11vw;
+  line-height: 0.9;
+  text-transform: uppercase;
+  z-index: 99;
+
+  &.is-active {
+    z-index: 200;
+  }
+
+  &__wrap {
+    @include center-xy;
+    transition: opacity .35s;
+  }
+
+  &__wrap--stroke {
+    opacity: 0;
+  }
+
+  &__part {
+    color: #fff;
+    opacity: 0;
+  }
+
+  &__part--stroke {
+    color: transparent;
+    opacity: 0;
+    -webkit-text-stroke: 1px #FFF;
+
+    @media (min-width: $screen-sm-min) { -webkit-text-stroke: 2px #FFF; }
+  }
+}
+
+.desktop {
+  .titles:hover,
+  .titles:focus,{
+    .title__wrap {
+      opacity: 0;
+    }
+
+    .title__wrap--stroke {
+      opacity: 1;
+    }
+  }
+}
