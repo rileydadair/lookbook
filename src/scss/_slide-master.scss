@@ -4,6 +4,27 @@
   overflow-y: hidden;
 	position: relative;
   width: 100%;
+
+  &--main {
+    @media (min-width: $screen-lg-min) {
+      left: 46.4%;
+      width: 44%;
+    }
+  }
+
+  &--section {
+    display: none;
+    @media (min-width: $screen-lg-min) {
+      display: block;
+      position: absolute;
+      top: 18%;
+      left: $inset-width-left;
+      // height: 64%;
+      // width: 24.2%;
+      height: 63%;
+      width: 23.7%;
+    }
+  }
   
   &::after {
     content: '';
@@ -18,18 +39,33 @@
 }
 
 .controls {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   right: 0;
   z-index: 200;
 
+  @media (min-width: $screen-lg-min) {
+    bottom: 50%;
+    transform: translate(0, 50%);
+    width: $inset-width-right;
+  }
+
   &__btn {
     display: block;
     padding: 10px 24px;
+
+    @media (min-width: $screen-lg-min) {
+      margin: 0 auto;
+      padding: 13px 20px;
+    }
   }
 
   &__plus {
     color: #fff;
     font-size: 2.8rem;
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 4rem;
+    }
   }
 }

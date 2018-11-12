@@ -27,6 +27,7 @@ export default {
     }
   },
   computed: {
+    // move out of here and into Home
     bgImage() {
       if (States.deviceType === 'mobile') {
         return `url('${this.bgMobile}')`

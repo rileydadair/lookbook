@@ -1,8 +1,14 @@
 <template>
   <header class="header">
-    <a href="/" class="header__link header__link--title">Lookbook</a>
-    <a href="/" class="header__link header__link--about">About</a>
-    <a href="/" class="header__link header__link--all">All</a>
+    <span class="header__item header__item--title">
+      <a href="/" class="header__link">Lookbook</a>
+    </span>
+    <span class="header__item header__item--about">
+      <a href="/" class="header__link">About</a>
+    </span>
+    <span class="header__item header__item--all">
+      <a href="/" class="header__link">All</a>
+    </span>
   </header>
 </template>
 

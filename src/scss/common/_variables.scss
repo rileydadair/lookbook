@@ -11,8 +11,13 @@ $screen-lg-max:               ($screen-xl-min - 1) !default;
 
 // Font families
 $font-avenir-demi: 'AvenirNext-Demi', Futura, "Trebuchet MS", Arial, sans-serif;
-$font-avenir-medium: 'AvenirNext-Medium', Futura, "Trebuchet MS", Arial, sans-serif;
+$font-avenir-regular: 'AvenirNext-Regular', Futura, "Trebuchet MS", Arial, sans-serif;
 $font-din: 'Din1451', Futura, "Trebuchet MS", Arial, sans-serif;
 
-// colors
+// Colors
 $color-black: #101010;
+
+// Layout
+$horizontal-inset: 12px;
+$inset-width-left: 11.5%;
+$inset-width-right: 9.6%;

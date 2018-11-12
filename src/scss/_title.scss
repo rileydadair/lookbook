@@ -1,15 +1,22 @@
 .title {
-  @include center-xy;
-  cursor: pointer;
-  font-family: $font-din;
-  font-weight: 400;
-  font-size: 11vw;
-  line-height: 0.9;
-  text-transform: uppercase;
-  z-index: 99;
+  &__link {
+    @include center-xy;
+    cursor: pointer;
+    font-family: $font-din;
+    font-weight: 400;
+    font-size: 11vw;
+    line-height: 0.9;
+    text-transform: uppercase;
+    z-index: 99;
+  
+    @media (min-width: $screen-lg-min) {
+      font-size: 7vw;
+      letter-spacing: .01em;
+    }
 
-  &.is-active {
-    z-index: 200;
+    &.is-active {
+      z-index: 200;
+    }
   }
 
   &__wrap {
@@ -36,8 +43,8 @@
 }
 
 .desktop {
-  .titles:hover,
-  .titles:focus,{
+  .title:hover,
+  .title:focus,{
     .title__wrap {
       opacity: 0;
     }

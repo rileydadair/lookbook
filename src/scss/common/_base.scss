@@ -13,6 +13,10 @@ html {
 
 body {
   background-color: $color-black;
+
+  // background: url('/images/bg.png') top left / 100% no-repeat;
+  // background: url('/images/bg.png') top left / 100% 100% no-repeat;
+
   color: #fff;
   font-family: $font-avenir-demi;
   font-size: 1.4rem;
@@ -47,10 +51,23 @@ canvas {
   display: none;
 }
 
-.section {
+.main {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.desktop {
+  .main:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    opacity: 0;
+  }
 }

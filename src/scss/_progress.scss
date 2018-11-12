@@ -2,15 +2,39 @@
   position: absolute;
   bottom: 26px;
   left: 21px;
-  overflow: hidden;
   transform: rotate(-90deg) translate(0,100%);
   transform-origin: bottom left;
-  z-index: 9999;
+  z-index: 100;
+
+  @media (min-width: $screen-lg-min) {
+    // bottom: 54px;
+    bottom: 5.8%;
+    left: 0;
+    letter-spacing: -0.5px;
+    height: 11.25vw;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: $screen-xl-min) {
+    height: 11vw;
+  }
+
+  &__wrap {
+    backface-visibility: hidden;
+    overflow: hidden;
+  }
 
   &__label {
-    padding: 0;
-    font-size: 2.2rem;
-    position: relative;
     display: inline-block;
+    font-size: 2.2rem;
+    line-height: 0.8;
+    padding: 6px 0 0;
+    position: relative;
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 4rem;
+      padding-top: 7px;
+    }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <a href="" class="title" :class="[`title--${title}`,{ 'is-active': active}]" ref="title" v-on:click="route" :tabindex="tabIndex" :aria-label="title">
+  <a href="" class="title__link" :class="{ 'is-active': active}" ref="title" v-on:click="route" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
@@ -20,9 +20,6 @@ export default {
   data() {
     return {
       active: false,
-      animation: {
-        duration: 0.6
-      },
       canRoute: true,
       title: this.titleVal,
       splitTitle: this.titleVal.split('')
@@ -59,31 +56,22 @@ export default {
         if (action === 'show') this.active = true
         
         const indexArray = this.getIndexArray()
-        const duration = action === 'hide' ? 0.15 : 0.25
+        const duration = action === 'hide' ? 0.15 : 0.2
 
         this.splitTitle.forEach((letter, index) => {
-          const letterIndex = indexArray.splice(Math.floor(Math.random()*indexArray.length), 1);
-
-          TweenMax.to(this.$refs.titleParts[letterIndex], duration, {
+          const letterIndex = indexArray.splice(Math.floor(Math.random()*indexArray.length), 1)
+          const animation = {
             opacity: action === 'hide' ? 0 : 1,
-            delay: index * 0.045,
+            delay: index * 0.04,
             onComplete: function(i, arr) {
               if (i === (arr.length - 1)) {
                 resolve()
               }
             },
             onCompleteParams: [index, this.splitTitle]
-          })
-          TweenMax.to(this.$refs.titlePartsStroke[letterIndex], duration, {
-            opacity: action === 'hide' ? 0 : 1,
-            delay: index * 0.045,
-            onComplete: function(i, arr) {
-              if (i === (arr.length - 1)) {
-                resolve()
-              }
-            },
-            onCompleteParams: [index, this.splitTitle]
-          })
+          }
+          TweenMax.to(this.$refs.titleParts[letterIndex], duration, animation)
+          TweenMax.to(this.$refs.titlePartsStroke[letterIndex], duration, animation)
         })
       })
 
