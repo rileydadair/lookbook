@@ -2,7 +2,7 @@
   "name": "lookbook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rileyAdair.github.io/lookbook",
+  "homepage": "https://RileyAdair.github.io/lookbook",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
