@@ -48,6 +48,8 @@
 
 <script>
 import States from '../core/services/States'
+import imagesLoaded from 'imagesloaded'
+
 import SlideMaster from '../components/SlideMaster'
 import Slide from '../components/Slide'
 import Title from '../components/Title'
@@ -75,21 +77,25 @@ import Progress from '../components/Progress'
       onSliderMount(slider) {
         slider.toggleEvents(false);
 
-        setTimeout(() => {
-          document.querySelector('.header').style.opacity = '1'
-          document.querySelector('.progress').style.opacity = '1'
-          document.querySelector('.controls').style.opacity = '1'
+        function animateIntro(component) {
+          setTimeout(() => {
+            document.querySelector('.header').style.opacity = '1'
+            document.querySelector('.progress').style.opacity = '1'
+            document.querySelector('.controls').style.opacity = '1'
 
-          Promise.all([
-            this.$refs.mainSlides[0].show('next'),
-            this.$refs.sectionSlides[0].show('prev'),
-            setTimeout(() => this.$refs.titles[0].show(), 760),
-            setTimeout(() => this.$refs.descriptions[0].show('prev'), 600)
-          ])
-            .then(() => {
-              slider.toggleEvents()
-            })
-        }, 500)
+            Promise.all([
+              component.$refs.mainSlides[0].show('next'),
+              component.$refs.sectionSlides[0].show('prev'),
+              setTimeout(() => component.$refs.titles[0].show(), 760),
+              setTimeout(() => component.$refs.descriptions[0].show('prev'), 600)
+            ])
+              .then(() => {
+                slider.toggleEvents()
+              })
+          }, 400)
+        }
+
+        imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => animateIntro(this))
       },
       onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
         // Progress animation
