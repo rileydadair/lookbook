@@ -2,8 +2,10 @@
 *::before,
 *::after {
   box-sizing: inherit;
+  border: 0;
   margin: 0;
   padding: 0;
+  outline: 0;
 }
 
 html {
@@ -17,7 +19,7 @@ body {
   // background: url('/images/bg.png') top left / 100% no-repeat;
   // background: url('/images/bg.png') top left / 100% 100% no-repeat;
 
-  color: #fff;
+  color: $color-white;
   font-family: $font-avenir-demi;
   font-size: 1.4rem;
   min-height: 100vh;
@@ -28,11 +30,9 @@ body {
 }
 
 button {
-  border: 0;
   background: transparent;
   cursor: pointer;
   font-family: inherit;
-  outline: 0;
 }
 
 a {

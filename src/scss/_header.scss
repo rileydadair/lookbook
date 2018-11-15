@@ -5,9 +5,9 @@
   width: 100%;
   z-index: 200;
 
-  // @media (min-width: $screen-lg-min) {
-  //   top: 7%;
-  // }
+    // @media (min-width: $screen-xxl-min) {
+    //   top: 5.5%;
+    // }
 
   &__item {
     position: absolute;
@@ -15,10 +15,18 @@
     letter-spacing: 0.3px;
 
     @media (min-width: $screen-lg-min) {
-      top: 58px;
+      top: 3.5vw;
       // top: 0;
       text-align: center;
     }
+
+    // @media (min-width: $screen-xl-min) {
+    //   top: 58px;
+    // }
+
+    // @media (min-width: $screen-xxl-min) {
+    //   top: 0;
+    // }
   }
 
   &__item--title {
@@ -48,11 +56,11 @@
   }
 
   &__link {
-    color: #fff;
+    color: $color-white;
     padding: 13px;
 
     &:focus {
-      color: #fff;
+      color: $color-white;
     }
   }
 }

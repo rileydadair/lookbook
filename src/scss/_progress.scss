@@ -20,6 +20,10 @@
     height: 11vw;
   }
 
+  @media (min-width: $screen-xxl-min) {
+    bottom: 6.5%;
+  }
+
   &__wrap {
     backface-visibility: hidden;
     overflow: hidden;

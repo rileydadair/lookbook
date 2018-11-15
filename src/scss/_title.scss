@@ -4,13 +4,14 @@
     cursor: pointer;
     font-family: $font-din;
     font-weight: 400;
-    font-size: 11vw;
+    font-size: 14vw;
     line-height: 0.9;
     text-transform: uppercase;
     z-index: 99;
   
     @media (min-width: $screen-lg-min) {
-      font-size: 7vw;
+      // font-size: 7vw;
+      font-size: 8vw;
       letter-spacing: .01em;
     }
 
@@ -22,6 +23,7 @@
   &__wrap {
     @include center-xy;
     transition: opacity .35s;
+    white-space: nowrap;
   }
 
   &__wrap--stroke {
@@ -29,16 +31,16 @@
   }
 
   &__part {
-    color: #fff;
+    color: $color-white;
     opacity: 0;
   }
 
   &__part--stroke {
     color: transparent;
     opacity: 0;
-    -webkit-text-stroke: 1px #FFF;
+    -webkit-text-stroke: 1px $color-white;
 
-    @media (min-width: $screen-sm-min) { -webkit-text-stroke: 2px #FFF; }
+    @media (min-width: $screen-sm-min) { -webkit-text-stroke: 2px $color-white; }
   }
 }
 

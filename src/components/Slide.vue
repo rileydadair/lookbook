@@ -36,9 +36,10 @@ export default {
       }
     },
     bgPosition() {
-      if (this.bgDesktop.includes('michelangelo/main')) {
-        return '50% 0%'
-      } else if (this.bgDesktop.includes('donatello/main')) {
+      // if (this.bgDesktop.includes('michelangelo/main')) {
+      //   return '50% 0%'
+      // }
+      if (this.bgDesktop.includes('donatello/main')) {
         return '50% 100%'
       } else {
         return '50% 50%'

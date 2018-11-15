@@ -31,13 +31,16 @@
     opacity: .7;
 
     @media (min-width: $screen-lg-min) {
-      opacity: .8;
+      opacity: .85;
     }
   }
 }
 
-.slider--section {
-  .slide__img {
-    opacity: .85;
-  }
-}
+// Save Nike main image at .9
+// - will be .85 when all main images are .95 with css
+
+// .slider--section {
+//   .slide__img {
+//     opacity: .85;
+//   }
+// }

@@ -26,11 +26,6 @@ export default {
     }
   },
   computed: {
-    classObject: function () {
-      return {
-        
-      }
-    },
     tabIndex: function () {
       return this.active ? 0 : -1
     }
@@ -56,13 +51,13 @@ export default {
         if (action === 'show') this.active = true
         
         const indexArray = this.getIndexArray()
-        const duration = action === 'hide' ? 0.15 : 0.2
+        const duration = action === 'hide' ? 0.2 : 0.2
 
         this.splitTitle.forEach((letter, index) => {
           const letterIndex = indexArray.splice(Math.floor(Math.random()*indexArray.length), 1)
           const animation = {
             opacity: action === 'hide' ? 0 : 1,
-            delay: index * 0.04,
+            delay: index * 0.05,
             onComplete: function(i, arr) {
               if (i === (arr.length - 1)) {
                 resolve()
@@ -82,8 +77,8 @@ export default {
       return togglePromise
     },
     route(e) {
-      e.preventDefault()
-      console.dir(e.currentTarget)
+      // e.preventDefault()
+      // console.dir(e.currentTarget)
     }
   }
 }

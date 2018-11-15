@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "title": "Michelangelo",
+    "title": "Made Wild",
     "description": "Pivot gnarly ho-ho drop in mute-air shoveit airwalk",
-    "main_image_mobile": "/images/michelangelo/main_m.jpg",
-    "main_image_desktop": "/images/michelangelo/main.jpg",
+    "main_image_mobile": "/images/michelangelo/main_a_m.jpg",
+    "main_image_desktop": "/images/michelangelo/main_b.jpg",
     "detail_images": [
-      "/images/michelangelo/detail_1.jpg"
+      "/images/michelangelo/detail_b.jpg"
     ]
   },
   {
     "id": 2,
-    "title": "Leonardo",
+    "title": "Adidas",
     "description": "Christ air pivot nose bone feeble quarter pipe",
     "main_image_mobile": "/images/leonardo/main_m.jpg",
     "main_image_desktop": "/images/leonardo/main.jpg",
@@ -21,7 +21,7 @@
   },
   {
     "id": 3,
-    "title": "Donatello",
+    "title": "Vans",
     "description": "Nollie risers salad grind fridgid air the faction",
     "main_image_mobile": "/images/donatello/main_m.jpg",
     "main_image_desktop": "/images/donatello/main.jpg",
@@ -31,10 +31,10 @@
   },
   {
     "id": 4,
-    "title": "Raphael",
+    "title": "Nike",
     "description": "Layback goofy footed transfer birdie Julien Stranger",
-    "main_image_mobile": "/images/raphael/main_m.jpg",
-    "main_image_desktop": "/images/raphael/main.jpg",
+    "main_image_mobile": "/images/raphael/main_a_m.jpg",
+    "main_image_desktop": "/images/raphael/main_a.jpg",
     "detail_images": [
       "/images/raphael/detail_1.jpg"
     ]

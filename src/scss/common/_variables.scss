@@ -4,6 +4,7 @@ $screen-sm-min:               768px !default;
 $screen-md-min:               992px !default;
 $screen-lg-min:               1200px !default;
 $screen-xl-min:               1440px !default;
+$screen-xxl-min:              1682px !default;
 $screen-xs-max:               ($screen-sm-min - 1) !default;
 $screen-sm-max:               ($screen-md-min - 1) !default;
 $screen-md-max:               ($screen-lg-min - 1) !default;
@@ -15,7 +16,8 @@ $font-avenir-regular: 'AvenirNext-Regular', Futura, "Trebuchet MS", Arial, sans-
 $font-din: 'Din1451', Futura, "Trebuchet MS", Arial, sans-serif;
 
 // Colors
-$color-black: #101010;
+$color-black: #151515;
+$color-white: #FDF8F1;
 
 // Layout
 $horizontal-inset: 12px;
