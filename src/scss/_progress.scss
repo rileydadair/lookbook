@@ -8,7 +8,12 @@
 
   // Temporary intro animation
   opacity: 0;
-  transition: $intro-duration;
+  transition: opacity $intro-duration;
+
+  @media (min-width: $screen-sm-min) {
+    bottom: 42px;
+    left: 45px;
+  }
 
   @media (min-width: $screen-lg-min) {
     // bottom: 54px;
@@ -39,6 +44,10 @@
     line-height: 0.8;
     padding: 6px 0 0;
     position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 3rem;
+    }
 
     @media (min-width: $screen-lg-min) {
       font-size: 4rem;

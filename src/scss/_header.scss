@@ -7,7 +7,7 @@
 
   // Temporary intro animation
   opacity: 0;
-  transition: $intro-duration;
+  transition: opacity $intro-duration;
 
     // @media (min-width: $screen-xxl-min) {
     //   top: 5.5%;
@@ -17,6 +17,10 @@
     position: absolute;
     top: 25px;
     letter-spacing: 0.3px;
+
+    @media (min-width: $screen-sm-min) {
+      top: 40px;
+    }
 
     @media (min-width: $screen-lg-min) {
       top: 3.5vw;
@@ -34,7 +38,11 @@
   }
 
   &__item--title {
-    left: $horizontal-inset;
+    left: 12px;
+
+    @media (min-width: $screen-sm-min) {
+      left: 36px;
+    }
 
     @media (min-width: $screen-lg-min) {
       left: 3.2%;
@@ -44,20 +52,29 @@
   &__item--about {
     left: 130px;
 
+    @media (min-width: $screen-sm-min) {
+      left: 180px;
+    }
+
     @media (min-width: $screen-lg-min) {
       left: 16.25%;
-      // left: 15%;
     }
   }
 
   &__item--all {
-    right: $horizontal-inset;
+    right: 12px;
+
+    @media (min-width: $screen-sm-min) {
+      right: 36px;
+    }
 
     @media (min-width: $screen-lg-min) {
       right: 0;
       width: $inset-width-right;
     }
   }
+
+
 
   &__link {
     color: $color-white;
