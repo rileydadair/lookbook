@@ -9,7 +9,7 @@
 <script>
 import States from '../core/services/States'
 import TweenMax from 'gsap'
-import CustomEase from 'gsap/CustomEase'
+import CustomEase from '../core/gsap/CustomEase'
 
 export default {
   name: 'Slide',
