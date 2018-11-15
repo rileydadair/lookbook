@@ -75,13 +75,21 @@ import Progress from '../components/Progress'
       onSliderMount(slider) {
         slider.toggleEvents(false);
 
-        Promise.all([
-          this.$refs.mainSlides[0].show('next'),
-          this.$refs.sectionSlides[0].show('prev'),
-          setTimeout(() => this.$refs.titles[0].show(), 600),
-          setTimeout(() => this.$refs.descriptions[0].show('prev'), 400)
-        ])
-          .then(() => slider.toggleEvents())
+        setTimeout(() => {
+          document.querySelector('.header').style.opacity = '1'
+          document.querySelector('.progress').style.opacity = '1'
+          document.querySelector('.controls').style.opacity = '1'
+
+          Promise.all([
+            this.$refs.mainSlides[0].show('next'),
+            this.$refs.sectionSlides[0].show('prev'),
+            setTimeout(() => this.$refs.titles[0].show(), 760),
+            setTimeout(() => this.$refs.descriptions[0].show('prev'), 600)
+          ])
+            .then(() => {
+              slider.toggleEvents()
+            })
+        }, 500)
       },
       onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
         // Progress animation

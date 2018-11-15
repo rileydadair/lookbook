@@ -5,6 +5,10 @@
   width: 100%;
   z-index: 200;
 
+  // Temporary intro animation
+  opacity: 0;
+  transition: $intro-duration;
+
     // @media (min-width: $screen-xxl-min) {
     //   top: 5.5%;
     // }

@@ -44,6 +44,10 @@
   right: 0;
   z-index: 200;
 
+  // Temporary intro animation
+  opacity: 0;
+  transition: $intro-duration;
+
   @media (min-width: $screen-lg-min) {
     bottom: 50%;
     transform: translate(0, 50%);
