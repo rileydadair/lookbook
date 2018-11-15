@@ -39,7 +39,7 @@ export default {
       // if (this.bgDesktop.includes('michelangelo/main')) {
       //   return '50% 0%'
       // }
-      if (this.bgDesktop.includes('donatello/main')) {
+      if (this.bgDesktop.includes('vans/main')) {
         return '50% 100%'
       } else {
         return '50% 50%'
