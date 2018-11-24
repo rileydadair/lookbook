@@ -16,7 +16,6 @@
   }
 
   @media (min-width: $screen-lg-min) {
-    // bottom: 54px;
     bottom: 5.8%;
     left: 0;
     letter-spacing: -0.5px;
@@ -25,13 +24,9 @@
     align-items: center;
   }
 
-  @media (min-width: $screen-xl-min) {
-    height: 11vw;
-  }
+  @media (min-width: $screen-xl-min) { height: 11vw; }
 
-  @media (min-width: $screen-xxl-min) {
-    bottom: 6.5%;
-  }
+  @media (min-width: $screen-xxl-min) { bottom: 6.5%; }
 
   &__wrap {
     backface-visibility: hidden;
@@ -45,9 +40,7 @@
     padding: 6px 0 0;
     position: relative;
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 3rem;
-    }
+    @media (min-width: $screen-sm-min) { font-size: 3rem; }
 
     @media (min-width: $screen-lg-min) {
       font-size: 4rem;

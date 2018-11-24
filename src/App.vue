@@ -11,13 +11,11 @@
 <script>
 import States from './core/services/States'
 import Header from './components/Header'
-import Home from './pages/Home'
 
 export default {
   name: 'app',
   components: {
-    Header,
-    Home
+    Header // eslint-disable-line
   },
   data() {
     return {
