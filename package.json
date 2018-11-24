@@ -2,7 +2,6 @@
   "name": "lookbook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://RileyAdair.github.io/lookbook",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,7 +13,8 @@
     "imagesloaded": "^4.1.4",
     "lethargy": "^1.0.4",
     "mobile-detect": "^1.4.3",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
@@ -50,5 +50,6 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "homepage": "https://RileyAdair.github.io/lookbook"
 }

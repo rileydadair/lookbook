@@ -1,15 +1,15 @@
 <template>
   <div id="app" :class="deviceType">
     <Header />
+    <router-view/>
       <!-- router -->
-        <Home :items="items" />
+        <!-- <Home :items="items" /> -->
       <!-- End router -->
   </div>
 </template>
 
 <script>
 import States from './core/services/States'
-import items from './core/collections/items'
 import Header from './components/Header'
 import Home from './pages/Home'
 
@@ -21,9 +21,8 @@ export default {
   },
   data() {
     return {
-      deviceType: States.deviceType,
-      items: items,
+      deviceType: States.deviceType
     }
   },
 }
-</script>
+</script>  

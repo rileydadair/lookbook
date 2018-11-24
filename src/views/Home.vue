@@ -49,19 +49,22 @@
 </template>
 
 <script>
-import States from '../core/services/States'
+import States from '@/core/services/States'
+import items from '@/core/collections/items'
 import imagesLoaded from 'imagesloaded'
 
-import SlideMaster from '../components/SlideMaster'
-import Slide from '../components/Slide'
-import Title from '../components/Title'
-import Description from '../components/Description'
-import Progress from '../components/Progress'
+import SlideMaster from '@/components/SlideMaster'
+import Slide from '@/components/Slide'
+import Title from '@/components/Title'
+import Description from '@/components/Description'
+import Progress from '@/components/Progress'
 
   export default {
     name: 'Home',
-    props: {
-      items: Array
+    data() {
+      return {
+        items: items
+      }
     },
     components: {
       SlideMaster,
