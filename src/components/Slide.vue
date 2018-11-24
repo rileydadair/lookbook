@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import States from '../core/services/States'
+import States from '@/services/States'
 import TweenMax from 'gsap'
-import CustomEase from '../core/gsap/CustomEase'
+import CustomEase from '@/services/CustomEase'
 
 export default {
   name: 'Slide',
@@ -36,9 +36,6 @@ export default {
       }
     },
     bgPosition() {
-      // if (this.bgDesktop.includes('michelangelo/main')) {
-      //   return '50% 0%'
-      // }
       if (this.bgDesktop.includes('vans/main')) {
         return '50% 100%'
       } else {

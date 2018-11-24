@@ -8,10 +8,10 @@
       ref="slider"
     >
       <template slot="slides" v-for="item in items">
-        <Slide 
-          :bgMobile="item.main_image_mobile" 
-          :bgDesktop="item.main_image_desktop" 
-          :key="`slide-main-${item.id}`" 
+        <Slide
+          :bgMobile="item.main_image_mobile"
+          :bgDesktop="item.main_image_desktop"
+          :key="`slide-main-${item.slug}`"
           ref="mainSlides"
         />
       </template>
@@ -23,10 +23,10 @@
 
     <div class="slider slider--section">
       <template v-for="item in items">
-        <Slide 
-          :bgMobile="item.detail_images[0]" 
-          :bgDesktop="item.detail_images[0]" 
-          :key="`slide-section-${item.id}`" 
+        <Slide
+          :bgMobile="item.detail_images[0]"
+          :bgDesktop="item.detail_images[0]"
+          :key="`slide-section-${item.slug}`"
           ref="sectionSlides"
         />
       </template>
@@ -34,13 +34,13 @@
 
     <div class="title">
       <template v-for="item in items">
-        <Title :titleVal="item.title" :key="`title-${item.id}`" ref="titles" />
+        <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
       </template>
     </div>
 
     <div class="description">
       <template v-for="item in items">
-        <Description :descriptionVal="item.description" :key="`description-${item.id}`" ref="descriptions" />
+        <Description :descriptionVal="item.description" :key="`description-${item.slug}`" ref="descriptions" />
       </template>
     </div>
 
@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import States from '@/core/services/States'
-import items from '@/core/collections/items'
+import States from '@/services/States'
+import items from '@/data/items'
 import imagesLoaded from 'imagesloaded'
 
 import SlideMaster from '@/components/SlideMaster'

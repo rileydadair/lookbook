@@ -1,12 +1,12 @@
 <template>
-  <a href="" class="title__link" :class="{ 'is-active': active}" ref="title" v-on:click="route" :tabindex="tabIndex" :aria-label="title">
+  <router-link :to="{ name: 'detail', params: { slug } }" class="title__link" :class="{ 'is-active': active}" ref="title" v-on:click="route" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
     <span class="title__wrap title__wrap--stroke">
       <span class="title__part title__part--stroke" v-for="(part, index) in splitTitle" :key="`title-part-dup-${index}`" ref="titlePartsStroke">{{ part }}</span>
     </span>
-  </a>
+  </router-link>
 </template>
 
 <script>
@@ -15,7 +15,8 @@ import TweenMax from 'gsap';
 export default {
   name: 'Title',
   props: {
-    titleVal: String
+    titleVal: String,
+    slug: String
   },
   data() {
     return {
