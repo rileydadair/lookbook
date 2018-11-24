@@ -63,16 +63,17 @@
   &__btn {
     display: block;
     padding: 10px 24px;
+    margin: 0 auto;
 
     @media (min-width: $screen-lg-min) {
-      margin: 0 auto;
       padding: 13px 20px;
     }
   }
 
-  &__plus {
+  &__item {
     color: $color-white;
     font-size: 2.8rem;
+    position: relative;
 
     @media (min-width: $screen-sm-min) {
       font-size: 3.4rem;
@@ -82,4 +83,25 @@
       font-size: 4rem;
     }
   }
+
+  // &__item--minus {
+  //   color: transparent;
+
+  //   &:after {
+  //     @include center-xy;
+  //     content: '';
+  //     background-color: #fff;
+  //     height: 3px;
+  //     width: 15px;
+
+  //     @media (min-width: $screen-sm-min) {
+  //       height: 4px;
+  //       width: 18px;
+  //     }
+
+  //     @media (min-width: $screen-lg-min) {
+  //       width: 21px;
+  //     }
+  //   }
+  // }
 }

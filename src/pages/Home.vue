@@ -15,8 +15,10 @@
           ref="mainSlides"
         />
       </template>
-      <span slot="prevButton" class="controls__plus">+</span>
-      <span slot="nextButton" class="controls__plus">+</span>
+      <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
+      <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
+      <span slot="prevButton" class="controls__item">+</span>
+      <span slot="nextButton" class="controls__item">+</span>
     </SlideMaster>
 
     <div class="slider slider--section">
