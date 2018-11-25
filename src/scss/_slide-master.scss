@@ -42,10 +42,6 @@
   right: 0;
   z-index: 200;
 
-  // Temporary intro animation
-  opacity: 0;
-  transition: opacity $intro-duration;
-
   @media (min-width: $screen-sm-min) {
     bottom: 25px;
     right: 24px;

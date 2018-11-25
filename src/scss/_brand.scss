@@ -1,0 +1,130 @@
+$offset: 11.4%;
+
+.brand {
+  background-color: $color-white;
+  padding: 0 3.4rem;
+  padding: 0 2.6rem;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 0 5rem;
+  }
+
+  @media (min-width: $screen-lg-min) {
+    padding: 0 4.2%;
+  }
+
+  &__hero {
+    padding-top: 37.5%;
+    padding-left: $offset;
+    margin-bottom: 27%;
+
+    @media (min-width: $screen-sm-min) {
+      padding-top: 34.5%;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      padding-top: 17.5%;
+      margin-bottom: 13%;
+    }
+  }
+  
+  &__title {
+    font-family: $font-din;
+    font-weight: 400;
+    font-size: 13vw;
+    line-height: 0.9;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 8vw;
+    }
+  }
+
+  &__description {
+    font-family: $font-avenir-regular;
+    letter-spacing: 0.3px;
+    margin: 28px 0 0;
+    max-width: 252px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-left: 0.5%;
+    }
+  }
+
+  &__img-wrap {
+    margin-bottom: 130px;
+    margin-bottom: 42%;
+    max-width: 668px;
+
+    @media (min-width: $screen-md-min) {
+      margin: 0 auto 26%;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      margin: 0 auto 24%;
+    }
+  }
+
+  &__img-wrap:last-child {
+    margin-bottom: 0;
+  }
+
+  // Margins
+  &__img-wrap:nth-child(1),
+  &__img-wrap:nth-child(5) {
+    margin-right: $offset;
+
+    @media (min-width: $screen-md-min) { margin-left: 0; }
+  }
+
+  &__img-wrap:nth-child(2),
+  &__img-wrap:nth-child(7), {
+    margin-left: $offset;
+
+    @media (min-width: $screen-md-min) { margin-left: auto; margin-right: 0; }
+  }
+
+  // Padding-bottoms
+  &__img-wrap:nth-child(1),
+  &__img-wrap:nth-child(4),
+  &__img-wrap:nth-child(5),
+  &__img-wrap:nth-child(7) {
+    .brand__img {
+      padding-bottom: 149.3%;
+    }
+  }
+
+  &__img-wrap:nth-child(2) {
+    .brand__img {
+      padding-bottom: 83.2%;
+    }
+  }
+
+  &__img-wrap:nth-child(3) {
+    .brand__img {
+      padding-bottom: 87.3%;
+    }
+  }
+
+  &__img-wrap:nth-child(6) {
+    .brand__img {
+      padding-bottom: 87.3%;
+    }
+  }
+
+  &__img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+  }
+
+  &__link {
+    display: block;
+    margin: 37.5% $offset 42%;
+
+    @media (min-width: $screen-md-min) {
+      margin: 22% $offset;
+    }
+  }
+}

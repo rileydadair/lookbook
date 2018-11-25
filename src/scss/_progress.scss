@@ -6,10 +6,6 @@
   transform-origin: bottom left;
   z-index: 100;
 
-  // Temporary intro animation
-  opacity: 0;
-  transition: opacity $intro-duration;
-
   @media (min-width: $screen-sm-min) {
     bottom: 42px;
     left: 45px;

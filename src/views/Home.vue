@@ -24,8 +24,8 @@
     <div class="slider slider--section">
       <template v-for="item in items">
         <Slide
-          :bgMobile="item.detail_images[0]"
-          :bgDesktop="item.detail_images[0]"
+          :bgMobile="item.detail_images[0].image_mobile"
+          :bgDesktop="item.detail_images[0].image_desktop"
           :key="`slide-section-${item.slug}`"
           ref="sectionSlides"
         />
@@ -61,20 +61,21 @@ import Progress from '@/components/Progress'
 
   export default {
     name: 'Home',
+    components: {
+      SlideMaster,
+      Slide,
+      Title, // eslint-disable-line
+      Description,
+      Progress // eslint-disable-line
+    },
     data() {
       return {
         items: items
       }
     },
-    components: {
-      SlideMaster,
-      Slide,
-      Title,
-      Description,
-      Progress
-    },
     computed: {
       swipe() {
+        // Replace with this.$parent._data.deviceType
         return States.deviceType === 'mobile' ? true : false
       }
     },
@@ -82,11 +83,11 @@ import Progress from '@/components/Progress'
       onSliderMount(slider) {
         slider.toggleEvents(false);
 
+        // Move images loaded to App - globally
+        // Then depending on view - call that views animateIntro
         function animateIntro(component) {
           setTimeout(() => {
-            document.querySelector('.header').style.opacity = '1'
-            document.querySelector('.progress').style.opacity = '1'
-            document.querySelector('.controls').style.opacity = '1'
+            document.body.classList.remove('is-loading')
 
             Promise.all([
               component.$refs.mainSlides[0].show('next'),

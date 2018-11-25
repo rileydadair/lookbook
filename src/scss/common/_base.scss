@@ -23,21 +23,32 @@ body {
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-button {
-  background: transparent;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
+  &.detail {
+    background-color: $color-white;
+    color: $color-black;
+    
+
+    &.mobile,
+    &.tablet {
+      overflow: visible;
+      min-height: auto;
+    }
+  }
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
-canvas {
-  vertical-align: middle;
+button {
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
 }
 
 ::-webkit-scrollbar { 
@@ -67,4 +78,35 @@ canvas {
     z-index: 100;
     opacity: 0;
   }
+}
+
+// Intro animations
+.header,
+.progress,
+.controls {
+  opacity: 1;
+  transition: opacity $intro-duration;
+}
+
+.is-loading {
+  .header,
+  .progress,
+  .controls {
+    opacity: 0;
+  }
+}
+
+.gutters {
+  padding: 0 33px;
+  padding: 0 3.3rem;
+}
+
+.offset-left {
+  margin-left: 32px;
+  margin-left: 10.4%;
+}
+
+.offset-right {
+  margin-right: 32px;
+  margin-right: 10.4%;
 }

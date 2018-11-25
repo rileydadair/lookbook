@@ -3,11 +3,11 @@
     <span class="header__item header__item--title">
       <router-link to="/" class="header__link">Lookbook</router-link>
     </span>
-    <span class="header__item header__item--about">
+    <span v-if="$route.name !== 'detail'" class="header__item header__item--about">
       <router-link to="/about" class="header__link">About</router-link>
     </span>
     <span class="header__item header__item--all">
-      <button class="header__link">All</button>
+      <button class="header__btn">All</button>
     </span>
   </header>
 </template>

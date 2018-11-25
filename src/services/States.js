@@ -2,8 +2,10 @@ import MobileDetect from 'mobile-detect'
 
 class States {
   constructor() {
-    this.mobileDetect = new MobileDetect(window.navigator.userAgent);
+    this.userAgent = window.navigator.userAgent;
+    this.mobileDetect = new MobileDetect(this.userAgent);
     this.deviceType = this.getDeviceType();
+    this.isIE = this.isIE();
   }
 
   getDeviceType() {

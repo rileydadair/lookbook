@@ -1,7 +1,7 @@
 <template>
-  <div id="app" :class="deviceType">
+  <div id="app">
     <Header />
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
@@ -19,5 +19,20 @@ export default {
       deviceType: States.deviceType
     }
   },
+  // created() {
+  //   console.dir(States.isIE)
+  // },
+  beforeCreate() {
+    document.body.className = States.deviceType
+    document.body.classList.add('is-loading')
+    if (States.isIE) document.body.classList.add('is-IE')
+  },
+  // watch: {
+  //   '$route' (to, from) {
+  //    // Possibly animate page transition
+  //     console.log('route change')
+
+  //   }
+  // }
 }
 </script>  
