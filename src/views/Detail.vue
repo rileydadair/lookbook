@@ -1,5 +1,5 @@
 <template>
-  <BrandMobile v-if="this.$parent._data.deviceType !== 'desktop'"
+  <BrandMobile v-if="deviceType !== 'desktop'"
     :item="item"
     :nextTitle="nextTitle"
     :nextSlug="nextSlug" />
@@ -7,9 +7,11 @@
 </template>
 
 <script>
-import items from '../data/items'
-import Brand from '../components/Brand'
-import BrandMobile from '../components/BrandMobile'
+import States from '@/services/States'
+import items from '@/data/items'
+
+import Brand from '@/components/Brand'
+import BrandMobile from '@/components/BrandMobile'
 
 export default {
   name: 'Detail',
@@ -19,10 +21,17 @@ export default {
   },
   data() {
     return {
+      deviceType: States.deviceType,
       item: {},
       nextTitle: '',
       nextSlug: ''
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    // Can run page transition between brands
+    console.dir(to)
+    console.dir(from)
+    next()
   },
   beforeCreate() {
     document.body.classList.add('detail')
@@ -46,6 +55,7 @@ export default {
         this.nextSlug = array[nextIndex].slug
         return
       }
+      // else - set data to render 404 page
     })
     document.body.classList.remove('is-loading')
   }

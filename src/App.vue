@@ -14,14 +14,6 @@ export default {
   components: {
     Header // eslint-disable-line
   },
-  data() {
-    return {
-      deviceType: States.deviceType
-    }
-  },
-  // created() {
-  //   console.dir(States.isIE)
-  // },
   beforeCreate() {
     document.body.className = States.deviceType
     document.body.classList.add('is-loading')

@@ -9,8 +9,8 @@
     >
       <template slot="slides" v-for="item in items">
         <Slide
-          :bgMobile="item.main_image_mobile"
-          :bgDesktop="item.main_image_desktop"
+          :bgImage="bgImage(item)"
+          :bgPosition="bgPosition(item)"
           :key="`slide-main-${item.slug}`"
           ref="mainSlides"
         />
@@ -21,11 +21,10 @@
       <span slot="nextButton" class="controls__item">+</span>
     </SlideMaster>
 
-    <div class="slider slider--section">
+    <div v-if="deviceType === 'desktop'" class="slider slider--section">
       <template v-for="item in items">
         <Slide
-          :bgMobile="item.detail_images[0].image_mobile"
-          :bgDesktop="item.detail_images[0].image_desktop"
+          :bgImage="item.detail_images[0].image_desktop"
           :key="`slide-section-${item.slug}`"
           ref="sectionSlides"
         />
@@ -70,13 +69,18 @@ import Progress from '@/components/Progress'
     },
     data() {
       return {
-        items: items
+        items: items,
+        deviceType: States.deviceType
       }
+    },
+    beforeRouteLeave(to, from, next) {
+      console.dir(to)
+      next()
     },
     computed: {
       swipe() {
-        // Replace with this.$parent._data.deviceType
-        return States.deviceType === 'mobile' ? true : false
+        // Consider setting deviceType in Vuex store
+        return this.deviceType === 'mobile' ? true : false
       }
     },
     methods: {
@@ -91,7 +95,7 @@ import Progress from '@/components/Progress'
 
             Promise.all([
               component.$refs.mainSlides[0].show('next'),
-              component.$refs.sectionSlides[0].show('prev'),
+              component.deviceType === 'desktop' ? component.$refs.sectionSlides[0].show('prev') : '',
               setTimeout(() => component.$refs.titles[0].show(), 760),
               setTimeout(() => component.$refs.descriptions[0].show('prev'), 600)
             ])
@@ -103,6 +107,7 @@ import Progress from '@/components/Progress'
 
         imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => animateIntro(this))
       },
+
       onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
         // Progress animation
         this.$refs.progress.setCurrent(nextIndex + 1, direction);
@@ -115,12 +120,20 @@ import Progress from '@/components/Progress'
         // Slides animation
         Promise.all([
           this.$refs.mainSlides[currentIndex].hide(direction),
-          this.$refs.sectionSlides[currentIndex].hide(direction),
+          this.deviceType === 'desktop' ? this.$refs.sectionSlides[currentIndex].hide(direction) : '',
           this.$refs.mainSlides[nextIndex].show(direction),
-          this.$refs.sectionSlides[nextIndex].show(direction)          
+          this.deviceType === 'desktop' ? this.$refs.sectionSlides[nextIndex].show(direction) : ''      
         ])
           .then(() => slider.toggleEvents())
       },
+
+      bgImage(item) {
+        return this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop;
+      },
+
+      bgPosition(item) {
+        return item.main_image_desktop.includes('vans/main') ? '50% 100%' : '';
+      }
     }
   }
 </script>

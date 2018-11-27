@@ -11,9 +11,10 @@
         </div>
       </template>
     </div>
-      <!-- v-if for router error when the template is trying to access the data that does not (yet) exist -->
+      <!-- v-if for router error when the template is trying to access
+        the data that does not (yet) exist -->
       <template v-if="nextSlug">
-        <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand__link">
+        <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand__link" :aria-label="nextTitle">
           <h2 class="brand__title">{{ nextTitle }}</h2>
           <p class="brand__description">Next lookbook</p>
         </router-link>
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import States from '@/services/States'
+
 export default {
   name: 'BrandMobile',
   props: {
@@ -31,7 +34,8 @@ export default {
   },
   methods: {
     bgImage(image) {
-      if (this.$root.$children[0]._data.deviceType === 'mobile') {
+      // Consider using Vuex store to check deviceType
+      if (States.deviceType === 'mobile') {
         return `url('${image.image_mobile}')`
       } else {
         return `url('${image.image_desktop}')`

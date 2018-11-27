@@ -14,9 +14,9 @@ $offset: 11.4%;
   }
 
   &__hero {
-    padding-top: 37.5%;
+    padding-top: 42.5%;
     padding-left: $offset;
-    margin-bottom: 27%;
+    margin-bottom: 32%;
 
     @media (min-width: $screen-sm-min) {
       padding-top: 34.5%;
@@ -43,7 +43,7 @@ $offset: 11.4%;
   &__description {
     font-family: $font-avenir-regular;
     letter-spacing: 0.3px;
-    margin: 28px 0 0;
+    margin: 24px 0 0;
     max-width: 252px;
 
     @media (min-width: $screen-sm-min) {

@@ -1,7 +1,7 @@
 <template>
   <div class="slide" :class="{ 'is-active': active }" ref="slide">
     <div class="slide__wrap" ref="wrap">
-      <div class="slide__img" :style="{ backgroundImage: bgImage, backgroundPosition: bgPosition }" ref="img"></div>
+      <div class="slide__img" :style="{ backgroundImage: `url( ${bgImage} )`, backgroundPosition: bgPosition }" ref="img"></div>
     </div>
   </div>
 </template>
@@ -14,8 +14,11 @@ import CustomEase from '@/services/CustomEase'
 export default {
   name: 'Slide',
   props: {
-    bgMobile: String,
-    bgDesktop: String
+    bgImage: String,
+    bgPosition: {
+      type: String,
+      default: '50% 50%'
+    }
   },
   data() {
     return {
@@ -23,23 +26,6 @@ export default {
       animation: {
         duration: 1.2,
         ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
-      }
-    }
-  },
-  computed: {
-    // move out of here and into Home
-    bgImage() {
-      if (States.deviceType === 'mobile') {
-        return `url('${this.bgMobile}')`
-      } else {
-        return `url('${this.bgDesktop}')`
-      }
-    },
-    bgPosition() {
-      if (this.bgDesktop.includes('vans/main')) {
-        return '50% 100%'
-      } else {
-        return '50% 50%'
       }
     }
   },
