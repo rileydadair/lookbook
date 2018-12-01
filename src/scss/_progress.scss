@@ -1,10 +1,10 @@
 .progress {
-  position: absolute;
+  position: fixed;
   bottom: 26px;
   left: 21px;
   transform: rotate(-90deg) translate(0,100%);
   transform-origin: bottom left;
-  z-index: 100;
+  z-index: $zIndex-lower;
 
   @media (min-width: $screen-sm-min) {
     bottom: 42px;

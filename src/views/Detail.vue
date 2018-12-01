@@ -15,6 +15,7 @@ import BrandMobile from '@/components/BrandMobile'
 
 export default {
   name: 'Detail',
+  props: ['transitioning', 'initialLoad'],
   components: {
     Brand,
     BrandMobile
@@ -28,11 +29,11 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    // Can run page transition between brands
-    console.dir(to)
-    console.dir(from)
-    next()
+    this.$root.$emit('toggleOverlay', 'show', next);
   },
+  beforeRouteLeave(to, from, next) {
+      this.$root.$emit('toggleOverlay', 'show', next);
+    },
   beforeCreate() {
     document.body.classList.add('detail')
   },
@@ -43,6 +44,10 @@ export default {
     document.body.classList.remove('detail')
   },
   mounted() {
+    if (this.transitioning) {
+      this.$root.$emit('toggleOverlay', 'hide');
+    }
+
     // Get item object
     items.forEach((item, index, array) => {
       if (item.slug === this.$route.params.slug) {

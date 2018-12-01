@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link" :class="{ 'is-active': active}" ref="title" v-on:click="route" :tabindex="tabIndex" :aria-label="title">
+  <router-link event="" :to="{ name: 'detail', params: { slug: slug } }" class="title__link" :class="{ 'is-active': active}" ref="title" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
@@ -78,8 +78,16 @@ export default {
       return togglePromise
     },
     route(e) { // eslint-disable-line
-      // e.preventDefault()
-      // console.dir(e.currentTarget)
+      e.preventDefault()
+
+      this.$root.$emit('toggleOverlay', 'show', null, true);
+
+      setTimeout(() => {
+        const titlePromise = this.hide();
+        titlePromise.then(() => {
+          this.$router.push(`/${this.slug}`)
+        })
+      }, 950)
     }
   }
 }

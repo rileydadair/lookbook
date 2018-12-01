@@ -1,49 +1,49 @@
 <template>
   <div class="main">
-    <SlideMaster
-      className="slider--main"
-      @onSliderEvent="onSliderEvent"
-      @onSliderMount="onSliderMount"
-      :swipe="swipe"
-      ref="slider"
-    >
-      <template slot="slides" v-for="item in items">
-        <Slide
-          :bgImage="bgImage(item)"
-          :bgPosition="bgPosition(item)"
-          :key="`slide-main-${item.slug}`"
-          ref="mainSlides"
-        />
-      </template>
-      <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
-      <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
-      <span slot="prevButton" class="controls__item">+</span>
-      <span slot="nextButton" class="controls__item">+</span>
-    </SlideMaster>
+      <SlideMaster
+        className="slider--main"
+        @onSliderEvent="onSliderEvent"
+        @onSliderMount="onSliderMount"
+        :swipe="swipe"
+        ref="slider"
+      >
+        <template slot="slides" v-for="item in items">
+          <Slide
+            :bgImage="bgImage(item)"
+            :bgPosition="bgPosition(item)"
+            :key="`slide-main-${item.slug}`"
+            ref="mainSlides"
+          />
+        </template>
+        <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
+        <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
+        <span slot="prevButton" class="controls__item">+</span>
+        <span slot="nextButton" class="controls__item">+</span>
+      </SlideMaster>
 
-    <div v-if="deviceType === 'desktop'" class="slider slider--section">
-      <template v-for="item in items">
-        <Slide
-          :bgImage="item.detail_images[0].image_desktop"
-          :key="`slide-section-${item.slug}`"
-          ref="sectionSlides"
-        />
-      </template>
-    </div>
+      <div v-if="deviceType === 'desktop'" class="slider slider--section">
+        <template v-for="item in items">
+          <Slide
+            :bgImage="item.detail_images[0].image_desktop"
+            :key="`slide-section-${item.slug}`"
+            ref="sectionSlides"
+          />
+        </template>
+      </div>
 
-    <div class="title">
-      <template v-for="item in items">
-        <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
-      </template>
-    </div>
+      <div class="title">
+        <template v-for="item in items">
+          <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
+        </template>
+      </div>
 
-    <div class="description">
-      <template v-for="item in items">
-        <Description :descriptionVal="item.description" :key="`description-${item.slug}`" ref="descriptions" />
-      </template>
-    </div>
+      <div class="description">
+        <template v-for="item in items">
+          <Description :descriptionVal="item.description" :key="`description-${item.slug}`" ref="descriptions" />
+        </template>
+      </div>
 
-    <Progress ref="progress" />
+      <Progress ref="progress" />
   </div>
 </template>
 
@@ -60,6 +60,7 @@ import Progress from '@/components/Progress'
 
   export default {
     name: 'Home',
+    props: ['transitioning', 'initialLoad'],
     components: {
       SlideMaster,
       Slide,
@@ -70,12 +71,37 @@ import Progress from '@/components/Progress'
     data() {
       return {
         items: items,
-        deviceType: States.deviceType
+        currentIndex: 0,
+        deviceType: States.deviceType,
+        next: {},
+        slider: {}
       }
     },
-    beforeRouteLeave(to, from, next) {
-      console.dir(to)
-      next()
+    beforeCreate() {
+      document.body.classList.add('home')
+    },
+    beforeRouteUpdate(to, from, next) {
+      this.$root.$emit('toggleOverlay', 'show', next);
+    },
+    mounted() {
+      if (this.transitioning) {
+        this.$root.$emit('hideOverlay');
+      }
+      this.$root.$on('assetsLoaded', this.enter)
+
+      function componentEnter(component) {
+        component.enter();
+      }
+
+      console.log(this.initialLoad)
+
+      if (this.initialLoad) {
+        imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
+      }
+    },
+    destroyed() {
+      document.body.classList.remove('home')
+      document.body.classList.remove('enter')
     },
     computed: {
       swipe() {
@@ -84,31 +110,28 @@ import Progress from '@/components/Progress'
       }
     },
     methods: {
+      enter() {
+        console.log('HOme enter');
+        setTimeout(() => {
+          Promise.all([
+            this.$refs.mainSlides[0].show('next'),
+            this.deviceType === 'desktop' ? this.$refs.sectionSlides[0].show('prev') : '',
+            setTimeout(() => this.$refs.titles[0].show(), 760),
+            setTimeout(() => this.$refs.descriptions[0].show('prev'), 600),
+            setTimeout(() => document.body.classList.add('enter'), 600)
+          ])
+            .then(() => {
+              this.slider.toggleEvents()
+            })
+        }, 200)
+      },
       onSliderMount(slider) {
         slider.toggleEvents(false);
-
-        // Move images loaded to App - globally
-        // Then depending on view - call that views animateIntro
-        function animateIntro(component) {
-          setTimeout(() => {
-            document.body.classList.remove('is-loading')
-
-            Promise.all([
-              component.$refs.mainSlides[0].show('next'),
-              component.deviceType === 'desktop' ? component.$refs.sectionSlides[0].show('prev') : '',
-              setTimeout(() => component.$refs.titles[0].show(), 760),
-              setTimeout(() => component.$refs.descriptions[0].show('prev'), 600)
-            ])
-              .then(() => {
-                slider.toggleEvents()
-              })
-          }, 200)
-        }
-
-        imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => animateIntro(this))
+        this.slider = slider;
       },
 
       onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
+        this.currentIndex = nextIndex
         // Progress animation
         this.$refs.progress.setCurrent(nextIndex + 1, direction);
         // Titles animation

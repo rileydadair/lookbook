@@ -46,6 +46,10 @@ $offset: 11.4%;
     margin: 24px 0 0;
     max-width: 252px;
 
+    &--hero {
+      line-height: 1.7em;
+    }
+
     @media (min-width: $screen-sm-min) {
       padding-left: 0.5%;
     }

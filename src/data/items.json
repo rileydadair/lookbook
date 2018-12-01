@@ -85,28 +85,28 @@
         "image_desktop": "/images/vans/detail_1.jpg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/detail_2.jpeg",
+        "image_desktop": "/images/vans/detail_2.jpeg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/detail_3.jpeg",
+        "image_desktop": "/images/vans/detail_3.jpeg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/detail_4.jpeg",
+        "image_desktop": "/images/vans/detail_4.jpeg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/detail_5.jpeg",
+        "image_desktop": "/images/vans/detail_5.jpeg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/detail_6.jpeg",
+        "image_desktop": "/images/vans/detail_6.jpeg"
       },
       {
-        "image_mobile": "/images/vans/detail_1.jpg",
-        "image_desktop": "/images/vans/detail_1.jpg"
+        "image_mobile": "/images/vans/main_m.jpg",
+        "image_desktop": "/images/vans/main.jpg"
       }
     ]
   },
@@ -114,36 +114,36 @@
     "slug": "nike",
     "title": "Nike",
     "description": "Layback goofy footed transfer birdie Julien Stranger",
-    "main_image_mobile": "/images/nike/main_a_m.jpg",
-    "main_image_desktop": "/images/nike/main_a.jpg",
+    "main_image_mobile": "/images/nike/main_m.jpg",
+    "main_image_desktop": "/images/nike/main.jpg",
     "detail_images": [
       {
         "image_mobile": "/images/nike/detail_1.jpg",
         "image_desktop": "/images/nike/detail_1.jpg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_2.jpeg",
+        "image_desktop": "/images/nike/detail_2.jpeg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_3.jpeg",
+        "image_desktop": "/images/nike/detail_3.jpeg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_4.jpeg",
+        "image_desktop": "/images/nike/detail_4.jpeg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_5.jpeg",
+        "image_desktop": "/images/nike/detail_5.jpeg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_6.jpeg",
+        "image_desktop": "/images/nike/detail_6.jpeg"
       },
       {
-        "image_mobile": "/images/nike/detail_1.jpg",
-        "image_desktop": "/images/nike/detail_1.jpg"
+        "image_mobile": "/images/nike/detail_7.jpeg",
+        "image_desktop": "/images/nike/detail_7.jpeg"
       }
     ]
   }

@@ -19,6 +19,9 @@ export default {
       }
     }
   },
+  mounted() {
+    TweenMax.set(this.$refs.el, { transformStyle: 'preserve-3d' })
+  },
   methods: {
     hide(direction) {
       return this.toggle('hide', direction)

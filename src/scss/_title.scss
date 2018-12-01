@@ -1,4 +1,7 @@
 .title {
+  @include center-xy;
+  z-index: 999;
+
   &__link {
     @include center-xy;
     cursor: pointer;
@@ -7,7 +10,7 @@
     font-size: 14vw;
     line-height: 0.9;
     text-transform: uppercase;
-    z-index: 99;
+    z-index: 0;
   
     @media (min-width: $screen-lg-min) {
       font-size: 8vw;
@@ -15,7 +18,7 @@
     }
 
     &.is-active {
-      z-index: 200;
+      z-index: 300;
     }
   }
 
@@ -45,7 +48,8 @@
 
 .desktop {
   .title:hover,
-  .title:focus,{
+  .title__link.is-active:active,
+  .title__link.is-active:focus,{
     .title__wrap {
       opacity: 0;
     }

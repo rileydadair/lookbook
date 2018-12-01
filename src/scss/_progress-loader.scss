@@ -1,0 +1,12 @@
+.loader {
+  @include center-xy;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+  z-index: 400;
+
+  &__value {
+    display: inline-block;
+    color: $color-white;
+  }
+}

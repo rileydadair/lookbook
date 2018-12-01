@@ -2,7 +2,7 @@
   <div class="brand">
     <div class="brand__hero">
       <h1 class="brand__title">{{ item.title }}</h1>
-      <p class="brand__description">{{ item.description }}</p>
+      <p class="brand__description brand__description--hero">{{ item.description }}</p>
     </div>
     <div class="brand__section">
       <template v-for="(image, index) in item.detail_images">

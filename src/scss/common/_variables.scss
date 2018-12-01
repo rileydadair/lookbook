@@ -1,3 +1,8 @@
+// Font families
+$font-avenir-demi: 'AvenirNext-Demi', sans-serif;
+$font-avenir-regular: 'AvenirNext-Regular', sans-serif;
+$font-din: 'Din1451', sans-serif;
+
 // Media queries
 $screen-xs-min:               480px !default;
 $screen-sm-min:               768px !default;
@@ -10,18 +15,19 @@ $screen-sm-max:               ($screen-md-min - 1) !default;
 $screen-md-max:               ($screen-lg-min - 1) !default;
 $screen-lg-max:               ($screen-xl-min - 1) !default;
 
-// Font families
-$font-avenir-demi: 'AvenirNext-Demi', Futura, "Trebuchet MS", Arial, sans-serif;
-$font-avenir-regular: 'AvenirNext-Regular', Futura, "Trebuchet MS", Arial, sans-serif;
-$font-din: 'Din1451', Futura, "Trebuchet MS", Arial, sans-serif;
-
 // Colors
-$color-black: #151515;
-$color-white: #FDF8F1;
+$color-black:       #151515;
+$color-black-dark:  #050505;
+$color-white:       #FDF8F1;
 
 // Layout
-$inset-width-left: 11.5%;
-$inset-width-right: 9.6%;
+$inset-width-left:    11.5%;
+$inset-width-right:   9.6%;
 
-// Temporary intro animation
-$intro-duration: 1.2s;
+// Zindex
+$zIndex-upper:        200;
+$zIndex-mid:          150;
+$zIndex-lower:        100;
+
+// Intro animation
+$intro-duration:      1.2s;
