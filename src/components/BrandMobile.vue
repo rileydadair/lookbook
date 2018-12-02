@@ -6,9 +6,7 @@
     </div>
     <div class="brand__section">
       <template v-for="(image, index) in item.detail_images">
-        <div class="scroll-reveal__img-wrap" :key="`image-${index}`" ref="wrap">
-          <div class="scroll-reveal__img" :style="{ backgroundImage: bgImage(image) }" ref="img"></div>
-        </div>
+        <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
       </template>
     </div>
       <!-- v-if for router error when the template is trying to access the data that does not (yet) exist -->
@@ -24,8 +22,8 @@
 <script>
 import States from '@/services/States'
 import imagesLoaded from 'imagesloaded'
-import TweenMax from 'gsap'
-import CustomEase from '@/services/CustomEase'
+
+import Reveal from './Reveal'
 
 export default {
   name: 'BrandMobile',
@@ -34,54 +32,80 @@ export default {
     nextTitle: String,
     nextSlug: String
   },
+  components: {
+    Reveal
+  },
   data() {
     return {
-      animation: {
-        duration: 1.2,
-        // ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
-        // ease: Expo.easeOut,
-        ease: CustomEase.create("custom", "M0,0 C0.142,0.6 0.205,0.689 0.258,0.758 0.316,0.834 0.374,1 1,1"),
-      }
+      deviceType: States.deviceType,
+      scrollEls: []
     }
   },
   mounted() {
     setTimeout(() => {
-      function componentEnter(component) { component.enter() }
+      function componentInit(component) { component.init() }
 
       const images = document.querySelectorAll('.brand__img')
-      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
+      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentInit(this))
     })
   },
   methods: {
-    enter() {
+    init() {
       setTimeout(() => {
         this.$root.$emit('toggleOverlay', 'hide');
-
-        setTimeout(() => this.show(), 1000)
+        setTimeout(() => this.$refs.reveal[0].showMobile(), 700)
+        this.initScroll()
       }, 200)
+
+      this.scrollEls = this.$refs.reveal.splice(1, (this.$refs.reveal.length - 1))
     },
 
-    show() {
-      // console.dir(this.$refs.wrap[0]);
-      // TweenMax.to(this.$refs.wrap[0], this.animation.duration, {
-      //   startAt: { scaleY: 0 },
-      //   ease: this.animation.ease,
-      //   transformStyle: 'preserve-3d',
-      //   transformOrigin: "0%, 50%",
-      //   scaleY: 1
-      // })
-      // TweenMax.to(this.$refs.img[0], this.animation.duration, {
-      //   startAt: { scaleY: 2 },
-      //   ease: this.animation.ease,
-      //   transformStyle: 'preserve-3d',
-      //   transformOrigin: "0%, 50%",
-      //   scaleY: 1
-      // })
+    initScroll() {
+      this.scrollEvent = this.throttle(this.handleScroll, 10)
+      window.addEventListener('scroll', this.scrollEvent)
+    },
+
+    removeScroll() {
+      console.log('removed');
+      window.removeEventListener('scroll', this.scrollEvent)
+    },
+
+    handleScroll() {
+      this.scrollEls.forEach((el, index) => {
+        if (this.isInView(el.$el)) {
+          setTimeout(() => el.showMobile(), 0)
+          this.scrollEls.splice(index, 1)
+        }
+      })
+
+      if (this.scrollEls.length === 0) this.removeScroll()
+    },
+
+    isInView(el) {
+      const viewTop = 0;
+      const viewBottom = viewTop + window.innerHeight;
+      const elTop = el.getBoundingClientRect().top;
+      const elBottom = elTop + el.clientHeight * 0.5;
+
+      return elBottom <= viewBottom
+    },
+
+    throttle(func, limit) {
+      var timer = null;
+      return function() {
+        var args = arguments;
+        var context = this;
+        if (!timer) {
+          func.apply(context, args)
+          timer = true;
+          setTimeout(function() { timer = false; }, limit)
+        }
+      }
     },
 
     bgImage(image) {
       // Consider using Vuex store to check deviceType
-      if (States.deviceType === 'mobile') {
+      if (this.deviceType === 'mobile') {
         return `url('${image.image_mobile}')`
       } else {
         return `url('${image.image_desktop}')`

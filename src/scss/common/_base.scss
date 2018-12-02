@@ -23,7 +23,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  &.mobile {
+  &.mobile,
+  &.tablet {
     background-color: $color-white;
     position: fixed;
     top: 0;
