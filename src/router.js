@@ -27,7 +27,4 @@ export default new Router({
       component: () => import('./views/Detail.vue')
     }
   ],
-  scrollBehavior () {
-    return { x: 0, y: 0 }
-  }
 })

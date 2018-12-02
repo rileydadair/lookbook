@@ -1,10 +1,13 @@
 .reveal {
   margin-bottom: 42%;
   max-width: 668px;
-
-  width: 100%;
   opacity: 0;
   overflow: hidden;
+  width: 100%;
+
+  &:nth-child(1) {
+    opacity: 1;
+  }
 
   &:nth-child(1),
   &:nth-child(5) {

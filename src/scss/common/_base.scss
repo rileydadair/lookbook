@@ -95,6 +95,7 @@ button {
   left: 0;
   height: 400px;
   width: 100%;
+  z-index: $zIndex-upper;
 }
 
 // Intro animations

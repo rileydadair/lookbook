@@ -22,7 +22,6 @@
 <script>
 import States from '@/services/States'
 import imagesLoaded from 'imagesloaded'
-
 import Reveal from './Reveal'
 
 export default {
@@ -53,7 +52,6 @@ export default {
     init() {
       setTimeout(() => {
         this.$root.$emit('toggleOverlay', 'hide');
-        setTimeout(() => this.$refs.reveal[0].showMobile(), 700)
         this.initScroll()
       }, 200)
 
@@ -61,12 +59,11 @@ export default {
     },
 
     initScroll() {
-      this.scrollEvent = this.throttle(this.handleScroll, 10)
+      this.scrollEvent = this.handleScroll
       window.addEventListener('scroll', this.scrollEvent)
     },
 
     removeScroll() {
-      console.log('removed');
       window.removeEventListener('scroll', this.scrollEvent)
     },
 
@@ -88,19 +85,6 @@ export default {
       const elBottom = elTop + el.clientHeight * 0.5;
 
       return elBottom <= viewBottom
-    },
-
-    throttle(func, limit) {
-      var timer = null;
-      return function() {
-        var args = arguments;
-        var context = this;
-        if (!timer) {
-          func.apply(context, args)
-          timer = true;
-          setTimeout(function() { timer = false; }, limit)
-        }
-      }
     },
 
     bgImage(image) {

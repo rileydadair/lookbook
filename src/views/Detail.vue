@@ -42,6 +42,7 @@ export default {
   },
   updated() {
     document.body.classList.add('detail')
+    window.scrollTo(0, 0)
   },
   destroyed() {
     document.body.classList.remove('detail')

@@ -70,13 +70,13 @@ export default {
 
       TweenMax.to(this.$refs.inner, this.animation.duration, {
         ease: this.animation.ease,
-        startAt: { y: '100%' },
+        startAt: { y: '-100%' },
         y: '0%'
       })
 
       TweenMax.to(this.$refs.img, this.animation.duration, {
         ease: this.animation.ease,
-        startAt: { y: '-100%'},
+        startAt: { y: '100%'},
         y: '0%',
         onStart: () => {
           this.$refs.img.style.transformOrigin = '50% 0%'

@@ -26,7 +26,6 @@ export default {
       initialLoad: false,
       progress: 0,
       transitioning: false,
-      // activeOverlay: false
     }
   },
   beforeCreate() {
@@ -34,6 +33,10 @@ export default {
     if (States.isIE) document.body.classList.add('is-IE')
   },
   mounted() {
+    if ('scrollRestoration' in history) {
+      // Back off, browser, I got this...
+      history.scrollRestoration = 'manual';
+    }
     this.$root.$on('toggleOverlay', this.setTransitioning)
     this.$root.$on('hideOverlay', this.setTransitioning)
   },
