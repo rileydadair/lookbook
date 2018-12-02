@@ -80,17 +80,6 @@ import Progress from '@/components/Progress'
     beforeCreate() {
       document.body.classList.add('home')
     },
-    // beforeRouteUpdate(to, from, next) {
-    //   console.log('update');
-    //   this.$root.$emit('toggleOverlay', 'show', next);
-    // },
-    // beforeRouteLeave(to, from, next) {
-    //   console.dir(to);
-    //   console.dir(from);
-    //   console.dir(next);
-    //   console.dir(this.$route)
-    //   this.$root.$emit('toggleOverlay', 'show', next);
-    // },
     mounted() {
       if (this.transitioning) {
         this.$root.$emit('hideOverlay');

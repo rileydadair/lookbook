@@ -16,8 +16,7 @@ export default {
   props: {
     bgImage: String,
     bgPosition: {
-      type: String,
-      default: '50% 50%'
+      type: String
     }
   },
   data() {
