@@ -60,7 +60,7 @@ import Progress from '@/components/Progress'
 
   export default {
     name: 'Home',
-    props: ['transitioning', 'initialLoad'],
+    props: ['transitioning'],
     components: {
       SlideMaster,
       Slide,
@@ -80,24 +80,25 @@ import Progress from '@/components/Progress'
     beforeCreate() {
       document.body.classList.add('home')
     },
-    beforeRouteUpdate(to, from, next) {
-      this.$root.$emit('toggleOverlay', 'show', next);
-    },
+    // beforeRouteUpdate(to, from, next) {
+    //   console.log('update');
+    //   this.$root.$emit('toggleOverlay', 'show', next);
+    // },
+    // beforeRouteLeave(to, from, next) {
+    //   console.dir(to);
+    //   console.dir(from);
+    //   console.dir(next);
+    //   console.dir(this.$route)
+    //   this.$root.$emit('toggleOverlay', 'show', next);
+    // },
     mounted() {
       if (this.transitioning) {
         this.$root.$emit('hideOverlay');
       }
-      this.$root.$on('assetsLoaded', this.enter)
 
-      function componentEnter(component) {
-        component.enter();
-      }
+      function componentEnter(component) { component.enter() }
 
-      console.log(this.initialLoad)
-
-      if (this.initialLoad) {
-        imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
-      }
+      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
     },
     destroyed() {
       document.body.classList.remove('home')
@@ -109,9 +110,9 @@ import Progress from '@/components/Progress'
         return this.deviceType === 'mobile' ? true : false
       }
     },
+
     methods: {
       enter() {
-        console.log('HOme enter');
         setTimeout(() => {
           Promise.all([
             this.$refs.mainSlides[0].show('next'),
@@ -125,6 +126,7 @@ import Progress from '@/components/Progress'
             })
         }, 200)
       },
+
       onSliderMount(slider) {
         slider.toggleEvents(false);
         this.slider = slider;

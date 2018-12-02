@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  background-color: $color-white;
+  background-color: $color-black;
   color: $color-white;
   font-family: $font-avenir-demi;
   font-size: 1.4rem;
@@ -24,6 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   &.mobile {
+    background-color: $color-white;
     position: fixed;
     top: 0;
     left: 0;
@@ -39,6 +40,21 @@ body {
     &.tablet {
       position: relative;
       min-height: auto;
+    }
+  }
+
+  &.desktop {
+    overflow: hidden;
+
+    .main:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: $zIndex-lower;
+      opacity: 0;
     }
   }
 }
@@ -70,19 +86,7 @@ button {
   background-color: $color-black;
 }
 
-.desktop {
-  .main:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: $zIndex-lower;
-    opacity: 0;
-  }
-}
-
+// Hide transparency of mobile URL bar
 .top-overlay {
   background-color: $color-white;
   position: fixed;
@@ -106,7 +110,7 @@ button {
     .progress,
     .controls {
       opacity: 1;
-      transition: opacity $intro-duration;
+      transition: opacity 1.2s;
     }
   }
 }

@@ -3,7 +3,10 @@
     :item="item"
     :nextTitle="nextTitle"
     :nextSlug="nextSlug" />
-  <Brand v-else :item="item" />
+  <Brand v-else 
+    :item="item"
+    :nextTitle="nextTitle"
+    :nextSlug="nextSlug" />
 </template>
 
 <script>
@@ -15,7 +18,7 @@ import BrandMobile from '@/components/BrandMobile'
 
 export default {
   name: 'Detail',
-  props: ['transitioning', 'initialLoad'],
+  props: ['transitioning'],
   components: {
     Brand,
     BrandMobile
@@ -32,8 +35,8 @@ export default {
     this.$root.$emit('toggleOverlay', 'show', next);
   },
   beforeRouteLeave(to, from, next) {
-      this.$root.$emit('toggleOverlay', 'show', next);
-    },
+    this.$root.$emit('toggleOverlay', 'show', next);
+  },
   beforeCreate() {
     document.body.classList.add('detail')
   },
@@ -44,10 +47,6 @@ export default {
     document.body.classList.remove('detail')
   },
   mounted() {
-    if (this.transitioning) {
-      this.$root.$emit('toggleOverlay', 'hide');
-    }
-
     // Get item object
     items.forEach((item, index, array) => {
       if (item.slug === this.$route.params.slug) {

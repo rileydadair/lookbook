@@ -4,30 +4,27 @@ $font-avenir-regular: 'AvenirNext-Regular', sans-serif;
 $font-din: 'Din1451', sans-serif;
 
 // Media queries
-$screen-xs-min:               480px !default;
-$screen-sm-min:               768px !default;
-$screen-md-min:               992px !default;
-$screen-lg-min:               1200px !default;
-$screen-xl-min:               1440px !default;
-$screen-xxl-min:              1682px !default;
-$screen-xs-max:               ($screen-sm-min - 1) !default;
-$screen-sm-max:               ($screen-md-min - 1) !default;
-$screen-md-max:               ($screen-lg-min - 1) !default;
-$screen-lg-max:               ($screen-xl-min - 1) !default;
+$screen-xs-min:       480px;
+$screen-sm-min:       768px;
+$screen-md-min:       992px;
+$screen-lg-min:       1200px;
+$screen-xl-min:       1440px;
+$screen-xxl-min:      1682px;
+$screen-xs-max:       ($screen-sm-min - 1);
+$screen-sm-max:       ($screen-md-min - 1);
+$screen-md-max:       ($screen-lg-min - 1);
+$screen-lg-max:       ($screen-xl-min - 1);
 
 // Colors
 $color-black:       #151515;
-$color-black-dark:  #050505;
 $color-white:       #FDF8F1;
 
 // Layout
-$inset-width-left:    11.5%;
+$inset-width-left:    11.5%; // Home
 $inset-width-right:   9.6%;
+$offset:              11.4%; // Brand
 
 // Zindex
+$zIndex-title:        300;
 $zIndex-upper:        200;
-$zIndex-mid:          150;
 $zIndex-lower:        100;
-
-// Intro animation
-$intro-duration:      1.2s;
