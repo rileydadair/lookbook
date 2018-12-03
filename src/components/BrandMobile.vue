@@ -43,9 +43,7 @@ export default {
   mounted() {
     setTimeout(() => {
       function componentInit(component) { component.init() }
-
-      const images = document.querySelectorAll('.brand__img')
-      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentInit(this))
+      imagesLoaded(document.querySelectorAll('.detail-img'), {background: true}, () => componentInit(this))
     })
   },
   methods: {

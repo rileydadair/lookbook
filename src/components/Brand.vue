@@ -1,27 +1,33 @@
 <template>
   <div class="main">
     <div class="vs-section">
-      <div class="brand">
-          <div class="brand__section">
-            <template v-for="(image, index) in item.detail_images">
-              <div class="brand__img-wrap" :key="`image-${index}`">
-                <div class="brand__img" :style="{ backgroundImage: bgImage(image) }" ref="img"></div>
-              </div>
-            </template>
+      <template v-for="(image, index) in item.detail_images">
+
+        <template v-if="index === 1">
+          <div class="vs-wrap">
+            <Reveal :bgImage="bgImage(item.detail_images[1])" :key="`reveal-${index}`" ref="reveal" />
+            <Reveal :bgImage="bgImage(item.detail_images[2])" :key="`reveal-${index + 1}`" ref="reveal" />
           </div>
-            <!-- v-if for router error when the template is trying to access the data that does not (yet) exist -->
-            <!-- <template v-if="nextSlug">
-              <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand__link" :aria-label="nextTitle">
-                <h2 class="brand__title">{{ nextTitle }}</h2>
-              </router-link>
-            </template> -->
-        </div>
+        </template>
+        <template v-else-if="index === 2"></template>
+        <template v-else>
+            <div class="vs-wrap">
+              <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
+            </div>
+        </template>
+      </template>
+
+      <div class="test"></div>
     </div>
   </div>
 </template>
 
 <script>
 import imagesLoaded from 'imagesloaded'
+import Custom from '@/services/scroll/Custom'
+import Smooth from '@/services/scroll/Smooth'
+
+import Reveal from './Reveal'
 
 export default {
   name: 'Brand',
@@ -30,20 +36,48 @@ export default {
     nextTitle: String,
     nextSlug: String
   },
+  components: {
+    Reveal
+  },
   mounted() {
     setTimeout(() => {
-      function componentEnter(component) { component.enter() }
-
-      const images = document.querySelectorAll('.brand__img')
-      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
+      function componentInit(component) { component.init() }
+      imagesLoaded(document.querySelectorAll('.detail-img'), {background: true}, () => componentInit(this))
     })
   },
+  destroyed() {
+    this.smooth.destroy();
+  },
   methods: {
-    enter() {
+    init() {
       setTimeout(() => {
         this.$root.$emit('toggleOverlay', 'hide');
+        
+        this.smooth = new Custom({
+          preload: false,
+          native: false,
+          noscrollbar: true,
+          direction: 'horizontal',
+          section: document.querySelector('.vs-section'),
+          divs: document.querySelectorAll('.vs-wrap'),
+          vs : { mouseMultiplier: 0.4 },
+          test: document.querySelector('.test')
+        });
+
+        this.smooth.init();
+        this.initReveal();
       }, 200)
     },
+
+    initReveal() {
+      setTimeout(() => {
+        this.$refs.reveal.forEach(el => {
+          el.show()
+        })
+      }, 450)
+      // no overlay glitch at 460 - intermittent
+    },
+
     bgImage(image) {
       return `url('${image.image_desktop}')`
     },
