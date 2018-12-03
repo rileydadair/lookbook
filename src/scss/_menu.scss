@@ -1,0 +1,24 @@
+.menu {
+  @include full-fixed;
+  background-color: $color-black;
+  z-index: $zIndex-menu;
+
+  &__list {
+    // @include center-y;
+    position: absolute;
+    top: 34%;
+    right: 9.4%;
+    text-align: right;
+  }
+
+  &__item {
+    font-family: $font-din;
+    font-size: 6vw;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    width: 100%;
+  }
+}

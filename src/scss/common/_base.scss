@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  background-color: $color-black;
+  // background-color: $color-black;
+  background-color: $color-white;
   color: $color-white;
   font-family: $font-avenir-demi;
   font-size: 1.4rem;
@@ -25,7 +26,6 @@ body {
 
   &.mobile,
   &.tablet {
-    background-color: $color-white;
     position: fixed;
     top: 0;
     left: 0;
@@ -41,6 +41,10 @@ body {
     &.tablet {
       position: relative;
       min-height: auto;
+    }
+
+    .main {
+      background-color: $color-white;
     }
   }
 
@@ -58,6 +62,12 @@ body {
       opacity: 0;
     }
   }
+
+  &.active-menu {
+    .header {
+      z-index: $zIndex-menu;
+    }
+  }
 }
 
 a {
@@ -72,6 +82,11 @@ button {
   font-family: inherit;
   font-size: inherit;
   letter-spacing: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
 }
 
 ::-webkit-scrollbar { 

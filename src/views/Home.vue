@@ -1,49 +1,49 @@
 <template>
   <div class="main">
-      <SlideMaster
-        className="slider--main"
-        @onSliderEvent="onSliderEvent"
-        @onSliderMount="onSliderMount"
-        :swipe="swipe"
-        ref="slider"
-      >
-        <template slot="slides" v-for="item in items">
-          <Slide
-            :bgImage="bgImage(item)"
-            :bgPosition="bgPosition(item)"
-            :key="`slide-main-${item.slug}`"
-            ref="mainSlides"
-          />
-        </template>
-        <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
-        <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
-        <span slot="prevButton" class="controls__item">+</span>
-        <span slot="nextButton" class="controls__item">+</span>
-      </SlideMaster>
+    <SlideMaster
+      className="slider--main"
+      @onSliderEvent="onSliderEvent"
+      @onSliderMount="onSliderMount"
+      :swipe="swipe"
+      ref="slider"
+    >
+      <template slot="slides" v-for="item in items">
+        <Slide
+          :bgImage="bgImage(item)"
+          :bgPosition="bgPosition(item)"
+          :key="`slide-main-${item.slug}`"
+          ref="mainSlides"
+        />
+      </template>
+      <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
+      <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
+      <span slot="prevButton" class="controls__item">+</span>
+      <span slot="nextButton" class="controls__item">+</span>
+    </SlideMaster>
 
-      <div v-if="deviceType === 'desktop'" class="slider slider--section">
-        <template v-for="item in items">
-          <Slide
-            :bgImage="item.detail_images[0].image_desktop"
-            :key="`slide-section-${item.slug}`"
-            ref="sectionSlides"
-          />
-        </template>
-      </div>
+    <div v-if="deviceType === 'desktop'" class="slider slider--section">
+      <template v-for="item in items">
+        <Slide
+          :bgImage="item.detail_images[0].image_desktop"
+          :key="`slide-section-${item.slug}`"
+          ref="sectionSlides"
+        />
+      </template>
+    </div>
 
-      <div class="title">
-        <template v-for="item in items">
-          <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
-        </template>
-      </div>
+    <div class="title">
+      <template v-for="item in items">
+        <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
+      </template>
+    </div>
 
-      <div class="description">
-        <template v-for="item in items">
-          <Description :descriptionVal="item.description" :key="`description-${item.slug}`" ref="descriptions" />
-        </template>
-      </div>
+    <div class="description">
+      <template v-for="item in items">
+        <Description :descriptionVal="item.description" :key="`description-${item.slug}`" ref="descriptions" />
+      </template>
+    </div>
 
-      <Progress ref="progress" />
+    <Progress ref="progress" />
   </div>
 </template>
 
