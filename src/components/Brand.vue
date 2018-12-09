@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       animation: {
-        duration: 1.6,
+        duration: 2.2,
         ease: 'Expo.easeOut'
       }
     }
@@ -76,19 +76,17 @@ export default {
 
       setTimeout(() => {
         this.revealImages();
-      }, 200)
+      }, 1000)
     },
 
     revealImages() {
-        setTimeout(() => {
-          this.$refs.reveal.forEach(el => {
-          el.show()
-        })
+      this.$refs.reveal.forEach(el => {
+        el.show()
+      })
 
-        setTimeout(() => {
-          this.revealTitle()
-        }, 1200)
-      }, 280) // no overlay glitch at 460 - intermittent
+      setTimeout(() => {
+        this.revealTitle()
+      }, 1200)
 
       this.initSmooth()
     },

@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       animation: {
-        duration: .8,
+        duration: 1,
         // Need to call CustomEase only once - other is in slide - necessitates store
         ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
       }
