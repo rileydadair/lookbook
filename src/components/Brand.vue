@@ -4,14 +4,14 @@
       <template v-for="(image, index) in item.detail_images">
 
         <template v-if="index === 1">
-          <div class="brand-wrap">
+          <div class="brand-wrap" ref="brandWraps">
             <Reveal :bgImage="bgImage(item.detail_images[1])" :key="`reveal-${index}`" ref="reveal" />
             <Reveal :bgImage="bgImage(item.detail_images[2])" :key="`reveal-${index + 1}`" ref="reveal" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
-          <div class="brand-wrap">
+          <div class="brand-wrap" ref="brandWraps">
             <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
           </div>
         </template>
@@ -34,7 +34,6 @@
 <script>
 import imagesLoaded from 'imagesloaded'
 import TweenMax from 'gsap'
-import CustomEase from '@/services/CustomEase'
 import Custom from '@/services/scroll/Custom'
 import Smooth from '@/services/scroll/Smooth'
 
@@ -55,9 +54,8 @@ export default {
   data() {
     return {
       animation: {
-        duration: 1.2,
-        // ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
-        ease: 'Power3.easeOut'
+        duration: 1.6,
+        ease: 'Expo.easeOut'
       }
     }
   },
@@ -78,17 +76,19 @@ export default {
 
       setTimeout(() => {
         this.revealImages();
-      }, 460) // no overlay glitch at 460 - intermittent
+      }, 200)
     },
 
     revealImages() {
-      this.$refs.reveal.forEach(el => {
-        el.show()
-      })
+        setTimeout(() => {
+          this.$refs.reveal.forEach(el => {
+          el.show()
+        })
 
-      setTimeout(() => {
-        this.revealTitle()
-      }, 600)
+        setTimeout(() => {
+          this.revealTitle()
+        }, 1200)
+      }, 280) // no overlay glitch at 460 - intermittent
 
       this.initSmooth()
     },
@@ -100,7 +100,7 @@ export default {
           startAt: {y: '100%'},
           y: '0%',
           onStart: () => {
-            this.$refs.brandTitleWrap.style.opacity = 0.2
+            this.$refs.brandTitleWrap.style.opacity = 0.15
           },
           onComplete: () => {
             // resolve()
@@ -127,7 +127,6 @@ export default {
 
     addTitle() {
       return new Promise(resolve => {
-        console.dir(this.$refs.brandTitle.children[0])
         const htmlArr = Array.from(this.$refs.brandTitle.children[0].innerHTML.split(' '))
         htmlArr.push(this.item.title)
 

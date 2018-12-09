@@ -91,7 +91,7 @@ export default {
         titlePromise.then(() => {
           this.$router.push(`/${this.slug}`)
         })
-      }, 900)
+      }, 950)
     }
   }
 }
