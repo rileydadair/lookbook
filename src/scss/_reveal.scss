@@ -110,13 +110,13 @@
 }
 
 .reveal {
-  // opacity: 0;
-  overflow: hidden;
+  backface-visibility: hidden;
   position: relative;
   width: 100%;
   height: 100%;
 
   &__inner {
+    backface-visibility: hidden;
     width: 100%;
     position: absolute;
     top: 0;
@@ -125,6 +125,7 @@
   }
 
   &__img {
+    backface-visibility: hidden;
     background-position: 50% 50%;
     background-size: cover;
     position: relative;
@@ -137,15 +138,15 @@
     background-color: $color-white;
     position: absolute;
     left: 0;
-    height: 50%;
-    width: 100%;
+    height: calc(50% + 1px);
+    width: calc(100% + 1px);
 
     &--top {
-      top: 0;
+      top: -1px;
     }
 
     &--bottom {
-      bottom: 0;
+      bottom: -1px;
     }
   }
 }

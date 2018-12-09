@@ -85,10 +85,9 @@ export default {
       })
 
       setTimeout(() => {
+        this.initSmooth()
         this.revealTitle()
-      }, 1200)
-
-      this.initSmooth()
+      }, 1160)
     },
 
     revealTitle() {

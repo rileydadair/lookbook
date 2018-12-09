@@ -25,25 +25,32 @@ export default {
     this.$root.$on('hideOverlay', this.hide)
     this.$root.$on('showOverlay', this.show)
     this.$root.$on('toggleOverlay', this.toggle)
-    TweenMax.set(this.$refs.overlay, { transformStyle: 'preserve-3d' })
   },
   methods: {
     hide() {
-      TweenMax.set(this.$refs.overlay, { scaleY: 0 })
+      TweenMax.set(this.$refs.overlay, { transform: 'translate3d(0, 100%, 0)' })
     },
     
     show() {
-      TweenMax.set(this.$refs.overlay, { scaleY: 1 })
+      TweenMax.set(this.$refs.overlay, { transform: 'translate3d(0, 0, 0)' })
     },
 
-    // Try transition Y overlay for desktop
     toggle(action, next) {
       TweenMax.to(this.$refs.overlay, this.animation.duration, {
         ease: this.animation.ease,
-        transformOrigin: action === 'show' ? "0% 100%" : "50% 0%",
-        scaleY: action === 'show' ? 1 : 0,
+        startAt: { transform: action === 'show' ? 'translate3d(0, 100%, 0)' : 'translate3d(0, 0, 0)' },
+        transform: action === 'show' ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)',
+        onStart: () => {
+          this.$refs.overlay.style.transformOrigin = '50% 0%'
+          this.$refs.overlay.style.opacity = 1
+          this.$refs.overlay.style.zIndex = 200
+        },
         onComplete: () => {
           if (next) next()
+          if (action === 'hide') {
+            this.$refs.overlay.style.opacity = 0
+            this.$refs.overlay.style.zIndex = 0
+          }
         }
       })
     }

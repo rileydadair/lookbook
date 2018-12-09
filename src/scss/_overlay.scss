@@ -1,10 +1,21 @@
 .overlay {
+  background-color: $color-black;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  transform: translate3d(0, 100%, 0);
+  z-index: $zIndex-upper;
+}
+
+.overlay-m {
   background-color: $color-black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   transform: scaleY(0);
   z-index: $zIndex-upper;
 }

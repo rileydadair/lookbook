@@ -4,7 +4,8 @@
     <!-- <Menu :items="items" /> -->
     <Header />
     <router-view :key="$route.fullPath" :transitioning="transitioning" />
-    <Overlay :active="activeOverlay" />
+    <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
+    <Overlay v-else :active="activeOverlay" />
   </div>
 </template>
 
@@ -14,12 +15,14 @@ import items from './data/items'
 
 import Header from './components/Header'
 import Menu from './components/Menu'
+import OverlayMobile from './components/OverlayMobile'
 import Overlay from './components/Overlay'
 
 export default {
   name: 'app',
   components: {
     Header, // eslint-disable-line
+    OverlayMobile,
     Overlay,
     Menu
   },

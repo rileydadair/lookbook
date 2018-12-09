@@ -55,13 +55,13 @@ export default {
         if (action === 'show') this.active = true
         
         const indexArray = this.getIndexArray()
-        const duration = action === 'hide' ? 0.2 : 0.2
+        const duration = 0.2
 
         this.splitTitle.forEach((letter, index) => {
           const letterIndex = indexArray.splice(Math.floor(Math.random()*indexArray.length), 1)
           const animation = {
             opacity: action === 'hide' ? 0 : 1,
-            delay: index * 0.05,
+            delay: index * 0.055,
             onComplete: function(i, arr) {
               if (i === (arr.length - 1)) {
                 resolve()

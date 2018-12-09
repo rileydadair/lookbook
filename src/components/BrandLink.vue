@@ -60,7 +60,6 @@ export default {
           this.toggleLink(this.$refs.titleParts, 'show')
         })
       }, 200)
-      console.log('leave');
     },
     
     leave() {
@@ -92,7 +91,6 @@ export default {
             onComplete: function(i, arr) {
               if (i === (arr.length - 1)) {
                 resolve()
-                console.log('resolve')
               }
             },
             onCompleteParams: [index, array]

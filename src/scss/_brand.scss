@@ -14,6 +14,7 @@
     display: block;
     font-size: 18vw;
     font-size: 32.2vh;
+    letter-spacing: -2px;
     line-height: 0.58;
     position: absolute;
     bottom: 0;
@@ -31,7 +32,7 @@
   &__cta {
     position: relative;
     height: 100%;
-    opacity: .85;
+    opacity: .9;
     text-align: center;
 
     &:after {
@@ -78,6 +79,7 @@
 .link {
   @include center-xy;
   @include font-din;
+  letter-spacing: -2px;
   font-size: 8vw;
   z-index: $zIndex-title;
 
