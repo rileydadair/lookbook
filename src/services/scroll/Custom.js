@@ -8,8 +8,9 @@ class Custom extends Smooth {
     this.createExtraBound()
     this.resizing = false
     this.cache = null
+    this.addTitle = opt.addTitle
     this.dom.divs = Array.prototype.slice.call(opt.divs, 0)
-    this.dom.test = opt.test
+    this.dom.title = opt.title
   }
   
   createExtraBound() {
@@ -19,26 +20,24 @@ class Custom extends Smooth {
   
   resize() {
     this.resizing = true
-
     this.getCache()
     super.resize()
-    
     this.resizing = false
   }
 
   getCache() {
     this.cache = []
 
-    const unit = (this.vars.width / 3)
+    const titleBounding = this.dom.title.getBoundingClientRect()
+    this.titleCache = {
+      right: titleBounding.right + this.vars.target - window.innerWidth,
+      state: false
+    }
 
     let elsTotalWidth = 0
 
     this.dom.divs.forEach((el, index) => {
       elsTotalWidth += el.getBoundingClientRect().width
-      // el.style.display = 'inline-block'
-      // el.style.transform = 'none'
-      // el.style.width = `${unit}px`
-      
       const scrollX = this.vars.target
       const bounding = el.getBoundingClientRect()
       const bounds = {
@@ -46,42 +45,36 @@ class Custom extends Smooth {
         state: true,
         left: bounding.left + scrollX,
         right: bounding.right + scrollX,
-        center: unit / 2
       }
 
       this.cache.push(bounds)
     })
-
-    // console.log(elsTotalWidth)
     
     this.dom.section.style.width = `${this.vars.width}px`
     this.vars.bounding = elsTotalWidth - this.vars.width
   }
   
   run() {
-    this.dom.divs.forEach(this.inViewport);
     this.dom.section.style[this.prefix] = this.getTransform(this.vars.current * -1)
-    super.run()
+    this.dom.title.style.transform = this.getTransform(this.vars.current * -.5)
+    this.inViewport()
+    super.run()    
   }
   
-  inViewport(el, index) {
-    if(!this.cache || this.resizing) return
-    
-    const cache = this.cache[index]
+  inViewport() {
+    if(!this.titleCache || this.resizing) return
+
+    const cache = this.titleCache
     const current = this.vars.current
-    const left = Math.round(cache.left - current)
-    const right = Math.round(cache.right - current)
-    const inview = right > 0 && left < this.vars.width
+    const right = (cache.right / .5) - 600 // Divide the same amount that was multiplied in getTransform
+    const inview = current > right
     
-    // if(inview) {
-    //   if(!el.state) {
-    //       el.innerHTML = '<span>in viewport</span>'
-    //       el.state = true
-    //   }
-    // } else {
-    //   el.state = false
-    //   el.innerHTML = ''
-    // }
+    if (inview && !this.titleCache.state) {
+      this.titleCache.state = true;
+
+      const titlePromise = this.addTitle()
+        titlePromise.then(() => this.getCache()) // Update titleCache
+    }
   }
 }
 

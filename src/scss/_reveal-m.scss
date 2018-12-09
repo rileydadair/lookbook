@@ -1,4 +1,4 @@
-.scroll-reveal {
+.reveal-m {
   margin-bottom: 42%;
   max-width: 668px;
   opacity: 0;
@@ -42,30 +42,28 @@
   &:nth-child(4),
   &:nth-child(5),
   &:nth-child(7) {
-    .scroll-reveal__img {
+    .reveal-m__img {
       padding-bottom: 149.3%;
     }
   }
 
   &:nth-child(2) {
-    .scroll-reveal__img {
+    .reveal-m__img {
       padding-bottom: 83.2%;
     }
   }
 
   &:nth-child(3) {
-    .scroll-reveal__img {
+    .reveal-m__img {
       padding-bottom: 87.3%;
     }
   }
 
   &:nth-child(6) {
-    .scroll-reveal__img {
+    .reveal-m__img {
       padding-bottom: 87.3%;
     }
   }
-
-
 
   &__inner {
     height: 100%;

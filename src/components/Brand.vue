@@ -1,33 +1,45 @@
 <template>
   <div class="main">
-    <div class="vs-section">
+    <div class="brand">
       <template v-for="(image, index) in item.detail_images">
 
         <template v-if="index === 1">
-          <div class="vs-wrap">
+          <div class="brand-wrap">
             <Reveal :bgImage="bgImage(item.detail_images[1])" :key="`reveal-${index}`" ref="reveal" />
             <Reveal :bgImage="bgImage(item.detail_images[2])" :key="`reveal-${index + 1}`" ref="reveal" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
-            <div class="vs-wrap">
-              <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
-            </div>
+          <div class="brand-wrap">
+            <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
+          </div>
         </template>
       </template>
-
-      <div class="test"></div>
+      <div class="brand-wrap">
+        <!-- v-if for router error when the template is trying to access the data that does not (yet) exist -->
+        <template v-if="nextSlug">
+          <BrandLink :nextTitle="nextTitle" :nextSlug="nextSlug" />
+        </template>
+      </div>
+    </div>
+    <div class="brand__title" ref="brandTitle">
+      <span class="brand__title-wrap" ref="brandTitleWrap">
+        {{ item.title }}
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 import imagesLoaded from 'imagesloaded'
+import TweenMax from 'gsap'
+import CustomEase from '@/services/CustomEase'
 import Custom from '@/services/scroll/Custom'
 import Smooth from '@/services/scroll/Smooth'
 
 import Reveal from './Reveal'
+import BrandLink from './BrandLink'
 
 export default {
   name: 'Brand',
@@ -37,12 +49,22 @@ export default {
     nextSlug: String
   },
   components: {
-    Reveal
+    Reveal,
+    BrandLink
+  },
+  data() {
+    return {
+      animation: {
+        duration: 1.2,
+        // ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
+        ease: 'Power3.easeOut'
+      }
+    }
   },
   mounted() {
     setTimeout(() => {
       function componentInit(component) { component.init() }
-      imagesLoaded(document.querySelectorAll('.detail-img'), {background: true}, () => componentInit(this))
+      imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
     })
   },
   destroyed() {
@@ -52,30 +74,68 @@ export default {
     init() {
       setTimeout(() => {
         this.$root.$emit('toggleOverlay', 'hide');
-        
-        this.smooth = new Custom({
-          preload: false,
-          native: false,
-          noscrollbar: true,
-          direction: 'horizontal',
-          section: document.querySelector('.vs-section'),
-          divs: document.querySelectorAll('.vs-wrap'),
-          vs : { mouseMultiplier: 0.4 },
-          test: document.querySelector('.test')
-        });
-
-        this.smooth.init();
-        this.initReveal();
       }, 200)
+
+      setTimeout(() => {
+        this.revealImages();
+      }, 460) // no overlay glitch at 460 - intermittent
     },
 
-    initReveal() {
+    revealImages() {
+      this.$refs.reveal.forEach(el => {
+        el.show()
+      })
+
       setTimeout(() => {
-        this.$refs.reveal.forEach(el => {
-          el.show()
+        this.revealTitle()
+      }, 600)
+
+      this.initSmooth()
+    },
+
+    revealTitle() {
+      // return new Promise(resolve => {
+        TweenMax.to(this.$refs.brandTitleWrap, this.animation.duration, {
+          ease: this.animation.ease,
+          startAt: {y: '100%'},
+          y: '0%',
+          onStart: () => {
+            this.$refs.brandTitleWrap.style.opacity = 0.2
+          },
+          onComplete: () => {
+            // resolve()
+          }
         })
-      }, 450)
-      // no overlay glitch at 460 - intermittent
+      // })
+    },
+
+    initSmooth() {
+      this.smooth = new Custom({
+        preload: false,
+        native: false,
+        noscrollbar: true,
+        direction: 'horizontal',
+        section: document.querySelector('.brand'),
+        divs: document.querySelectorAll('.brand-wrap'),
+        vs : { mouseMultiplier: 0.4 },
+        title: this.$refs.brandTitle,
+        addTitle: this.addTitle
+      });
+
+      this.smooth.init();
+    },
+
+    addTitle() {
+      return new Promise(resolve => {
+        console.dir(this.$refs.brandTitle.children[0])
+        const htmlArr = Array.from(this.$refs.brandTitle.children[0].innerHTML.split(' '))
+        htmlArr.push(this.item.title)
+
+        const longerHTML = htmlArr.join(' ')
+        this.$refs.brandTitle.children[0].innerHTML = longerHTML
+
+        setTimeout(() => resolve(), 0)
+      })
     },
 
     bgImage(image) {

@@ -41,12 +41,15 @@ export default {
 
       return indexArray
     },
+
     hide() {
       return this.toggle('hide')
     },
+
     show() {
       return this.toggle('show')
     },
+
     toggle(action) {
       const togglePromise = new Promise(resolve => {
         if (action === 'show') this.active = true
@@ -77,6 +80,7 @@ export default {
 
       return togglePromise
     },
+    
     route(e) { // eslint-disable-line
       e.preventDefault()
 

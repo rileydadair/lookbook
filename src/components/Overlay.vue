@@ -36,6 +36,7 @@ export default {
       TweenMax.set(this.$refs.overlay, { scaleY: 1 })
     },
 
+    // Try transition Y overlay for desktop
     toggle(action, next) {
       TweenMax.to(this.$refs.overlay, this.animation.duration, {
         ease: this.animation.ease,

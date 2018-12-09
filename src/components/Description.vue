@@ -33,7 +33,7 @@ export default {
       return new Promise(resolve => {
         if (action === 'show') {
           TweenMax.to(this.$refs.el, this.animation.duration, {
-            ease: 'Power3..easeOut',
+            ease: 'Power3.easeOut',
             // force3D: true,
             startAt: { y: direction === 'next' ? '20px' : '-20px'},
             opacity: 1,

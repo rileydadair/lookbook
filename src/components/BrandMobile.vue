@@ -1,19 +1,19 @@
 <template>
-  <div class="brand">
-    <div class="brand__hero">
-      <h1 class="brand__title">{{ item.title }}</h1>
-      <p class="brand__description brand__description--hero" ref="description">{{ item.description }}</p>
+  <div class="brand-m">
+    <div class="brand-m__hero">
+      <h1 class="brand-m__title">{{ item.title }}</h1>
+      <p class="brand-m__description brand-m__description--hero" ref="description">{{ item.description }}</p>
     </div>
-    <div class="brand__section">
+    <div class="brand-m__section">
       <template v-for="(image, index) in item.detail_images">
         <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
       </template>
     </div>
       <!-- v-if for router error when the template is trying to access the data that does not (yet) exist -->
       <template v-if="nextSlug">
-        <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand__link" :aria-label="nextTitle">
-          <h2 class="brand__title">{{ nextTitle }}</h2>
-          <p class="brand__description">Next lookbook</p>
+        <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand-m__link" :aria-label="nextTitle">
+          <h2 class="brand-m__title">{{ nextTitle }}</h2>
+          <p class="brand-m__description">Next lookbook</p>
         </router-link>
       </template>
   </div>
@@ -43,7 +43,7 @@ export default {
   mounted() {
     setTimeout(() => {
       function componentInit(component) { component.init() }
-      imagesLoaded(document.querySelectorAll('.detail-img'), {background: true}, () => componentInit(this))
+      imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
     })
   },
   methods: {

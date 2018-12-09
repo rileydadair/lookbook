@@ -61,6 +61,12 @@ body {
       z-index: $zIndex-lower;
       opacity: 0;
     }
+
+    &.detail {
+      .main:after {
+        z-index: 1;
+      }
+    }
   }
 
   &.active-menu {

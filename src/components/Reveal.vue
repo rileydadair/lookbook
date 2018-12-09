@@ -1,7 +1,7 @@
 <template>
   <div :class="className" ref="reveal">
     <div :class="`${className}__inner`" ref="inner">
-      <div :class="`${className}__img`" class="detail-img" :style="{ backgroundImage: bgImage }" ref="img"></div>
+      <div :class="`${className}__img`" class="brand-img" :style="{ backgroundImage: bgImage }" ref="img"></div>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     className() {
-      return States.deviceType === 'mobile' ? 'scroll-reveal' : 'vs-reveal'
+      return States.deviceType === 'mobile' ? 'reveal-m' : 'reveal'
     }
   },
   methods: {
