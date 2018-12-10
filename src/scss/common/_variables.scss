@@ -26,7 +26,11 @@ $inset-width-right:   9.6%;
 $offset:              11.4%; // Brand
 
 // Zindex
-$zIndex-menu:         400;
+// $zIndex-overlay:      500;
+// $zIndex-menu:         400;
 $zIndex-title:        300;
 $zIndex-upper:        200;
+$zIndex-all:          175;
+$zIndex-mid:          150;
+$zIndex-controls:     125;
 $zIndex-lower:        100;

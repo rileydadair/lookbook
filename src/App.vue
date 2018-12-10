@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div v-if="deviceType === 'mobile'" class="top-overlay"></div>
-    <!-- <Menu :items="items" /> -->
     <Header />
     <router-view :key="$route.fullPath" :transitioning="transitioning" />
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
@@ -11,10 +10,7 @@
 
 <script>
 import States from './services/States'
-import items from './data/items'
-
 import Header from './components/Header'
-import Menu from './components/Menu'
 import OverlayMobile from './components/OverlayMobile'
 import Overlay from './components/Overlay'
 
@@ -24,7 +20,6 @@ export default {
     Header, // eslint-disable-line
     OverlayMobile,
     Overlay,
-    Menu
   },
   data() {
     return {
@@ -32,15 +27,11 @@ export default {
       initialLoad: false,
       progress: 0,
       transitioning: false,
-      items: items
     }
   },
   beforeCreate() {
     document.body.className = States.deviceType
     if (States.isIE) document.body.classList.add('is-IE')
-
-    // Temporary
-    // document.body.classList.add('active-menu')
   },
   mounted() {
     if ('scrollRestoration' in history) {

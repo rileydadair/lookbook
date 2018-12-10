@@ -1,5 +1,5 @@
 .title {
-  z-index: 999;
+  // z-index: $zIndex-title;
 
   &__link {
     @include center-xy;

@@ -36,13 +36,14 @@
         TweenMax.set(this.$refs.overlay, { scaleY: 1 })
       },
   
-      toggle(action, next) {
+      toggle(action, next, callback) {
         TweenMax.to(this.$refs.overlay, this.animation.duration, {
           ease: this.animation.ease,
           transformOrigin: action === 'show' ? "0% 100%" : "50% 0%",
           scaleY: action === 'show' ? 1 : 0,
           onComplete: () => {
             if (next) next()
+            if (callback) callback()
           }
         })
       }

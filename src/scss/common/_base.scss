@@ -71,7 +71,7 @@ body {
 
   &.active-menu {
     .header {
-      z-index: $zIndex-menu;
+      // z-index: $zIndex-menu;
     }
   }
 }
@@ -116,7 +116,7 @@ ul {
   left: 0;
   height: 400px;
   width: 100%;
-  z-index: $zIndex-upper;
+  z-index: 999;
 }
 
 // Intro animations
