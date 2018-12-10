@@ -20,6 +20,7 @@
 
   &__item--title {
     left: 12px;
+    z-index: $zIndex-all;
 
     @media (min-width: $screen-sm-min) { left: 36px; }
 

@@ -42,7 +42,14 @@ export default {
 
       if (this.$refs.links[index].$el.classList.contains('router-link-exact-active')) {
         this.toggle('hide').then(() => this.hide())
-      } else {
+      } 
+
+      if (this.$route.name === 'detail') {
+        console.log('detail');
+        this.$router.push(`/${slug}`)
+      }
+      
+      else {
         this.$root.$emit('toggleOverlay', 'show', null, () => routerPush(this));
       }
     },

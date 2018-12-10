@@ -9,22 +9,14 @@
     <span class="header__item header__item--all">
       <button class="header__btn" v-on:click="toggleMenu">All</button>
     </span>
-    <Menu :items="items" ref="menu" @toggleActive="toggleActive" />
   </header>
 </template>
-
 <script>
-import items from '@/data/items'
-import Menu from './Menu'
 
 export default {
   name: 'Header',
-  components: {
-    Menu
-  },
   data() {
     return {
-      items: items,
       isActive: false
     }
   },
