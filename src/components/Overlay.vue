@@ -35,7 +35,7 @@ export default {
       TweenMax.set(this.$refs.overlay, { transform: 'translate3d(0, 0, 0)' })
     },
 
-    toggle(action, next, callback) {
+    toggle(action, callback) {
       TweenMax.to(this.$refs.overlay, this.animation.duration, {
         ease: this.animation.ease,
         startAt: { transform: action === 'show' ? 'translate3d(0, 100%, 0)' : 'translate3d(0, 0, 0)' },
@@ -46,7 +46,6 @@ export default {
           this.$refs.overlay.style.zIndex = 200
         },
         onComplete: () => {
-          if (next) next()
           if (callback) callback()
           if (action === 'hide') {
             this.$refs.overlay.style.opacity = 0

@@ -2,6 +2,10 @@
   .title__link.is-active {
     z-index: $zIndex-lower;
   }
+
+  .header__item--about {
+    z-index: -1;
+  }
 }
 
 .menu {
@@ -20,23 +24,26 @@
     position: absolute;
     width: 100%;
   }
+}
 
-  &__list {
-    @include center-y;
-    position: absolute;
-    right: 27px;
-    text-align: right;
+.nav {
+  @include center-y;
+  position: absolute;
+  text-align: right;
+  width: 100%;
 
-    @media (min-width: $screen-lg-min) {
-      right: 9.4%;
-    }
-  }
 
   &__item {
-    font-family: $font-din;
-    font-size: 13vw;
-    letter-spacing: 0.015em;
-    text-transform: uppercase;
+    padding-right: 27px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-right: 50px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      height: 120px;
+      padding-right: 9.4%;
+    }
   }
 
   &__link {
@@ -44,20 +51,74 @@
     padding: 6px 0;
     position: relative;
     width: 100%;
+
+    @media (min-width: $screen-lg-min) {
+      padding: 0;
+
+      &.is-active,
+      &:hover {
+        .nav__title { opacity: 0; }
+        .nav__title--stroke { opacity: 1; }
+      }
+    }
+  }
+
+  &__title-wrap {
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      height: 120px;
+    }
   }
 
   &__title {
+    display: inline-block;
+    color: $color-white;
+    font-family: $font-din;
+    font-size: 13vw;
+    letter-spacing: 0.015em;
     padding-right: 44px;
+    text-transform: uppercase;
+    transition: opacity .35s;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 11vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 10.5rem;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &--stroke {
+      display: none;
+      color: transparent;
+      opacity: 0;
+      -webkit-text-stroke: 2px $color-white;
+      transition: opacity .35s;
+
+      @media (min-width: $screen-lg-min) { display: inline-block; }
+    }
   }
 
   &__num {
+    color: $color-white;
     display: inline-block;
-    font-family: "AvenirNext-Regular", sans-serif;
+    // font-family: "AvenirNext-Regular", sans-serif;
     font-size: 1.4rem;
-    letter-spacing: 0px;
+    // letter-spacing: 0px;
     transform: rotate(-90deg) translate(0%, -110%);
     transform-origin: center;
     position: absolute;
     top: 32%;
   }
+}
+
+.slide.slide--menu {
+  opacity: 1;
 }

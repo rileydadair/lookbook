@@ -1,5 +1,5 @@
 <template>
-  <div class="slide" :class="{ 'is-active': active }" ref="slide">
+  <div class="slide" :class="[{ 'is-active': active }, className]" ref="slide">
     <div class="slide__wrap" ref="wrap">
       <div class="slide__img" :style="{ backgroundImage: `url( ${bgImage} )`, backgroundPosition: bgPosition }" ref="img"></div>
     </div>
@@ -17,7 +17,8 @@ export default {
     bgImage: String,
     bgPosition: {
       type: String
-    }
+    },
+    className: String
   },
   data() {
     return {

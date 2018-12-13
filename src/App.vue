@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div v-if="deviceType === 'mobile'" class="top-overlay"></div>
-    <Header />
-    <Menu :items="items" ref="menu" />
+    <Header :menuActive="menuActive" @toggleMenuState="toggleMenuState" />
+    <Menu :menuActive="menuActive" @toggleMenuState="toggleMenuState" :items="items" ref="menu" />
     <router-view :key="$route.fullPath" :transitioning="transitioning" />
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
@@ -32,6 +32,7 @@ export default {
       initialLoad: false,
       progress: 0,
       transitioning: false,
+      menuActive: false,
     }
   },
   beforeCreate() {
@@ -52,6 +53,9 @@ export default {
     }
   },
   methods: {
+    toggleMenuState() {
+      this.menuActive = !this.menuActive
+    },
     setTransitioning(action) {
       this.transitioning = action === 'show' ? true : false
     }
@@ -60,10 +64,13 @@ export default {
     '$route' (to, from) {
      // Possibly animate page transition
       console.log('route change')
-      
 
       // MENU
       // Check if body contains menu-active $refs.menu.hide()
+      if (document.body.classList.contains('menu-active')) {
+        this.$refs.menu.hide();
+        this.menuActive = false;
+      }
     }
   }
 }

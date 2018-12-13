@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <span class="header__item header__item--title">
+    <span class="header__item header__item--title" v-on:click="handleDialogs">
       <router-link to="/" class="header__link">Lookbook</router-link>
     </span>
     <span v-if="$route.name !== 'detail'" class="header__item header__item--about">
@@ -15,25 +15,29 @@
 
 export default {
   name: 'Header',
-  data() {
-    return {
-      isActive: false
-    }
+  props: {
+    menuActive: Boolean
+  },
+  // data() {
+  //   return {
+  //     isActive: false
+  //   }
+  // },
+  mounted() {
+    console.log(this.menuActive);
   },
   methods: {
-    toggleActive() {
-      this.isActive = !this.isActive
-      console.log(this.isActive);
+    handleDialogs() {
+      if (this.$route.name === 'home' && this.menuActive) {
+        this.$root.$emit('toggleMenu', 'hide')
+        this.$emit('toggleMenuState')
+      }
     },
     toggleMenu() {
-      this.toggleActive()
-      if (this.isActive) document.body.classList.add('menu-active')
+      if (!this.menuActive) this.$root.$emit('toggleMenu', 'show')
+      else this.$root.$emit('toggleMenu', 'hide')
 
-      this.$refs.menu.toggle(this.isActive ? 'show' : 'hide')
-
-      .then(() => {
-        if (!this.isActive) document.body.classList.remove('menu-active')
-      })
+      this.$emit('toggleMenuState')
     }
   }
 }

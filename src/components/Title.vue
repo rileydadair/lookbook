@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link" :class="{ 'is-active': active}" ref="title" event="" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
+  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link" :class="{ 'is-active': active }" ref="title" event="" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
@@ -89,7 +89,7 @@ export default {
         })
       }
 
-      this.$root.$emit('toggleOverlay', 'show', null, () => hideTitle(this));
+      this.$root.$emit('toggleOverlay', 'show', () => hideTitle(this));
     }
   }
 }

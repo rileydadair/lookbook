@@ -13,19 +13,19 @@
   &:nth-child(5) {
     padding-right: $offset;
 
-    @media (min-width: $screen-md-min) { padding-left: 0; margin-left: 0 }
+    @media (min-width: $screen-sm-min) { padding-left: 0; margin-left: 0 }
   }
 
   &:nth-child(2),
   &:nth-child(7), {
     padding-left: $offset;
 
-    @media (min-width: $screen-md-min) {
+    @media (min-width: $screen-sm-min) {
       margin-right: 0;
    }
   }
 
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $screen-sm-min) {
     margin: 0 auto 26%;
   }
 
