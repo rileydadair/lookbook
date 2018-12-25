@@ -42,6 +42,7 @@
           transformOrigin: action === 'show' ? "0% 100%" : "50% 0%",
           scaleY: action === 'show' ? 1 : 0,
           onComplete: () => {
+            // Test only callback()
             if (next) next()
             if (callback) callback()
           }

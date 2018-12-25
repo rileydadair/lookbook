@@ -3,7 +3,7 @@
     <div v-if="deviceType === 'mobile'" class="top-overlay"></div>
     <Header :menuActive="menuActive" @toggleMenuState="toggleMenuState" />
     <Menu :menuActive="menuActive" @toggleMenuState="toggleMenuState" :items="items" ref="menu" />
-    <router-view :key="$route.fullPath" :transitioning="transitioning" />
+    <router-view :key="$route.fullPath" :transitioning="transitioning" :menuActive="menuActive" />
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
   </div>

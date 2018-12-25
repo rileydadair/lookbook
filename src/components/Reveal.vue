@@ -25,13 +25,12 @@ export default {
         mobileDuration: 1.2,
         ease: CustomEase.create("custom", "M0,0 C0.204,0.04 0.266,0.101 0.314,0.214 0.358,0.318 0.358,0.34 0.396,0.48 0.428,0.6 0.432,0.71 0.522,0.816 0.6,0.908 0.704,1 1,1"),
         mobileEase: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
-        // ease: 'Expo.easeInOut'
       }
     }
   },
   computed: {
     className() {
-      return States.deviceType === 'mobile' ? 'reveal-m' : 'reveal'
+      return States.deviceType !== 'desktop' ? 'reveal-m' : 'reveal'
     }
   },
   methods: {

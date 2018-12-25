@@ -82,6 +82,8 @@ export default {
     },
     
     route() {
+      if (!this.canRoute) return
+
       function hideTitle(component) {
         const titlePromise = component.hide();
         titlePromise.then(() => {
@@ -89,7 +91,10 @@ export default {
         })
       }
 
+      this.$root.$emit('toggleSliderEvents', false);
       this.$root.$emit('toggleOverlay', 'show', () => hideTitle(this));
+
+      this.canRoute = false
     }
   }
 }

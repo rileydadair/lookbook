@@ -60,7 +60,7 @@ import Progress from '@/components/Progress'
 
   export default {
     name: 'Home',
-    props: ['transitioning'],
+    props: ['transitioning', 'menuActive'],
     components: {
       SlideMaster,
       Slide,
@@ -74,7 +74,13 @@ import Progress from '@/components/Progress'
         currentIndex: 0,
         deviceType: States.deviceType,
         next: {},
-        slider: {}
+        slider: {},
+      }
+    },
+    watch: {
+      menuActive: function(boolean) {
+        // Toggle slider events on menuActive change
+        this.slider.toggleEvents(!boolean)
       }
     },
     beforeCreate() {
@@ -84,6 +90,8 @@ import Progress from '@/components/Progress'
       if (this.transitioning) {
         this.$root.$emit('hideOverlay');
       }
+
+      this.$root.$on('toggleSliderEvents', this.toggleSliderEvents)
 
       function componentEnter(component) { component.enter() }
 
@@ -95,11 +103,9 @@ import Progress from '@/components/Progress'
     },
     computed: {
       swipe() {
-        // Consider setting deviceType in Vuex store
-        return this.deviceType === 'mobile' ? true : false
+        return this.deviceType !== 'desktop' ? true : false
       }
     },
-
     methods: {
       enter() {
         setTimeout(() => {
@@ -114,6 +120,12 @@ import Progress from '@/components/Progress'
               this.slider.toggleEvents()
             })
         }, 200)
+      },
+
+      toggleSliderEvents(boolean) {
+        // Toggle slider events - false on Title route click
+        console.log(boolean)
+        this.slider.toggleEvents(boolean)
       },
 
       onSliderMount(slider) {

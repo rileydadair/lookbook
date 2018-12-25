@@ -12,12 +12,11 @@
     @include font-din;
     color: transparent;
     display: block;
-    font-size: 18vw;
-    font-size: 32.2vh;
-    letter-spacing: -2px;
+    // font-size: 32.2vh;
+    font-size: 27vh;
     line-height: 0.58;
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: .8%;
     z-index: 0;
     white-space: nowrap;
@@ -26,6 +25,7 @@
 
   &__title-wrap {
     display: inline-block;
+    letter-spacing: -3px;
     opacity: 0;
   }
 
