@@ -1,36 +1,28 @@
-.hover-imgs {
-  @include center-xy;
+.desktop {
+  .hover-reveal {
+    @media (min-width: $screen-lg-min) { display: block; }
+  }
+}
 
+.hover-imgs {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 15.4%;
+  transform: translate3d(0%, -50%, 0);
+  height: 72.4%;
+  width: 26.19%;
+  z-index: -1;
 }
 
 .hover-reveal {
-  // @include center-xy;
+  backface-visibility: hidden;
+  display: none;
   position: absolute;
-  top: 50%;
-  left: 44%;
-
-  left: 28%;
-  left: 15.4%;
-  transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(0%, -50%, 0);
-  overflow-y: hidden;
-
-  // height: 104%;
-  // width: 23%;
-
-  height: 122.77%;
-  width: 26.19%;
-
-  z-index: -1;
-  // display: none;
-
-  // &--1 { top: 18%; left: 28%; }
-
-  // &--2 { top: 38%; left: 36%; }
-
-  // &--3 { top: 62%; left: 44%; }
-
-  // &--4 { top: 86%; left: 52% }
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  overflow-y: hidden;  
 
   &__inner,
   &__img {

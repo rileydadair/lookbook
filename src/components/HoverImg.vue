@@ -18,9 +18,9 @@ export default {
   data() {
     return {
       animation: {
-        duration: 0.6,
-        // ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
-        ease: Power1.easeOut,
+        duration: 0.65,
+        ease: CustomEase.create("custom", "M0,0 C0.134,0.12 0.21,0.197 0.256,0.282 0.31,0.382 0.356,0.552 0.386,0.632 0.429,0.747 0.461,0.816 0.564,0.912 0.652,0.994 0.806,1 1,1"),
+        // ease: Power2.easeOut,
         opacity: 1
       }
     }
@@ -34,7 +34,6 @@ export default {
         onStart: () => {
           this.$refs.reveal.style.transformOrigin = '50% 0%'
           this.$refs.reveal.style.opacity = this.animation.opacity;
-          // TweenMax.set(this.$refs.reveal, {zIndex: 1000});
         }
       })
       .add('begin')
@@ -60,11 +59,7 @@ export default {
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
-        onStart: () => {
-          // TweenMax.set(this.$refs.reveal, {zIndex: 999});
-        },
         onComplete: () => {
-          // TweenMax.set(this.$refs.reveal, {zIndex: ''});
           TweenMax.set(this.$refs.reveal, {opacity: 0});
         }
       })

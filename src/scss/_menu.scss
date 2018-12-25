@@ -10,7 +10,6 @@
 
 .desktop {
   .nav {
-    top: 0%;
     transform: none;
     transition: .5s ease-out;
   }
@@ -49,9 +48,16 @@
     }
 
     @media (min-width: $screen-lg-min) {
-      height: 8vw;
+      height: 9.41vw;
       padding-right: 9.4%;
     }
+    
+    @media (min-width: $screen-lg-min) {
+      height: 9.41vw;
+      padding-right: 9.4%;
+    }
+
+    @media (min-width: $screen-xl-min) { height: 8.7vw; }
   }
 
   &__link {
@@ -61,6 +67,7 @@
     width: 100%;
 
     @media (min-width: $screen-lg-min) {
+      height: 9.41vw;
       padding: 0;
 
       &.is-active,
@@ -68,19 +75,13 @@
       &:hover {
         .nav__title { opacity: 0; }
         .nav__title--stroke { opacity: 1; }
-        // .nav__title { opacity: 1; }
-        // .nav__title--stroke { opacity: 0; }
       }
     }
+    
+    @media (min-width: $screen-xl-min) { height: 8.7vw; }
   }
 
-  &__title-wrap {
-    position: relative;
-
-    @media (min-width: $screen-sm-min) {
-      height: 8vw;
-    }
-  }
+  &__title-wrap { position: relative; }
 
   &__title {
     display: inline-block;
@@ -99,16 +100,18 @@
 
     @media (min-width: $screen-md-min) {
       font-size: 10.5rem;
-      font-size: 7.5vw;
+      font-size: 10vw;
     }
 
     @media (min-width: $screen-lg-min) {
+      font-size: 8vw;
       padding-right: 6%;
       position: absolute;
       top: 0;
       right: 0;
-      // opacity: 0;
     }
+
+    @media (min-width: $screen-xl-min) { font-size: 7vw; }
 
     &--stroke {
       display: none;
@@ -118,16 +121,13 @@
       transition: opacity .35s;
 
       @media (min-width: $screen-lg-min) { display: inline-block; }
-      // @media (min-width: $screen-lg-min) { display: inline-block; opacity: 1;}
     }
   }
 
   &__num {
     color: $color-white;
     display: inline-block;
-    // font-family: "AvenirNext-Regular", sans-serif;
     font-size: 1.4rem;
-    // letter-spacing: 0px;
     transform: rotate(-90deg) translate(0%, -110%);
     transform-origin: center;
     position: absolute;

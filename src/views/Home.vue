@@ -21,7 +21,7 @@
       <span slot="nextButton" class="controls__item">+</span>
     </SlideMaster>
 
-    <div v-if="deviceType === 'desktop'" class="slider slider--section">
+    <div v-if="deviceType !== 'mobile'" class="slider slider--section">
       <template v-for="item in items">
         <Slide
           :bgImage="item.detail_images[0].image_desktop"

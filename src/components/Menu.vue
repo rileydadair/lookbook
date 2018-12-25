@@ -8,8 +8,10 @@
         <div class="nav__item" v-for="(item, index) in itemsList" :key="`menu-list-${index}`" ref="items">
           <NavLink @showHoverImg="showHoverImg" @hideHoverImg="hideHoverImg" :item="item" :index="index" v-on:click.native="route(item.slug, index)" ref="links" />
         </div>
-        <HoverImg v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
       </nav>
+      <div class="hover-imgs" ref="imgs">
+        <HoverImg v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
+      </div>
     </div>
   </div>
 </template>
@@ -47,16 +49,17 @@ export default {
   },
   methods: {
     showHoverImg(index) {
-      this.$refs.img[index].showImage()
+      if (this.menuActive) this.$refs.img[index].showImage()
     },
 
     hideHoverImg(index) {
-      this.$refs.img[index].hideImage()
+      if (this.menuActive) this.$refs.img[index].hideImage()
     },
 
     route(slug, index) { // eslint-disable-line
       if (this.$refs.links[index].$el.classList.contains('router-link-exact-active')) {
         this.toggleMenu('hide').then(() => this.hide())
+        this.$refs.img.forEach(img => img.hideImage())
       } 
 
       if (this.$route.name === 'detail') {
@@ -78,6 +81,7 @@ export default {
       })
       document.body.classList.remove('menu-active')
       this.removeMouseMove()
+      this.$refs.img.forEach(img => img.hideImage())
     },
 
     initMouseMove() {
@@ -89,20 +93,23 @@ export default {
     },
 
     positionElement(ev) {
-      let { clientY: y } = ev
-      const walk = 350
-      const elRect = this.$refs.nav.getBoundingClientRect()
+      let { clientX: x, clientY: y } = ev
+      const xSpeed = 60
+      const ySpeed = 150
+      const elRect = this.$refs.imgs.getBoundingClientRect()
       const elHeight = elRect.height
-      const elBottom = elRect.top + elRect.height
-      const guard = (elHeight * 0.25) + elBottom
+      // const elBottom = elRect.top + elRect.height
+      // const guard = (elHeight * 0.25) + elBottom
 
-      if (y > guard) y = guard
+      // if (y > guard) y = guard
 
       const { offsetWidth: width, offsetHeight: height } = this.$refs.menu
-      const yWalk = Math.round((y / height * walk) - (walk / 2) - (elHeight * 0.35))
+      const xWalk = Math.round((x / width * xSpeed) - (xSpeed / 2))
+      const yWalk = Math.round((y / height * ySpeed) - (ySpeed / 2) - (elHeight * .5))
 
-      TweenMax.to(this.$refs.nav, .5, {
-        y: yWalk * -1,
+      TweenMax.to(this.$refs.imgs, 2, {
+        // x: xWalk,
+        y: yWalk,
         ease: Expo.easeOut
       })
     },
@@ -133,22 +140,25 @@ export default {
           const elHeight = this.$refs.nav.getBoundingClientRect().height * 0.225
           const windowHeight = window.innerHeight / 2
           const tweenY = windowHeight - elHeight
+
+
           this.tl.add(new TweenMax(this.$refs.nav, 0, {
             ease: Expo.easeOut,
-            y: tweenY
+            // y: tweenY
+            yPercent: -50
           }), 'begin')
         }
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Sine.easeIn, opacity: 1 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Expo.easeOut, yPercent: 0 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
+        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Sine.easeIn, opacity: 1 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.53' : 'begin+=0.45')
+        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Expo.easeOut, yPercent: 0 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.53' : 'begin+=0.45')
       }
       
       else {
         this.removeMouseMove()
         this.tl = new TimelineMax()
         if (this.deviceType === 'desktop') {
-          this.tl.add(new TweenMax(this.$refs.nav, 0.4, {
+          this.tl.add(new TweenMax(this.$refs.nav, 0.6, {
             ease: Expo.easeOut,
-            y: 0
+            yPercent: -100
           }), 'begin')
           this.tl.add(TweenMax.to(this.$refs.items, 0.3, { ease: Sine.easeIn , opacity: 0 }), 'begin')
         }
