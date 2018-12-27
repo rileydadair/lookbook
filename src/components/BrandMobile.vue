@@ -51,6 +51,7 @@ export default {
       setTimeout(() => {
         this.$root.$emit('toggleOverlay', 'hide');
         this.initScroll()
+        document.body.classList.add('enter')
       }, 200)
 
       this.scrollEls = this.$refs.reveal.splice(1, (this.$refs.reveal.length - 1))

@@ -70,13 +70,9 @@ export default {
   },
   methods: {
     init() {
-      setTimeout(() => {
-        this.$root.$emit('toggleOverlay', 'hide');
-      }, 200)
-
-      setTimeout(() => {
-        this.revealImages();
-      }, 1000)
+      setTimeout(() => this.$root.$emit('toggleOverlay', 'hide'), 200)
+      setTimeout(() => this.revealImages(), 1000)
+      setTimeout(() => document.body.classList.add('enter'), 1600)
     },
 
     revealImages() {
@@ -91,19 +87,14 @@ export default {
     },
 
     revealTitle() {
-      // return new Promise(resolve => {
-        TweenMax.to(this.$refs.brandTitleWrap, this.animation.duration, {
-          ease: this.animation.ease,
-          startAt: {y: '100%'},
-          y: '0%',
-          onStart: () => {
-            this.$refs.brandTitleWrap.style.opacity = 0.15
-          },
-          onComplete: () => {
-            // resolve()
-          }
-        })
-      // })
+      TweenMax.to(this.$refs.brandTitleWrap, this.animation.duration, {
+        ease: this.animation.ease,
+        startAt: {y: '100%'},
+        y: '0%',
+        onStart: () => {
+          this.$refs.brandTitleWrap.style.opacity = 0.15
+        }
+      })
     },
 
     initSmooth() {
@@ -114,6 +105,7 @@ export default {
         direction: 'horizontal',
         section: document.querySelector('.brand'),
         divs: document.querySelectorAll('.brand-wrap'),
+        ticking: true,
         vs : { mouseMultiplier: 0.4 },
         title: this.$refs.brandTitle,
         addTitle: this.addTitle

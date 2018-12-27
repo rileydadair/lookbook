@@ -8,7 +8,7 @@
 
   // 1
   &:nth-child(1) {
-    width: 25.7%;
+    width: 25.8%;
 
     .reveal__inner {
       @include center-y;
@@ -91,14 +91,16 @@
   // 7
   &:nth-child(6) {
     padding-right: 0;
-    width: 20%;
+    // width: 20%;
+    width: 23.45%;
 
     .reveal__inner {
       top: 27.5%;
     }
 
     .reveal__img {
-      padding-bottom: 155.25%;
+      // padding-bottom: 155.25%;
+      padding-bottom: 150%;
     }
   }
 

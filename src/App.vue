@@ -46,6 +46,8 @@ export default {
     }
     this.$root.$on('toggleOverlay', this.setTransitioning)
     this.$root.$on('hideOverlay', this.setTransitioning)
+
+    this.headerBtn = document.querySelector('.header__btn')
   },
   computed: {
     activeOverlay() {
@@ -62,11 +64,11 @@ export default {
   },
   watch: {
     '$route' (to, from) {
+      document.body.classList.remove('enter')
+      this.headerBtn.classList.remove('is-active')
      // Possibly animate page transition
       console.log('route change')
 
-      // MENU
-      // Check if body contains menu-active $refs.menu.hide()
       if (document.body.classList.contains('menu-active')) {
         this.$refs.menu.hide();
         this.menuActive = false;

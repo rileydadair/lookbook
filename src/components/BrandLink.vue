@@ -26,19 +26,20 @@ export default {
   data() {
     return {
       active: false,
+      isAnimating: false,
       splitNext: 'next'.split(''),
       splitTitle: this.nextTitle.split('')
     }
   },
 
   mounted() {
-    this.$refs.link.$el.addEventListener('mouseenter', this.enter)
-    this.$refs.link.$el.addEventListener('mouseleave', this.leave)
+    this.$refs.link.$el.addEventListener('mouseenter', this.mouseenter)
+    this.$refs.link.$el.addEventListener('mouseleave', this.mouseleave)
   },
 
   beforeDestroy() {
-    this.$refs.link.$el.removeEventListener('mouseenter', this.enter)
-    this.$refs.link.$el.removeEventListener('mouseleave', this.leave)
+    this.$refs.link.$el.removeEventListener('mouseenter', this.mouseenter)
+    this.$refs.link.$el.removeEventListener('mouseleave', this.mouseleave)
   },
 
   methods: {
@@ -52,7 +53,10 @@ export default {
       return indexArray
     },
 
-    enter() {
+    mouseenter() {
+      TweenMax.killTweensOf(this.$refs.nextParts);
+      TweenMax.killTweensOf(this.$refs.titleParts);
+
       setTimeout(() => {
         const togglePromise = this.toggleLink(this.$refs.nextParts, 'hide')
         togglePromise.then(() => {
@@ -62,7 +66,10 @@ export default {
       }, 200)
     },
     
-    leave() {
+    mouseleave() {
+      TweenMax.killTweensOf(this.$refs.nextParts);
+      TweenMax.killTweensOf(this.$refs.titleParts);
+
       setTimeout(() => {
         const togglePromise = this.toggleLink(this.$refs.titleParts, 'hide')
         togglePromise.then(() => {
@@ -72,13 +79,8 @@ export default {
       }, 200)
     },
 
-    toggleText() {
-
-    },
-
-    toggleLink(array, action, killArray) {
+    toggleLink(array, action) {
       return new Promise(resolve => {
-        // if (this.tween.isActive()) this.tween.kill();
 
         const indexArray = this.getIndexArray(array)
 

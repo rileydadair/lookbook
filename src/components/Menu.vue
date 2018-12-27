@@ -10,7 +10,7 @@
         </div>
       </nav>
       <div class="hover-imgs" ref="imgs">
-        <HoverImg v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
+        <HoverReveal v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@ import States from '@/services/States'
 import TweenMax from 'gsap'
 import CustomEase from '@/services/CustomEase'
 
-import HoverImg from './HoverImg'
+import HoverReveal from './HoverReveal'
 import NavLink from './NavLink'
 
 export default {
@@ -31,7 +31,7 @@ export default {
     menuActive: Boolean
   },
   components: {
-    HoverImg,
+    HoverReveal,
     NavLink
   },
   data() {
@@ -41,11 +41,13 @@ export default {
         ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
       },
       deviceType: States.deviceType,
+      headerBtn: {},
       itemsList: this.items,
     }
   },
   mounted() {
     this.$root.$on('toggleMenu', this.toggleMenu);
+    this.headerBtn = document.querySelector('.header__btn')
   },
   methods: {
     showHoverImg(index) {
@@ -59,15 +61,16 @@ export default {
     route(slug, index) { // eslint-disable-line
       if (this.$refs.links[index].$el.classList.contains('router-link-exact-active')) {
         this.toggleMenu('hide').then(() => this.hide())
-        this.$refs.img.forEach(img => img.hideImage())
+        this.headerBtn.classList.remove('is-active')
+        this.$refs.img.forEach(img => img.leaveImage())
       } 
 
-      if (this.$route.name === 'detail') {
-        this.$router.push(`/${slug}`)
+      else if (this.$route.name === 'detail') {
+        this.leaveNav().then(() => this.$router.push(`/${slug}`))
       }
       
       else {
-        this.$root.$emit('toggleOverlay', 'show', () => this.$router.push(`/${slug}`));
+        this.leaveNav().then(() => this.$root.$emit('toggleOverlay', 'show', () => this.$router.push(`/${slug}`)))
       }
 
       this.$emit('toggleMenuState')
@@ -94,18 +97,12 @@ export default {
 
     positionElement(ev) {
       let { clientX: x, clientY: y } = ev
-      const xSpeed = 60
-      const ySpeed = 150
+      const walk = 150
       const elRect = this.$refs.imgs.getBoundingClientRect()
       const elHeight = elRect.height
-      // const elBottom = elRect.top + elRect.height
-      // const guard = (elHeight * 0.25) + elBottom
-
-      // if (y > guard) y = guard
 
       const { offsetWidth: width, offsetHeight: height } = this.$refs.menu
-      const xWalk = Math.round((x / width * xSpeed) - (xSpeed / 2))
-      const yWalk = Math.round((y / height * ySpeed) - (ySpeed / 2) - (elHeight * .5))
+      const yWalk = Math.round((y / height * walk) - (walk / 2) - (elHeight * .5))
 
       TweenMax.to(this.$refs.imgs, 2, {
         // x: xWalk,
@@ -120,9 +117,21 @@ export default {
       })
     },
 
-    hideNav() {
-      TweenMax.to(this.$refs.nav, 0.4, { ease: Expo.easeOut, y: 0 })
-      TweenMax.to(this.$refs.items, 0.3, { ease: Sine.easeIn, opacity: 0 })
+    leaveNav() {
+      return new Promise(resolve => {
+        if (this.deviceType !== 'desktop') {
+          resolve()
+          return
+        }
+
+        TweenMax.staggerTo(this.$refs.items, 0.7, {
+          ease: Power1.easeIn,
+          opacity: 0,
+          onComplete: () => resolve()
+        }, -0.095)
+
+        this.$refs.img.forEach(img => img.leaveImage())
+      })
     },
 
     toggleNav(action) {
@@ -137,10 +146,6 @@ export default {
         this.tl.add('begin')
         if (this.deviceType === 'desktop') {
           this.initMouseMove()
-          const elHeight = this.$refs.nav.getBoundingClientRect().height * 0.225
-          const windowHeight = window.innerHeight / 2
-          const tweenY = windowHeight - elHeight
-
 
           this.tl.add(new TweenMax(this.$refs.nav, 0, {
             ease: Expo.easeOut,
@@ -148,8 +153,8 @@ export default {
             yPercent: -50
           }), 'begin')
         }
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Sine.easeIn, opacity: 1 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.53' : 'begin+=0.45')
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.65, { ease: Expo.easeOut, yPercent: 0 }, 0.09), this.deviceType === 'desktop' ? 'begin+=0.53' : 'begin+=0.45')
+        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Sine.easeIn, opacity: 1 }, 0.095), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
+        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Expo.easeOut, yPercent: 0 }, 0.095), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
       }
       
       else {

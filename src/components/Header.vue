@@ -7,7 +7,8 @@
       <router-link to="/about" class="header__link">About</router-link>
     </span> -->
     <span class="header__item header__item--all">
-      <button class="header__btn" :class="[menuActive ? 'is-active' : '']" v-on:click="toggleMenu">
+      <button class="header__btn" v-on:click="toggleMenu" ref="btn">
+      <!-- <button class="header__btn" :class="[menuActive ? 'is-active' : '']" v-on:click="toggleMenu"> -->
         <span class="header__btn-wrap">
           <span class="header__btn-text header__btn-text--close">Close</span>
           <span class="header__btn-text header__btn-text--all">All</span>
@@ -35,6 +36,8 @@ export default {
       else this.$root.$emit('toggleMenu', 'hide')
 
       this.$emit('toggleMenuState')
+
+      this.$refs.btn.classList.toggle('is-active')
     }
   }
 }

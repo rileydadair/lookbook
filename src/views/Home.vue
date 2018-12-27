@@ -99,7 +99,6 @@ import Progress from '@/components/Progress'
     },
     destroyed() {
       document.body.classList.remove('home')
-      document.body.classList.remove('enter')
     },
     computed: {
       swipe() {
@@ -124,7 +123,6 @@ import Progress from '@/components/Progress'
 
       toggleSliderEvents(boolean) {
         // Toggle slider events - false on Title route click
-        console.log(boolean)
         this.slider.toggleEvents(boolean)
       },
 

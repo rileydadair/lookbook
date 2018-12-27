@@ -11,6 +11,8 @@ class Custom extends Smooth {
     this.addTitle = opt.addTitle
     this.dom.divs = Array.prototype.slice.call(opt.divs, 0)
     this.dom.title = opt.title
+    this.newVal = 0
+    this.oldVal
   }
   
   createExtraBound() {
@@ -53,12 +55,19 @@ class Custom extends Smooth {
     this.dom.section.style.width = `${this.vars.width}px`
     this.vars.bounding = elsTotalWidth - this.vars.width
   }
+
+  update() {
+    console.log('update')
+  }
   
   run() {
+    console.dir(this.vars)
+
     this.dom.section.style[this.prefix] = this.getTransform(this.vars.current * -1)
-    this.dom.title.style.transform = this.getTransform(this.vars.current * -.5)
+    // Brand Title
+    this.dom.title.style[this.prefix] = this.getTransform(this.vars.current * -.5)
     this.inViewport()
-    super.run()    
+    super.run()
   }
   
   inViewport() {

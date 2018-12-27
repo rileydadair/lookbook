@@ -74,6 +74,22 @@ body {
       // z-index: $zIndex-menu;
     }
   }
+
+  .header,
+  .progress,
+  .controls {
+    opacity: 0;
+    transition: opacity 0s;
+  }
+
+  &.enter {
+    .header,
+    .progress,
+    .controls {
+      opacity: 1;
+      transition: opacity 1.2s;
+    }
+  }
 }
 
 a {
@@ -120,23 +136,23 @@ ul {
 }
 
 // Intro animations
-.home {
-  .header,
-  .progress,
-  .controls {
-    opacity: 0;
-    transition: opacity 0s;
-  }
+// .home {
+  // .header,
+  // .progress,
+  // .controls {
+  //   opacity: 0;
+  //   transition: opacity 0s;
+  // }
 
-  &.enter {
-    .header,
-    .progress,
-    .controls {
-      opacity: 1;
-      transition: opacity 1.2s;
-    }
-  }
-}
+  // &.enter {
+  //   .header,
+  //   .progress,
+  //   .controls {
+  //     opacity: 1;
+  //     transition: opacity 1.2s;
+  //   }
+  // }
+// }
 
 .gutters {
   padding: 0 33px;

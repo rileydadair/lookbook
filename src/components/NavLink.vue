@@ -9,16 +9,11 @@
 </template>
 
 <script>
-import HoverImg from './HoverImg'
-
 export default {
   name: 'NavLink',
   props: {
     index: Number,
     item: Object
-  },
-  components: {
-    HoverImg
   },
   mounted() {
     this.toggleEvents(true)

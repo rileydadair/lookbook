@@ -44,7 +44,7 @@
     @include center-x;
     font-family: $font-avenir-regular;
     letter-spacing: 0.3px;
-    top: 59.5%;
+    top: 58.5%;
     transform: translate3d(-65%, 0%, 0);
     transition: transform .4s cubic-bezier(.14,.64,.44,1);
 
@@ -79,7 +79,7 @@
   @include center-xy;
   @include font-din;
   letter-spacing: -2px;
-  font-size: 8vw;
+  font-size: 7vw;
   z-index: $zIndex-title;
 
   &__wrap {

@@ -11,7 +11,7 @@ import TweenMax from 'gsap'
 import CustomEase from '@/services/CustomEase'
 
 export default {
-  name: 'HoverImg',
+  name: 'HoverReveal',
   props: {
     img: String
   },
@@ -73,6 +73,13 @@ export default {
           ease: this.animation.ease,
           y: '-100%'
       }), 'begin')
+    },
+
+    leaveImage() {
+      TweenMax.killTweensOf(this.$refs.inner);
+      TweenMax.killTweensOf(this.$refs.img);
+
+      TweenMax.to(this.$refs.reveal, 0.6, {ease: Power2.easeOut, opacity: 0})
     }
   }
 }
