@@ -2,7 +2,6 @@
 import Smooth from './Smooth'
 
 class Custom extends Smooth {
-    
   constructor(opt) {
     super(opt)
     this.createExtraBound()
@@ -11,8 +10,6 @@ class Custom extends Smooth {
     this.addTitle = opt.addTitle
     this.dom.divs = Array.prototype.slice.call(opt.divs, 0)
     this.dom.title = opt.title
-    this.newVal = 0
-    this.oldVal
   }
   
   createExtraBound() {
@@ -56,13 +53,7 @@ class Custom extends Smooth {
     this.vars.bounding = elsTotalWidth - this.vars.width
   }
 
-  update() {
-    console.log('update')
-  }
-  
   run() {
-    console.dir(this.vars)
-
     this.dom.section.style[this.prefix] = this.getTransform(this.vars.current * -1)
     // Brand Title
     this.dom.title.style[this.prefix] = this.getTransform(this.vars.current * -.5)
@@ -75,7 +66,7 @@ class Custom extends Smooth {
 
     const cache = this.titleCache
     const current = this.vars.current
-    const right = (cache.right / .5) - 600 // Divide the same amount that was multiplied in getTransform
+    const right = (cache.right / .5) - 1000 // Divide the same amount that was multiplied in getTransform
     const inview = current > right
     
     if (inview && !this.titleCache.state) {

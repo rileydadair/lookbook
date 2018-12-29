@@ -1,6 +1,6 @@
 <template>
   <div class="brand__cta">
-    <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="link" ref="link">
+    <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="link js-hover" data-next ref="link">
       <span class="link__wrap link__wrap--title">
         <span class="link__part link__part--title" v-for="(part, index) in splitTitle" :key="`part-title-${index}`" ref="titleParts">{{ part }}</span>
       </span>
@@ -8,7 +8,7 @@
         <span class="link__part link__part--next" v-for="(part, index) in splitNext" :key="`part-next-${index}`" ref="nextParts">{{ part }}</span>
       </span>
     </router-link>
-    <p class="brand__text" :class="{ 'is-active': active}">
+    <p class="brand__text" :class="{ 'is-active': hoverActive}">
       <span class="brand__next" ref="nextText">Next </span><span class="brand__lookbook">lookbook</span>
     </p>
   </div>
@@ -25,80 +25,100 @@ export default {
   },
   data() {
     return {
-      active: false,
-      isAnimating: false,
+      hoverActive: !1,
+      oncePlay: !1,
+      hasLeft: !1,
       splitNext: 'next'.split(''),
       splitTitle: this.nextTitle.split('')
     }
   },
 
   mounted() {
-    this.$refs.link.$el.addEventListener('mouseenter', this.mouseenter)
-    this.$refs.link.$el.addEventListener('mouseleave', this.mouseleave)
+    this.$refs.link.$el.addEventListener('mouseenter', this.onHoverNext)
+    this.$refs.link.$el.addEventListener('mouseleave', this.offHoverNext)
   },
 
   beforeDestroy() {
-    this.$refs.link.$el.removeEventListener('mouseenter', this.mouseenter)
-    this.$refs.link.$el.removeEventListener('mouseleave', this.mouseleave)
+    this.$refs.link.$el.removeEventListener('mouseenter', this.onHoverNext)
+    this.$refs.link.$el.removeEventListener('mouseleave', this.offHoverNext)
   },
 
   methods: {
-    getIndexArray(array) {
-      const indexArray = []
+    onHoverNext(e) {
+      const random = []
 
-      array.forEach((letter, index) => {
-        indexArray.push(index);
-      })
-
-      return indexArray
+      !1 === this.oncePlay && (this.oncePlay = !0,
+      this.$refs.nextParts.forEach(function(e) {
+          return random.push(e)
+      }),
+      random.sort(function() {
+          return .5 - Math.random()
+      }),
+      TweenMax.staggerTo(random, .45, {
+          opacity: 0,
+          ease: Power2.easeIn
+      }, .055, this.allDoneNext))
     },
 
-    mouseenter() {
-      TweenMax.killTweensOf(this.$refs.nextParts);
-      TweenMax.killTweensOf(this.$refs.titleParts);
+    allDoneNext() {
+      // Failsafe for fast mouseenter + mouseleave
+      if (!0 === this.hasLeft) {
+        this.allDoneNext2()
+        return
+      }
+      this.hoverActive = !0
+      const random = []
 
-      setTimeout(() => {
-        const togglePromise = this.toggleLink(this.$refs.nextParts, 'hide')
-        togglePromise.then(() => {
-          this.active = true;
-          this.toggleLink(this.$refs.titleParts, 'show')
-        })
-      }, 200)
-    },
-    
-    mouseleave() {
-      TweenMax.killTweensOf(this.$refs.nextParts);
-      TweenMax.killTweensOf(this.$refs.titleParts);
+      TweenMax.set(this.$refs.titleParts, { opacity: 0 }),
+      TweenMax.set(this.$refs.nextParts, { opacity: 0 }),
 
-      setTimeout(() => {
-        const togglePromise = this.toggleLink(this.$refs.titleParts, 'hide')
-        togglePromise.then(() => {
-          this.active = false;
-          this.toggleLink(this.$refs.nextParts, 'show')
-        })
-      }, 200)
+      this.$refs.titleParts.forEach(function(e) {
+          return random.push(e)
+      }),
+      random.sort(function() {
+          return .5 - Math.random()
+      }),
+      TweenMax.staggerTo(random, .4, {
+          opacity: 1,
+          ease: Power2.easeOut
+      }, .05)
     },
 
-    toggleLink(array, action) {
-      return new Promise(resolve => {
+    offHoverNext() {
+      this.hasLeft = !0
+      const random = []
 
-        const indexArray = this.getIndexArray(array)
+      !0 === this.oncePlay && (this.oncePlay = !1,
+      this.$refs.titleParts.forEach(function(e) {
+          return random.push(e)
+      }),
+      random.sort(function() {
+          return .5 - Math.random()
+      }),
+      TweenMax.staggerTo(random, .4, {
+          opacity: 0,
+          ease: Power2.easeIn
+      }, .05, this.allDoneNext2))
+    },
 
-        array.forEach((letter, index) => {
-          const letterIndex = indexArray.splice(Math.floor(Math.random()*indexArray.length), 1)
+    allDoneNext2() {
+      this.hasLeft = !1
+      this.hoverActive = !1
+      const random = []
 
-          this.tween = TweenMax.to(array[letterIndex[0]], 0.2, {
-            opacity: action === 'hide' ? 0 : 1,
-            delay: index * 0.06,
-            onComplete: function(i, arr) {
-              if (i === (arr.length - 1)) {
-                resolve()
-              }
-            },
-            onCompleteParams: [index, array]
-          })
-        })
-      })
+      TweenMax.set(this.$refs.titleParts, { opacity: 0 }),
+      TweenMax.set(this.$refs.nextParts, { opacity: 0 }),
+
+      this.$refs.nextParts.forEach(function(e) {
+          return random.push(e)
+      }),
+      random.sort(function() {
+          return .5 - Math.random()
+      }),
+      TweenMax.staggerTo(random, .4, {
+          opacity: 1,
+          ease: Power2.easeOut
+      }, .05)
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="item" :to="{ name: 'detail', params: { slug: item.slug } }" class="nav__link" event="" ref="link">
+  <router-link v-if="item" :to="{ name: 'detail', params: { slug: item.slug } }" class="nav__link js-hover" event="" ref="link">
     <div class="nav__title-wrap">
       <span class="nav__title">{{ item.title }}</span>
       <span class="nav__title nav__title--stroke">{{ item.title }}</span>

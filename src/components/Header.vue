@@ -1,13 +1,13 @@
 <template>
   <header class="header">
     <span class="header__item header__item--title" v-on:click="handleHomeClick">
-      <router-link to="/" class="header__link">Lookbook</router-link>
+      <router-link to="/" class="header__link js-hover" data-lock="home">Lookbook</router-link>
     </span>
     <!-- <span v-if="$route.name !== 'detail'" class="header__item header__item--about">
       <router-link to="/about" class="header__link">About</router-link>
     </span> -->
     <span class="header__item header__item--all">
-      <button class="header__btn" v-on:click="toggleMenu" ref="btn">
+      <button class="header__btn js-hover" data-lock="all" v-on:click="toggleMenu" ref="btn">
       <!-- <button class="header__btn" :class="[menuActive ? 'is-active' : '']" v-on:click="toggleMenu"> -->
         <span class="header__btn-wrap">
           <span class="header__btn-text header__btn-text--close">Close</span>

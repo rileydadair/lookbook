@@ -1,17 +1,11 @@
 .menu-active {
-  .title__link.is-active {
+  .title__link.is-active,
+  .controls {
     z-index: $zIndex-lower;
   }
 
   .header__item--about {
     z-index: -1;
-  }
-}
-
-.desktop {
-  .nav {
-    transform: none;
-    transition: .5s ease-out;
   }
 }
 
@@ -73,8 +67,8 @@
       &.is-active,
       &:focus,
       &:hover {
-        .nav__title { opacity: 0; }
-        .nav__title--stroke { opacity: 1; }
+        // .nav__title { opacity: 0; }
+        // .nav__title--stroke { opacity: 1; }
       }
     }
     
@@ -91,7 +85,7 @@
     letter-spacing: 0.015em;
     padding-right: 44px;
     text-transform: uppercase;
-    transition: opacity .35s;
+    transition: opacity .45s;
 
     @media (min-width: $screen-sm-min) {
       padding-right: 7%;
@@ -117,8 +111,8 @@
       display: none;
       color: transparent;
       opacity: 0;
-      -webkit-text-stroke: 1px $color-white;
-      transition: opacity .35s;
+      -webkit-text-stroke: 2px $color-white;
+      transition: opacity .45s;
 
       @media (min-width: $screen-lg-min) { display: inline-block; }
     }

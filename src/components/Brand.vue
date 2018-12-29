@@ -4,15 +4,15 @@
       <template v-for="(image, index) in item.detail_images">
 
         <template v-if="index === 1">
-          <div class="brand-wrap" ref="brandWraps">
-            <Reveal :bgImage="bgImage(item.detail_images[1])" :key="`reveal-${index}`" ref="reveal" />
-            <Reveal :bgImage="bgImage(item.detail_images[2])" :key="`reveal-${index + 1}`" ref="reveal" />
+          <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
+            <Reveal :bgImage="bgImage(item.detail_images[1])" ref="reveal" />
+            <Reveal :bgImage="bgImage(item.detail_images[2])" ref="reveal" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
-          <div class="brand-wrap" ref="brandWraps">
-            <Reveal :bgImage="bgImage(image)" :key="`reveal-${index}`" ref="reveal" />
+          <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
+            <Reveal :bgImage="bgImage(image)" ref="reveal" />
           </div>
         </template>
       </template>
@@ -53,10 +53,7 @@ export default {
   },
   data() {
     return {
-      animation: {
-        duration: 2.2,
-        ease: 'Expo.easeOut'
-      }
+      current: 0
     }
   },
   mounted() {
@@ -83,29 +80,52 @@ export default {
       setTimeout(() => {
         this.initSmooth()
         this.revealTitle()
-      }, 1160)
+      }, 1000)
     },
 
     revealTitle() {
-      TweenMax.to(this.$refs.brandTitleWrap, this.animation.duration, {
-        ease: this.animation.ease,
+      TweenMax.to(this.$refs.brandTitleWrap, 2.2, {
+        ease: 'Expo.easeOut',
         startAt: {y: '100%'},
         y: '0%',
         onStart: () => {
-          this.$refs.brandTitleWrap.style.opacity = 0.15
+          this.$refs.brandTitleWrap.style.opacity = 0.18
         }
       })
     },
 
+    scaleImages(vars) {
+      const current = Math.round(vars.current)
+      const scale = Math.abs(current - this.current) / 260 + 1 < 1.14 ? Math.abs(current - this.current) / 260 + 1 : 1.14
+      const skew = (current - this.current) * 0.25
+
+      console.log(scale)
+
+      this.$refs.reveal.forEach(ref => {
+          TweenMax.to(ref.$el, 1.4, {
+          scaleX: scale,
+          ease: 'Power2.easeOut'
+        })
+      })
+      TweenMax.to(this.$refs.brandTitleWrap, 1.4, {
+        skewX: skew,
+        force3D: true,
+        skewType: 'simple',
+        ease: 'Power2.easeOut'
+      })
+
+      this.current = current
+    },
+
     initSmooth() {
       this.smooth = new Custom({
+        callback: this.scaleImages.bind(this),
         preload: false,
         native: false,
         noscrollbar: true,
         direction: 'horizontal',
         section: document.querySelector('.brand'),
         divs: document.querySelectorAll('.brand-wrap'),
-        ticking: true,
         vs : { mouseMultiplier: 0.4 },
         title: this.$refs.brandTitle,
         addTitle: this.addTitle

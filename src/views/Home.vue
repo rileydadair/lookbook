@@ -87,6 +87,8 @@ import Progress from '@/components/Progress'
       document.body.classList.add('home')
     },
     mounted() {
+      this.$emit('viewHasMounted')
+
       if (this.transitioning) {
         this.$root.$emit('hideOverlay');
       }

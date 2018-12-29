@@ -242,18 +242,20 @@ export default {
       (
         <div class="controls">
           <button
-            class="controls__btn controls__btn--prev"
+            class="controls__btn controls__btn--prev js-hover"
             onClick={e => this.onClick(e, this.currentIndex - 1, 'prev')}
             type="button"
             ref="prevButton"
+            data-lock="controls"
           >
             {this.$slots.prevButton}
           </button>
           <button
-            class="controls__btn controls__btn--next"
+            class="controls__btn controls__btn--next js-hover"
             onClick={e => this.onClick(e, this.currentIndex + 1, 'next')}
             type="button"
             ref="nextButton"
+            data-lock="controls"
           >
             {this.$slots.nextButton}
           </button>

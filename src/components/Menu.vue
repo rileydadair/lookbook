@@ -1,9 +1,6 @@
 <template>
   <div class="menu" ref="menu">
     <div class="menu__wrap" ref="wrap">
-      <!-- <div class="hover-imgs">
-        <HoverImg v-for="(item, index) in itemsList" :key="`hover-img-${index}`" :img="item.main_image_desktop" />
-      </div> -->
       <nav class="nav" ref="nav">
         <div class="nav__item" v-for="(item, index) in itemsList" :key="`menu-list-${index}`" ref="items">
           <NavLink @showHoverImg="showHoverImg" @hideHoverImg="hideHoverImg" :item="item" :index="index" v-on:click.native="route(item.slug, index)" ref="links" />
@@ -66,37 +63,39 @@ export default {
       } 
 
       else if (this.$route.name === 'detail') {
-        this.leaveNav().then(() => this.$router.push(`/${slug}`))
+        this.leaveNav()
+        this.$router.push(`/${slug}`)
       }
       
       else {
-        this.leaveNav().then(() => this.$root.$emit('toggleOverlay', 'show', () => this.$router.push(`/${slug}`)))
+        this.leaveNav()
+        this.$root.$emit('hideCursor')
+        this.$root.$emit('toggleOverlay', 'show', () => this.$router.push(`/${slug}`))
       }
 
       this.$emit('toggleMenuState')
     },
 
-    // Find all menu hide methods and rename - hideMenu
     hide() {
       TweenMax.set(this.$refs.menu, {
         y: '-100%',
         opacity: 0
       })
       document.body.classList.remove('menu-active')
-      this.removeMouseMove()
+      this.removeMousemove()
       this.$refs.img.forEach(img => img.hideImage())
     },
 
-    initMouseMove() {
-      document.addEventListener('mousemove', this.mouseMove)
+    initMousemove() {
+      window.addEventListener('mousemove', this.onMousemove)
     },
 
-    removeMouseMove() {
-      document.removeEventListener('mousemove', this.mouseMove)
+    removeMousemove() {
+      window.removeEventListener('mousemove', this.onMousemove)
     },
 
-    positionElement(ev) {
-      let { clientX: x, clientY: y } = ev
+    positionElement(e) {
+      let { clientX: x, clientY: y } = e
       const walk = 150
       const elRect = this.$refs.imgs.getBoundingClientRect()
       const elHeight = elRect.height
@@ -105,68 +104,35 @@ export default {
       const yWalk = Math.round((y / height * walk) - (walk / 2) - (elHeight * .5))
 
       TweenMax.to(this.$refs.imgs, 2, {
-        // x: xWalk,
         y: yWalk,
         ease: Expo.easeOut
       })
     },
 
-    mouseMove(ev) {
-      requestAnimationFrame(() => {
-        this.positionElement(ev)
-      })
+    onMousemove(e) {
+      requestAnimationFrame(() => this.positionElement(e))
     },
 
     leaveNav() {
-      return new Promise(resolve => {
-        if (this.deviceType !== 'desktop') {
-          resolve()
-          return
-        }
-
-        TweenMax.staggerTo(this.$refs.items, 0.7, {
-          ease: Power1.easeIn,
-          opacity: 0,
-          onComplete: () => resolve()
-        }, -0.095)
-
-        this.$refs.img.forEach(img => img.leaveImage())
-      })
+      TweenMax.to(this.$refs.items, 0.3, { ease: Power1.easeIn , opacity: 0, yPercent: -80 })
+      this.$refs.img.forEach(img => img.leaveImage())
     },
 
     toggleNav(action) {
       if (action === 'show') {
-        this.tl = new TimelineMax({
-          onStart: () => {
-            this.$refs.items.forEach(el => {
-              TweenMax.set(el, {opacity: 0, yPercent: -60})
-            })
-          }
-        })
-        this.tl.add('begin')
-        if (this.deviceType === 'desktop') {
-          this.initMouseMove()
+        TweenMax.set(this.$refs.items, {opacity: 0, yPercent: -60})
+        
+        setTimeout(() => {
+          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Sine.easeIn, opacity: 1 }, 0.095)
+          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Expo.easeOut, yPercent: 0 }, 0.095)
+        }, this.deviceType === 'desktop' ? 550 : 450)
 
-          this.tl.add(new TweenMax(this.$refs.nav, 0, {
-            ease: Expo.easeOut,
-            // y: tweenY
-            yPercent: -50
-          }), 'begin')
-        }
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Sine.easeIn, opacity: 1 }, 0.095), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
-        this.tl.add(TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Expo.easeOut, yPercent: 0 }, 0.095), this.deviceType === 'desktop' ? 'begin+=0.55' : 'begin+=0.45')
+        if (this.deviceType === 'desktop') this.initMousemove()
       }
       
       else {
-        this.removeMouseMove()
-        this.tl = new TimelineMax()
-        if (this.deviceType === 'desktop') {
-          this.tl.add(new TweenMax(this.$refs.nav, 0.6, {
-            ease: Expo.easeOut,
-            yPercent: -100
-          }), 'begin')
-          this.tl.add(TweenMax.to(this.$refs.items, 0.3, { ease: Sine.easeIn , opacity: 0 }), 'begin')
-        }
+        this.removeMousemove()
+        TweenMax.to(this.$refs.items, 0.3, { ease: Power1.easeIn , opacity: 0, yPercent: -80 })
       }
     },
 

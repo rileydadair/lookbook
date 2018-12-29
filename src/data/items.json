@@ -61,7 +61,7 @@
       },
       {
         "image_mobile": "/images/adidas/detail_5_m.jpg",
-        "image_desktop": "/images/adidas/detail_5.jpg"
+        "image_desktop": "/images/adidas/main.jpg"
       },
       {
         "image_mobile": "/images/adidas/detail_6_m.jpg",
@@ -69,7 +69,7 @@
       },
       {
         "image_mobile": "/images/adidas/main_m.jpg",
-        "image_desktop": "/images/adidas/main.jpg"
+        "image_desktop": "/images/adidas/detail_5.jpg"
       }
     ]
   },
@@ -122,24 +122,24 @@
         "image_desktop": "/images/nike/detail_1.jpg"
       },
       {
+        "image_mobile": "/images/nike/detail_3_m.jpg",
+        "image_desktop": "/images/nike/detail_3.jpg"
+      },
+      {
         "image_mobile": "/images/nike/detail_2_m.jpg",
         "image_desktop": "/images/nike/detail_2.jpg"
-      },
-      {
-        "image_mobile": "/images/nike/detail_6_m.jpg",
-        "image_desktop": "/images/nike/detail_6.jpg"
-      },
-      {
-        "image_mobile": "/images/nike/detail_4_m.jpg",
-        "image_desktop": "/images/nike/detail_4.jpg"
       },
       {
         "image_mobile": "/images/nike/detail_5_m.jpg",
         "image_desktop": "/images/nike/detail_5.jpg"
       },
       {
-        "image_mobile": "/images/nike/detail_3_m.jpg",
-        "image_desktop": "/images/nike/detail_3.jpg"
+        "image_mobile": "/images/nike/detail_4_m.jpg",
+        "image_desktop": "/images/nike/detail_4.jpg"
+      },
+      {
+        "image_mobile": "/images/nike/detail_6_m.jpg",
+        "image_desktop": "/images/nike/detail_6.jpg"
       },
       {
         "image_mobile": "/images/nike/detail_7_m.jpg",

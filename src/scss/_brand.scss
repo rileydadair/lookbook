@@ -12,7 +12,6 @@
     @include font-din;
     color: transparent;
     display: block;
-    // font-size: 32.2vh;
     font-size: 27vh;
     line-height: 0.58;
     position: absolute;
@@ -20,7 +19,12 @@
     left: .8%;
     z-index: 0;
     white-space: nowrap;
-    -webkit-text-stroke: 3px $color-tan;
+    -webkit-text-stroke: 2px $color-tan;
+    transition: transform .2s;
+
+    @media (min-height: $screen-sm-min) {
+      -webkit-text-stroke: 3px $color-tan;
+    }
   }
 
   &__title-wrap {

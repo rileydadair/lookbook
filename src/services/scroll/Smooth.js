@@ -126,7 +126,7 @@ export default class Smooth {
       this.dom.scrollbar.drag.el.style[this.prefix] = this.getTransform(clamp.toFixed(2))
     }
     if (this.callback && this.vars.current !== this.vars.last) {
-      this.callback(this.vars.current)
+      this.callback(this.vars)
     }
     this.vars.last = this.vars.current
   }

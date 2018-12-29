@@ -14,7 +14,6 @@ html {
 }
 
 body {
-  // background-color: $color-black;
   background-color: $color-white;
   color: $color-white;
   font-family: $font-avenir-demi;
@@ -23,6 +22,10 @@ body {
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (min-width: $screen-lg-min) {
+    cursor: none;
+  }
 
   &.mobile,
   &.tablet {
@@ -35,7 +38,7 @@ body {
   }
 
   &.detail {
-    color: $color-black;
+    color: #03070D;
 
     &.mobile,
     &.tablet {
@@ -95,6 +98,8 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+
+  
 }
 
 button {
@@ -104,6 +109,11 @@ button {
   font-family: inherit;
   font-size: inherit;
   letter-spacing: inherit;
+}
+
+a,
+button {
+  @media (min-width: $screen-lg-min) { cursor: none; }
 }
 
 ol,
@@ -168,3 +178,11 @@ ul {
   margin-right: 32px;
   margin-right: 10.4%;
 }
+
+// Mix blend mode
+// .header,
+// // .title__link,
+// .controls {
+//   color: #fff;
+//   mix-blend-mode: exclusion;
+// }

@@ -32,10 +32,12 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    this.$root.$emit('toggleOverlay', 'show', next);
+    this.$root.$emit('hideCursor')
+    this.$root.$emit('toggleOverlay', 'show', next)
   },
   beforeRouteLeave(to, from, next) {
-    this.$root.$emit('toggleOverlay', 'show', next);
+    this.$root.$emit('hideCursor')
+    this.$root.$emit('toggleOverlay', 'show', next)
   },
   beforeCreate() {
     document.body.classList.add('detail')
@@ -62,6 +64,7 @@ export default {
       }
       // else - set data to render 404 page
     })
+    this.$emit('viewHasMounted')
     document.body.classList.remove('is-loading')
   }
 }

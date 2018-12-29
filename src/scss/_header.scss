@@ -1,3 +1,13 @@
+$cubic-bezier: cubic-bezier(.04,.22,.15,.99);
+
+// Need to check if it's IE or Edge
+.detail {
+  .header {
+    mix-blend-mode: exclusion;
+    color: #fff;
+  }
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -13,8 +23,12 @@
     @media (min-width: $screen-sm-min) { top: 40px; }
 
     @media (min-width: $screen-lg-min) {
-      top: 3.5vw;
+      top: 4vw;
       text-align: center;
+    }
+
+    @media (min-width: $screen-xl-min) {
+      top: 3.5vw;
     }
   }
 
@@ -55,8 +69,8 @@
     height: 43px;
 
     &.is-active {
-      .header__btn-text--close { transform: translate3d(0%, 0%, 0); opacity: 1; transition: opacity, .3s linear .4s, transform .6s ease-in-out; }
-      .header__btn-text--all { transform: translate3d(0%, 100%, 0); opacity: 0; transition: opacity, .3s linear, transform .6s ease-in-out; }
+      .header__btn-text--close { transform: translate3d(0%, 0%, 0); opacity: 1; transition: opacity .4s linear .35s, transform .4s $cubic-bezier .35s; }
+      .header__btn-text--all { transform: translate3d(0%, 100%, 0); transition: opacity .4s ease-in, transform .4s ease-in; }
     }
   }
 
@@ -73,22 +87,14 @@
 
   &__btn-text--close {
     opacity: 0;
-    transition: opacity, .3s linear, transform .6s ease-in-out;
+    transition: opacity, .4s linear, transform .4s ease-in;
   }
 
   &__btn-text--all {
-    transition: opacity, .3s linear .4s,transform .6s ease-in-out;
+    transition: opacity, .4s $cubic-bezier .5s,transform .4s $cubic-bezier .45s;
 
     @media (max-width: $screen-md-max) {
       text-align: right;
     }
-  }
-}
-
-// Need to check if it's IE or Edge
-.detail {
-  .header {
-    mix-blend-mode: exclusion;
-    color: #fff;
   }
 }

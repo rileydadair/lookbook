@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link" :class="{ 'is-active': active }" ref="title" event="" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
+  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link js-hover" :class="{ 'is-active': active }" ref="title" event="" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import TweenMax from 'gsap';
+import States from '@/services/States'
+import TweenMax from 'gsap'
 
 export default {
   name: 'Title',
@@ -62,6 +63,7 @@ export default {
           const animation = {
             opacity: action === 'hide' ? 0 : 1,
             delay: index * 0.055,
+            ease: action === 'hide' ? Power1.easeOut : Power1.easeIn,
             onComplete: function(i, arr) {
               if (i === (arr.length - 1)) {
                 resolve()
@@ -85,12 +87,13 @@ export default {
       if (!this.canRoute) return
 
       function hideTitle(component) {
-        const titlePromise = component.hide();
+        const titlePromise = component.hide()
         titlePromise.then(() => {
           component.$router.push(`/${component.slug}`)
         })
       }
 
+      this.$root.$emit('hideCursor')
       this.$root.$emit('toggleSliderEvents', false);
       this.$root.$emit('toggleOverlay', 'show', () => hideTitle(this));
 
