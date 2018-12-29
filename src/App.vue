@@ -12,7 +12,10 @@
 
 <script>
 import States from './services/States'
-import items from '@/data/items'
+import items from './data/items'
+import ProgressLoaderService from './services/ProgressLoaderService'
+
+import ProgressLoader from './components/ProgressLoader'
 import CircleCursor from './components/CircleCursor'
 import Header from './components/Header'
 import Menu from './components/Menu'
@@ -22,6 +25,7 @@ import Overlay from './components/Overlay'
 export default {
   name: 'app',
   components: {
+    ProgressLoader, // eslint-disable-line
     CircleCursor,
     Header, // eslint-disable-line
     Menu,
@@ -67,9 +71,45 @@ export default {
     toggleMenuState() {
       this.menuActive = !this.menuActive
     },
+
     setTransitioning(action) {
       this.transitioning = action === 'show' ? true : false
-    }
+    },
+
+    loadAssets(slug) {
+      const assets = [];
+
+      // if slug find slug then forEach
+
+      // else push mains
+      items.forEach((item) => {
+        assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
+      })
+
+      // items.forEach((item) => {
+      //   assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
+      //   item.detail_images.forEach((detail) => {
+      //     assets.push(this.deviceType === 'mobile' ? detail.image_mobile : detail.image_desktop)
+      //   })
+      // })
+
+      setTimeout(() => {
+        const progressLoaderService = new ProgressLoaderService(assets)
+
+        progressLoaderService.on('progress', progress => {
+          this.progress = progress
+        });
+        progressLoaderService.on('complete', () => {
+          setTimeout(() => {
+            this.$refs.progressLoader.hide()
+              .then(() => {
+                this.$root.$emit('assetsLoaded')
+                this.initialLoad = true
+              })
+          }, 500)
+        })
+      }, 200)
+    },
   },
   watch: {
     '$route' (to, from) {
