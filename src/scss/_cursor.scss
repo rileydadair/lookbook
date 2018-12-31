@@ -102,3 +102,7 @@
     transition: opacity .3s ease-out;
   }
 }
+
+.js-hover {
+  @media (min-width: $screen-lg-min) { cursor: none; }
+}

@@ -146,11 +146,13 @@ export default {
         this.toggleControlsText(el, 'show')
       }
 
-      TweenMax.to(this.$refs.cursor, 0.8, {
-        ease: 'Power3.easeOut',
-        x: elX,
-        y: elY,
-      })
+      setTimeout(() => {
+        TweenMax.to(this.$refs.cursor, 0.8, {
+          ease: 'Power3.easeOut',
+          x: elX,
+          y: elY,
+        })
+      }, 60)
     },
 
     toggleControlsText(el, action) {

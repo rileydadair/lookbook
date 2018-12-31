@@ -23,9 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (min-width: $screen-lg-min) {
-    cursor: none;
-  }
+  @media (min-width: $screen-lg-min) { cursor: none; }
 
   &.mobile,
   &.tablet {
@@ -52,6 +50,7 @@ body {
   }
 
   &.desktop {
+    background-color: $color-black;
     overflow: hidden;
 
     .main:after {
