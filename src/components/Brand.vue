@@ -22,7 +22,6 @@
           <BrandLink :nextTitle="nextTitle" :nextSlug="nextSlug" />
         </template>
       </div>
-      <div class="brand__gallery" ></div>
     </div>
     <div class="brand__title" ref="brandTitle">
       <span class="brand__title-wrap" ref="brandTitleWrap">
@@ -167,17 +166,17 @@ export default {
       })
     },
 
-    // onPhotoClick(e) {
-    //   console.dir(e.currentTarget.parentNode)
-    //   // const reveal = e.currentTarget.parentNode
-    //   const elRect = e.currentTarget.getBoundingClientRect()
-    //   const elCenterX = (window.innerWidth / 2) - elRect.x - (elRect.width / 2)
+    onPhotoClick(e) {
+      // console.dir(e.currentTarget.parentNode)
+      // // const reveal = e.currentTarget.parentNode
+      // const elRect = e.currentTarget.getBoundingClientRect()
+      // const elCenterX = (window.innerWidth / 2) - elRect.x - (elRect.width / 2)
 
-    //   TweenMax.to(e.currentTarget, .6, {
-    //     x: `${elCenterX}px`,
-    //     // y: `${elCenterY}px`
-    //   })
-    // },
+      // TweenMax.to(e.currentTarget, .6, {
+      //   x: `${elCenterX}px`,
+      //   // y: `${elCenterY}px`
+      // })
+    },
 
     bgImage(image) {
       return `url('${image.image_desktop}')`
