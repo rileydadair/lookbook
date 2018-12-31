@@ -28,6 +28,7 @@
         {{ item.title }}
       </span>
     </div>
+    <Scroll v-if="!scrolledDetail" ref="scroll"/>
   </div>
 </template>
 
@@ -37,29 +38,44 @@ import TweenMax from 'gsap'
 import Custom from '@/services/scroll/Custom'
 import Smooth from '@/services/scroll/Smooth'
 
-import Reveal from './Reveal'
 import BrandLink from './BrandLink'
+import Reveal from './Reveal'
+import Scroll from '@/components/Scroll'
 
 export default {
   name: 'Brand',
   props: {
+    initialLoad: Boolean,
     item: Object,
     nextTitle: String,
-    nextSlug: String
+    nextSlug: String,
+    scrolledDetail: Boolean
   },
   components: {
+    BrandLink,
     Reveal,
-    BrandLink
+    Scroll
   },
   data() {
     return {
-      current: 0
+      current: 0,
+      hasScrolled: false
+    }
+  },
+  watch: {
+    hasScrolled: function() {
+      if (!this.scrolledDetail) {
+          this.$refs.scroll.toggle('hide', false)
+          setTimeout(() => this.$emit('disableScrollEl', 'scrolledDetail'), 800)
+      }
     }
   },
   mounted() {
     setTimeout(() => {
       function componentInit(component) { component.init() }
-      imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
+      if (this.initialLoad) {
+        imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
+      }
     })
   },
   destroyed() {
@@ -67,9 +83,13 @@ export default {
   },
   methods: {
     init() {
-      setTimeout(() => this.$root.$emit('toggleOverlay', 'hide'), 200)
+      setTimeout(() => this.$root.$emit('toggleOverlay', 'hide'), 100)
       setTimeout(() => this.revealImages(), 1000)
-      setTimeout(() => document.body.classList.add('enter'), 1600)
+      setTimeout(() => {
+        document.body.classList.add('enter')
+        this.$root.$emit('cursorEnter')
+        this.$refs.scroll.toggle('show', true)
+      }, 1600)
     },
 
     revealImages() {
@@ -99,8 +119,6 @@ export default {
       const scale = Math.abs(current - this.current) / 260 + 1 < 1.14 ? Math.abs(current - this.current) / 260 + 1 : 1.14
       const skew = (current - this.current) * 0.25
 
-      console.log(scale)
-
       this.$refs.reveal.forEach(ref => {
           TweenMax.to(ref.$el, 1.4, {
           scaleX: scale,
@@ -115,6 +133,8 @@ export default {
       })
 
       this.current = current
+
+      if (!this.hasScrolled) this.hasScrolled = true
     },
 
     initSmooth() {

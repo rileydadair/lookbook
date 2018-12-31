@@ -4,7 +4,6 @@
       className="slider--main"
       @onSliderEvent="onSliderEvent"
       @onSliderMount="onSliderMount"
-      :swipe="swipe"
       ref="slider"
     >
       <template slot="slides" v-for="item in items">
@@ -17,8 +16,18 @@
       </template>
       <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
       <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
-      <span slot="prevButton" class="controls__item">+</span>
-      <span slot="nextButton" class="controls__item">+</span>
+      <span slot="prevButton" class="controls__item">
+        <span class="controls__text controls__text--prev js-controls-text">
+          <span class="controls__part js-controls-part" v-for="(part, index) in prevSplit" :key="`prev-part-${index}`" ref="prevParts">{{ part }}</span>
+        </span>
+        <span class="controls__plus">+</span>
+      </span>
+      <span slot="nextButton" class="controls__item">
+        <span class="controls__text controls__text--next js-controls-text">
+          <span class="controls__part js-controls-part" v-for="(part, index) in nextSplit" :key="`next-part-${index}`" ref="nextParts">{{ part }}</span>
+        </span>
+        <span class="controls__plus">+</span>
+      </span>
     </SlideMaster>
 
     <div v-if="deviceType !== 'mobile'" class="slider slider--section">
@@ -44,6 +53,8 @@
     </div>
 
     <Progress ref="progress" />
+
+    <Scroll v-if="!scrolledHome" ref="scroll"/>
   </div>
 </template>
 
@@ -57,16 +68,18 @@ import Slide from '@/components/Slide'
 import Title from '@/components/Title'
 import Description from '@/components/Description'
 import Progress from '@/components/Progress'
+import Scroll from '@/components/Scroll'
 
   export default {
     name: 'Home',
-    props: ['transitioning', 'menuActive'],
+    props: ['initialLoad', 'transitioning', 'menuActive', 'scrolledHome'],
     components: {
       SlideMaster,
       Slide,
       Title, // eslint-disable-line
       Description,
-      Progress // eslint-disable-line
+      Progress, // eslint-disable-line
+      Scroll
     },
     data() {
       return {
@@ -74,6 +87,8 @@ import Progress from '@/components/Progress'
         currentIndex: 0,
         deviceType: States.deviceType,
         next: {},
+        nextSplit: 'Next'.split(''),
+        prevSplit: 'Prev'.split(''),
         slider: {},
       }
     },
@@ -87,17 +102,20 @@ import Progress from '@/components/Progress'
       document.body.classList.add('home')
     },
     mounted() {
-      this.$emit('viewHasMounted')
+      if (this.deviceType === 'desktop') this.$emit('resetCursor')
 
       if (this.transitioning) {
         this.$root.$emit('hideOverlay');
       }
 
+      this.$root.$on('assetsLoaded', this.enter)
       this.$root.$on('toggleSliderEvents', this.toggleSliderEvents)
 
       function componentEnter(component) { component.enter() }
 
-      imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
+      if (this.initialLoad) {
+        imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
+      }
     },
     destroyed() {
       document.body.classList.remove('home')
@@ -109,17 +127,25 @@ import Progress from '@/components/Progress'
     },
     methods: {
       enter() {
+        const delay = 600
         setTimeout(() => {
           Promise.all([
             this.$refs.mainSlides[0].show('next'),
             this.deviceType === 'desktop' ? this.$refs.sectionSlides[0].show('prev') : '',
             setTimeout(() => this.$refs.titles[0].show(), 760),
-            setTimeout(() => this.$refs.descriptions[0].show('prev'), 600),
-            setTimeout(() => document.body.classList.add('enter'), 600)
+            setTimeout(() => this.$refs.descriptions[0].show('prev'), delay),
+            setTimeout(() => document.body.classList.add('enter'), delay),
+            setTimeout(() => this.$root.$emit('cursorEnter'), delay),
           ])
             .then(() => {
               this.slider.toggleEvents()
             })
+
+          if (!this.scrolledHome) {
+            setTimeout(() => {
+              this.$refs.scroll.toggle('show', this.deviceType === 'desktop' ? true : false)
+            }, delay)
+          }
         }, 200)
       },
 
@@ -151,6 +177,11 @@ import Progress from '@/components/Progress'
           this.deviceType === 'desktop' ? this.$refs.sectionSlides[nextIndex].show(direction) : ''      
         ])
           .then(() => slider.toggleEvents())
+
+        if (!this.scrolledHome) {
+          this.$refs.scroll.toggle('hide', false)
+          setTimeout(() => this.$emit('disableScrollEl', 'scrolledHome'), 800)
+        }
       },
 
       bgImage(item) {

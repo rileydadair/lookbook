@@ -103,7 +103,7 @@ export default {
     },
 
     initSwipe() {
-      this.managerSlider = new Hammer.Manager(this.$el, {
+      this.managerSlider = new Hammer.Manager(document.body, {
         recognizers: [
           [Hammer.Swipe]
         ]

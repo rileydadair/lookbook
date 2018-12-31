@@ -11,11 +11,20 @@ export default {
     return {
       hoverEls: [],
       isHovering: false,
-      stopRaf: false
+      stopPositionEl: false
     }
   },
   mounted() {
     this.initEvents()
+    this.$root.$on('cursorEnter', this.onEnter)
+
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+
+    TweenMax.set(this.$refs.cursor, {
+      x: innerWidth - (innerWidth * 0.096) - 80,
+      y: innerHeight - 80
+    })
   },
   destroyed() {
     this.removeEvents()
@@ -32,7 +41,6 @@ export default {
           el.addEventListener('mouseenter', this.onHoverCursor)
           el.addEventListener('mouseleave', this.offHoverCursor)
         })
-        console.dir(this.hoverEls)
       }, 200)
 
 
@@ -52,11 +60,11 @@ export default {
     },
 
     onEnter() {
-
+      TweenMax.fromTo(this.$refs.cursor, 0.6, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 })
     },
 
     onLeave() {
-      TweenMax.to(this.$refs.cursor, 0.4, { scale: 0 })
+      TweenMax.to(this.$refs.cursor, 0.4, { scale: 0, onComplete: () => this.$refs.cursor.style.opacity = 0 })
     },
 
     onReset() {
@@ -65,10 +73,7 @@ export default {
       this.$refs.cursor.dataset.fill = false
       this.$refs.cursor.dataset.next = false
       this.$refs.cursor.dataset.lock = false
-      TweenMax.set(this.$refs.cursor, { scale: 1 })
       this.initEvents()
-
-      console.dir(this.hoverEls)
     },
 
     positionElement(e) {
@@ -82,11 +87,10 @@ export default {
     },
 
     onMousemove(e) {
-      if (!this.stopRaf) requestAnimationFrame(() => this.positionElement(e))
+      if (!this.stopPositionEl) requestAnimationFrame(() => this.positionElement(e))
     },
 
     onHoverCursor(e) {
-      console.log(e.target.dataset);
       this.isHovering = true
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
       else if (e.target.dataset.lock) {
@@ -98,26 +102,28 @@ export default {
     },
 
     onMousedown() {
-      if (this.isHovering) TweenMax.to(this.$refs.cursor, 0.3, { scale: 0.9, ease: 'Power3.easeOut' })
+      TweenMax.to(this.$refs.cursor, 0.3, { scale: 0.88, ease: 'Power3.easeOut' })
     },
 
     offHoverCursor(e) {
       this.isHovering = false
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
       else if (e.target.dataset.lock) {
-        this.stopRaf = false
+        this.stopPositionEl = false
         this.$refs.cursor.dataset.lock = false
+
+        if (e.target.dataset.lock === 'controls') this.toggleControlsText(e.target, 'hide')
       } else {
         this.$refs.cursor.dataset.fill = false
       }
     },
 
     onMouseup() {
-      if (this.isHovering) TweenMax.to(this.$refs.cursor, 0.3, { scale: 1, ease: 'Power3.easeOut' })
+      TweenMax.to(this.$refs.cursor, 0.3, { scale: 1, ease: 'Power3.easeOut' })
     },
 
     setLockedPos(el) {
-      this.stopRaf = true
+      this.stopPositionEl = true
 
       const elRect = el.getBoundingClientRect()
       let elX = (elRect.height * 0.5) + elRect.x
@@ -129,13 +135,15 @@ export default {
       }
 
       if (el.dataset.lock === 'all') {
-        elX = Math.abs(elX + 11)
-        elY = Math.abs(elY - 10.85)
+        elX = Math.abs(elX + 20.75)
+        elY = Math.abs(elY - 20.5)
       }
 
       if (el.dataset.lock === 'controls') {
-        elX = Math.abs(elX - 3.85)
-        elY = Math.abs(elY + 1.35)
+        elX = Math.abs(elX - 3.95)
+        elY = Math.abs(elY + 1.25)
+
+        this.toggleControlsText(el, 'show')
       }
 
       TweenMax.to(this.$refs.cursor, 0.8, {
@@ -143,6 +151,20 @@ export default {
         x: elX,
         y: elY,
       })
+    },
+
+    toggleControlsText(el, action) {
+      const text = el.querySelector('.js-controls-text')
+      const parts = el.querySelectorAll('.js-controls-part')
+      
+      TweenMax.staggerFromTo(parts, 0.5, {
+        y: action === 'show' ? '14px' : 0,
+        opacity: action === 'show' ? 0 : 1
+      }, {
+        y: action === 'show' ? 0 : '-14px',
+        opacity: action === 'show' ? 1 : 0,
+        ease: 'Power2.easeOut'
+      }, .02)
     }
   }
 }

@@ -1,24 +1,30 @@
 <template>
   <BrandMobile v-if="deviceType !== 'desktop'"
+    :initialLoad="initialLoad"
     :item="item"
     :nextTitle="nextTitle"
-    :nextSlug="nextSlug" />
-  <Brand v-else 
+    :nextSlug="nextSlug"
+    ref="brandMobile"/>
+  <Brand v-else
+    :initialLoad="initialLoad"
     :item="item"
     :nextTitle="nextTitle"
-    :nextSlug="nextSlug" />
+    :nextSlug="nextSlug"
+    :scrolledDetail="scrolledDetail"
+    @disableScrollEl="disableScrollEl"
+    ref="brand" />
 </template>
 
 <script>
 import States from '@/services/States'
 import items from '@/data/items'
 
-import Brand from '@/components/Brand'
 import BrandMobile from '@/components/BrandMobile'
+import Brand from '@/components/Brand'
 
 export default {
   name: 'Detail',
-  props: ['transitioning'],
+  props: ['initialLoad', 'transitioning', 'scrolledDetail'],
   components: {
     Brand,
     BrandMobile
@@ -46,10 +52,11 @@ export default {
     document.body.classList.add('detail')
     window.scrollTo(0, 0)
   },
-  destroyed() {
-    document.body.classList.remove('detail')
-  },
   mounted() {
+    this.$root.$on('assetsLoaded', () => {
+      this.deviceType === 'mobile' ? this.$refs.brandMobile.init() : this.$refs.brand.init()
+    })
+
     // Get item object
     items.forEach((item, index, array) => {
       if (item.slug === this.$route.params.slug) {
@@ -64,8 +71,18 @@ export default {
       }
       // else - set data to render 404 page
     })
-    this.$emit('viewHasMounted')
+
+    if (this.deviceType === 'desktop') this.$emit('resetCursor')
     document.body.classList.remove('is-loading')
+  },
+  destroyed() {
+    document.body.classList.remove('detail')
+  },
+  methods: {
+    disableScrollEl(prop) {
+      console.log('detail disable')
+      this.$emit('disableScrollEl', prop)
+    }
   }
 }
 </script>

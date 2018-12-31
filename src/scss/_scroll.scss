@@ -1,0 +1,31 @@
+.scroll {
+  @include center-x;
+  bottom: 26px;
+  z-index: $zIndex-lower;
+
+  @media (min-width: $screen-sm-min) { bottom: 42px; }
+
+  @media (min-width: $screen-lg-min) {
+    display: flex;
+    justify-content: center;
+    bottom: 7.2%;
+    left: auto;
+    right: 0;
+    transform: translate3d(0%, 0%, 0);
+    width: 9.6%;
+  }
+
+  @media (min-width: $screen-xxl-min) { bottom: 7.4%; }
+
+  &__wrap {
+    @media (min-width: $screen-lg-min) {
+      transform: rotate(90deg) translate3d(0%, -40%, 0);
+      transform-origin: top center;
+    }
+  }
+
+  &__part {
+    display: inline-block;
+    opacity: 0;
+  }
+}

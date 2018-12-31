@@ -1,0 +1,16 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+  z-index: 400;
+
+  &__part {
+    color: $color-white;
+    display: inline-block;
+    opacity: 0;
+  }
+}

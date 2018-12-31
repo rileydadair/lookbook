@@ -8,8 +8,11 @@
         <span class="link__part link__part--next" v-for="(part, index) in splitNext" :key="`part-next-${index}`" ref="nextParts">{{ part }}</span>
       </span>
     </router-link>
-    <p class="brand__text" :class="{ 'is-active': hoverActive}">
-      <span class="brand__next" ref="nextText">Next </span><span class="brand__lookbook">lookbook</span>
+    <p class="brand__text" ref="text" :class="[hoverActive ? 'is-active' : '']" >
+      <span class="brand__next">
+        <span class="brand__next-part" v-for="(part, index) in splitNext" :key="`text-part-${index}`" ref="textParts">{{ part }}</span>
+      </span>
+      <span class="brand__lookbook"> lookbook</span>
     </p>
   </div>
 </template>
@@ -25,10 +28,10 @@ export default {
   },
   data() {
     return {
-      hoverActive: !1,
+      hoverActive: false,
       oncePlay: !1,
       hasLeft: !1,
-      splitNext: 'next'.split(''),
+      splitNext: 'Next'.split(''),
       splitTitle: this.nextTitle.split('')
     }
   },
@@ -54,10 +57,10 @@ export default {
       random.sort(function() {
           return .5 - Math.random()
       }),
-      TweenMax.staggerTo(random, .45, {
+      TweenMax.staggerTo(random, .3, {
           opacity: 0,
-          ease: Power2.easeIn
-      }, .055, this.allDoneNext))
+          ease:' Power2.easeIn'
+      }, .05, this.allDoneNext))
     },
 
     allDoneNext() {
@@ -66,7 +69,8 @@ export default {
         this.allDoneNext2()
         return
       }
-      this.hoverActive = !0
+
+      this.hoverActive = true
       const random = []
 
       TweenMax.set(this.$refs.titleParts, { opacity: 0 }),
@@ -78,10 +82,19 @@ export default {
       random.sort(function() {
           return .5 - Math.random()
       }),
-      TweenMax.staggerTo(random, .4, {
-          opacity: 1,
-          ease: Power2.easeOut
+      TweenMax.staggerTo(random, .3, {
+        opacity: 1,
+        ease: 'Power2.easeOut'
       }, .05)
+      // show
+      // TweenMax.to(this.$refs.text, .5, {
+      //   x: '-50%',
+      //   ease: 'Power2.easeOut'
+      // })
+      // TweenMax.staggerTo(this.$refs.textParts, .5, {
+      //   opacity: 1,
+      //   ease: 'Power2.easeOut'
+      // }, -.04)
     },
 
     offHoverNext() {
@@ -95,15 +108,15 @@ export default {
       random.sort(function() {
           return .5 - Math.random()
       }),
-      TweenMax.staggerTo(random, .4, {
-          opacity: 0,
-          ease: Power2.easeIn
+      TweenMax.staggerTo(random, .3, {
+        opacity: 0,
+        ease: 'Power2.easeIn'
       }, .05, this.allDoneNext2))
     },
 
     allDoneNext2() {
       this.hasLeft = !1
-      this.hoverActive = !1
+      this.hoverActive = false
       const random = []
 
       TweenMax.set(this.$refs.titleParts, { opacity: 0 }),
@@ -115,10 +128,19 @@ export default {
       random.sort(function() {
           return .5 - Math.random()
       }),
-      TweenMax.staggerTo(random, .4, {
-          opacity: 1,
-          ease: Power2.easeOut
+      TweenMax.staggerTo(random, .3, {
+        opacity: 1,
+        ease: 'Power2.easeOut'
       }, .05)
+      // hide
+      // TweenMax.to(this.$refs.text, 0.5, {
+      //   x: '-65%',
+      //   ease: 'Power2.easeOut'
+      // })
+      // TweenMax.staggerTo(this.$refs.textParts, .4, {
+      //   opacity: 0,
+      //   ease: 'Power2.easeOut'
+      // }, .04)
     }
   }
 }

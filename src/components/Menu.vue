@@ -58,7 +58,6 @@ export default {
     route(slug, index) { // eslint-disable-line
       if (this.$refs.links[index].$el.classList.contains('router-link-exact-active')) {
         this.toggleMenu('hide').then(() => this.hide())
-        this.headerBtn.classList.remove('is-active')
         this.$refs.img.forEach(img => img.leaveImage())
       } 
 
@@ -95,6 +94,7 @@ export default {
     },
 
     positionElement(e) {
+      console.log('position El')
       let { clientX: x, clientY: y } = e
       const walk = 150
       const elRect = this.$refs.imgs.getBoundingClientRect()
@@ -139,6 +139,7 @@ export default {
     toggleMenu(action) {
       return new Promise(resolve => {
         this.toggleNav(action)
+        this.$root.$emit('toggleAll', action)
         if (action === 'show') document.body.classList.add('menu-active')
 
         // Menu animation

@@ -65,36 +65,31 @@ $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
   }
 
   &__btn {
+    position: relative;
     transform: translate(0%, -30%); // weird styling to match links
     height: 43px;
-
-    &.is-active {
-      .header__btn-text--close { transform: translate3d(0%, 0%, 0); opacity: 1; transition: opacity .4s linear .35s, transform .4s $cubic-bezier .35s; }
-      .header__btn-text--all { transform: translate3d(0%, 100%, 0); transition: opacity .4s ease-in, transform .4s ease-in; }
-    }
-  }
-
-  &__btn-wrap {
-    overflow: hidden;
-    display: inline-block;
-    height: 17px;
+    width: 83px;
   }
 
   &__btn-text {
-    display: block;
-    transform: translate3d(0%, -100%, 0);
+    display: inline-block;
+    @include center-y;
+    right: 13px;
+    text-align: right;
+
+    @media (min-width: $screen-lg-min) {
+      right: auto;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      text-align: center;
+    }
   }
 
-  &__btn-text--close {
-    opacity: 0;
-    transition: opacity, .4s linear, transform .4s ease-in;
-  }
+  &__part {
+    display: inline-block;
 
-  &__btn-text--all {
-    transition: opacity, .4s $cubic-bezier .5s,transform .4s $cubic-bezier .45s;
-
-    @media (max-width: $screen-md-max) {
-      text-align: right;
+    &--close {
+      opacity: 0;
     }
   }
 }

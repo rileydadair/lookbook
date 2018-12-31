@@ -10,6 +10,7 @@
 
   &__title {
     @include font-din;
+    backface-visibility: hidden;
     color: transparent;
     display: block;
     font-size: 27vh;
@@ -21,6 +22,7 @@
     white-space: nowrap;
     -webkit-text-stroke: 2px $color-tan;
     transition: transform .2s;
+    will-change: transform;
 
     @media (min-height: $screen-sm-min) {
       -webkit-text-stroke: 3px $color-tan;
@@ -28,12 +30,14 @@
   }
 
   &__title-wrap {
+    backface-visibility: hidden;
     display: inline-block;
     letter-spacing: -3px;
     opacity: 0;
   }
 
   &__cta {
+    backface-visibility: hidden;
     position: relative;
     height: 100%;
     text-align: center;
@@ -46,6 +50,7 @@
 
   &__text {
     @include center-x;
+    backface-visibility: hidden;
     font-family: $font-avenir-regular;
     letter-spacing: 0.3px;
     top: 58.5%;
@@ -76,6 +81,11 @@
       transform-origin: left;
       transition: transform .4s cubic-bezier(.14,.64,.44,1);
     }
+  }
+
+  &__next-part {
+    display: inline-block;
+    // opacity: 0;
   }
 }
 

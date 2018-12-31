@@ -27,6 +27,7 @@ import Reveal from './Reveal'
 export default {
   name: 'BrandMobile',
   props: {
+    initialLoad: Boolean,
     item: Object,
     nextTitle: String,
     nextSlug: String
@@ -43,7 +44,9 @@ export default {
   mounted() {
     setTimeout(() => {
       function componentInit(component) { component.init() }
-      imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
+      if (this.initialLoad) {
+        imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
+      }
     })
   },
   methods: {
@@ -52,7 +55,7 @@ export default {
         this.$root.$emit('toggleOverlay', 'hide');
         this.initScroll()
         document.body.classList.add('enter')
-      }, 200)
+      }, 100)
 
       this.scrollEls = this.$refs.reveal.splice(1, (this.$refs.reveal.length - 1))
     },

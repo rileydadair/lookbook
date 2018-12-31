@@ -53,12 +53,45 @@
 
   &__item {
     color: $color-white;
-    font-size: 2.8rem;
+    display: inline-block;
+    // font-size: 2.8rem;
     position: relative;
 
-    @media (min-width: $screen-sm-min) { font-size: 3.4rem; }
+    // @media (min-width: $screen-sm-min) { font-size: 3.4rem; }
 
+    // @media (min-width: $screen-lg-min) { font-size: 3.6rem; }
+  }
+
+  &__text {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    overflow: hidden;
+    pointer-events: none; // Magic sauce
+
+    @media (min-width: $screen-lg-min) { display: block; }
+
+    &--prev {
+      top: -17vh;
+    }
+
+    &--next {
+      bottom: -17vh;
+    }
+  }
+
+  &__plus {
+    font-size: 2.8rem;
+
+    @media (min-width: $screen-sm-min) { font-size: 3.4rem; }
     @media (min-width: $screen-lg-min) { font-size: 3.6rem; }
+  }
+
+  &__part {
+    display: inline-block;
+    opacity: 0;
   }
 
   // &__item--minus {
