@@ -168,7 +168,6 @@ export default {
     },
 
     onWheel(e) {
-      console.log(e)
       e.preventDefault()
       e.stopPropagation()
 

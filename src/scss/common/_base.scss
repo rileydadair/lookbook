@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  background-color: $color-white;
+  background-color: $color-black;
   color: $color-white;
   font-family: $font-avenir-demi;
   font-size: 1.4rem;
@@ -27,6 +27,7 @@ body {
 
   &.mobile,
   &.tablet {
+    background-color: $color-white;
     position: fixed;
     top: 0;
     left: 0;
@@ -36,6 +37,7 @@ body {
   }
 
   &.detail {
+    background-color: $color-white;
     color: #03070D;
 
     &.mobile,
@@ -50,7 +52,6 @@ body {
   }
 
   &.desktop {
-    background-color: $color-black;
     overflow: hidden;
 
     .main:after {
