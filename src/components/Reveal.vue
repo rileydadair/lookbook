@@ -34,6 +34,11 @@ export default {
     }
   },
   methods: {
+    onPhotoClick(e) {
+      // v-on:click="onPhotoClick"
+      // this.$emit('onPhotoClick', e)
+    },
+
     showMobile() {
       TweenMax.to(this.$refs.inner, this.animation.mobileDuration, {
         ease: this.animation.mobileEase,

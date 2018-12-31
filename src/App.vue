@@ -64,7 +64,6 @@ export default {
     }
     this.$root.$on('toggleOverlay', this.setTransitioning)
     this.$root.$on('hideOverlay', this.setTransitioning)
-    // this.headerBtn = document.querySelector('.header__btn')
   },
   computed: {
     activeOverlay() {
@@ -74,7 +73,6 @@ export default {
   methods: {
     setInitialLoad() {
       this.initialLoad = true
-      console.log('setInitialLoad')
     },
 
     resetCursor() {
@@ -97,10 +95,7 @@ export default {
   watch: {
     '$route' (to, from) {
       document.body.classList.remove('enter')
-      // this.headerBtn.classList.remove('is-active')
       this.$refs.header.resetAll()
-     // Possibly animate page transition
-      console.log('route change')
 
       if (document.body.classList.contains('menu-active')) {
         this.$refs.menu.hide();

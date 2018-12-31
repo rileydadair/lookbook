@@ -80,7 +80,6 @@ export default {
   },
   methods: {
     disableScrollEl(prop) {
-      console.log('detail disable')
       this.$emit('disableScrollEl', prop)
     }
   }

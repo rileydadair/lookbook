@@ -5,14 +5,14 @@
 
         <template v-if="index === 1">
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(item.detail_images[1])" ref="reveal" />
-            <Reveal :bgImage="bgImage(item.detail_images[2])" ref="reveal" />
+            <Reveal :bgImage="bgImage(item.detail_images[1])" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(item.detail_images[2])" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(image)" ref="reveal" />
+            <Reveal :bgImage="bgImage(image)" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
       </template>
@@ -22,6 +22,7 @@
           <BrandLink :nextTitle="nextTitle" :nextSlug="nextSlug" />
         </template>
       </div>
+      <div class="brand__gallery" ></div>
     </div>
     <div class="brand__title" ref="brandTitle">
       <span class="brand__title-wrap" ref="brandTitleWrap">
@@ -165,6 +166,18 @@ export default {
         setTimeout(() => resolve(), 0)
       })
     },
+
+    // onPhotoClick(e) {
+    //   console.dir(e.currentTarget.parentNode)
+    //   // const reveal = e.currentTarget.parentNode
+    //   const elRect = e.currentTarget.getBoundingClientRect()
+    //   const elCenterX = (window.innerWidth / 2) - elRect.x - (elRect.width / 2)
+
+    //   TweenMax.to(e.currentTarget, .6, {
+    //     x: `${elCenterX}px`,
+    //     // y: `${elCenterY}px`
+    //   })
+    // },
 
     bgImage(image) {
       return `url('${image.image_desktop}')`

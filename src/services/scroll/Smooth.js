@@ -91,7 +91,8 @@ export default class Smooth {
 
   calc(e) {
     // Riley - change e.delta option
-    const delta = this.vars.direction == 'horizontal' ? e.deltaY : e.deltaY
+    // const delta = this.vars.direction == 'horizontal' ? e.deltaX : e.deltaY
+    const delta = e.deltaY
     this.vars.target += delta * -1
     this.clampTarget()
   }

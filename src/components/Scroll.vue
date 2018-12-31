@@ -21,15 +21,13 @@ export default {
   },
   methods: {
     toggle(action, repeat) {
-        console.log(action)
-
-        TweenMax.staggerFromTo(this.$refs.parts, 1, {
-          opacity: action === 'show' ? 0 : 1
-        }, {
-          opacity: action === 'show' ? 1 : 0,
-          ease: 'Power2.easeOut',
-          delay: action === 'show' ? 1 : 0,
-        }, .05, repeat ? this.repeat : false)
+      TweenMax.staggerFromTo(this.$refs.parts, 1, {
+        opacity: action === 'show' ? 0 : 1
+      }, {
+        opacity: action === 'show' ? 1 : 0,
+        ease: 'Power2.easeOut',
+        delay: action === 'show' ? 1 : 0,
+      }, .05, repeat ? this.repeat : false)
     },
 
     repeat() {
