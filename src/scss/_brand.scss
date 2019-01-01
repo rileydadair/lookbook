@@ -1,3 +1,14 @@
+body.active-gallery {
+  .brand__title,
+  .brand__cta {
+    opacity: 0;
+  }
+
+  .brand__next:after {
+    background-color: $color-black-darker;
+  }
+}
+
 .brand {
   position: fixed;
   width: 100%;
@@ -8,11 +19,33 @@
   white-space: nowrap;
   z-index: 2;
 
+  // &:after {
+  //   content: '';
+  //   background-color: $color-black;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   opacity: 0;
+  //   transition: opacity .4s linear;
+  //   z-index: -1;
+  // }
+
+  // &.active-gallery {
+  //   z-index: 999;
+
+  //   &:after {
+  //     opacity: 1;
+  //     z-index: 998;
+  //   }
+  // }
+
   &__title {
     @include font-din;
     backface-visibility: hidden;
     color: transparent;
-    display: block;
+    // display: block;
     font-size: 27vh;
     line-height: 0.58;
     position: absolute;
@@ -21,7 +54,7 @@
     z-index: 0;
     white-space: nowrap;
     -webkit-text-stroke: 2px $color-tan;
-    transition: transform .2s;
+    transition: transform .2s, opacity .4s;
     will-change: transform;
 
     @media (min-height: $screen-sm-min) {
@@ -41,6 +74,7 @@
     position: relative;
     height: 100%;
     text-align: center;
+    transition: opacity .4s;
 
     &:after {
       content: '';
@@ -79,7 +113,7 @@
       background-color: $color-white;
       transform: scaleX(1);
       transform-origin: left;
-      transition: transform .4s cubic-bezier(.14,.64,.44,1);
+      transition: transform .4s cubic-bezier(.14,.64,.44,1), background-color .4s;
     }
   }
 

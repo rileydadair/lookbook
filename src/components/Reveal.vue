@@ -1,6 +1,6 @@
 <template>
   <div :class="className" ref="reveal">
-    <div :class="`${className}__inner`" ref="inner">
+    <div :class="`${className}__inner`" ref="inner" v-on:click="onPhotoClick">
       <div :class="`${className}__img`" class="brand-img" :style="{ backgroundImage: bgImage }" ref="img"></div>
       <div :class="`${className}__overlay ${className}__overlay--top`" ref="overlayTop"></div>
       <div :class="`${className}__overlay ${className}__overlay--bottom`" ref="overlayBottom"></div>
@@ -17,6 +17,7 @@ export default {
   name: 'Reveal',
   props: {
     bgImage: String,
+    index: Number
   },
   data() {
     return {
@@ -35,8 +36,7 @@ export default {
   },
   methods: {
     onPhotoClick(e) {
-      // v-on:click="onPhotoClick"
-      // this.$emit('onPhotoClick', e)
+      this.$emit('onPhotoClick', e, this.index)
     },
 
     showMobile() {

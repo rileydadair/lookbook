@@ -1,0 +1,119 @@
+<template>
+  <div class="gallery" ref="gallery">
+    <SlideMaster
+      className="slider--gallery"
+      :swipe="false"
+      @onSliderEvent="onSliderEvent"
+      @onSliderMount="onSliderMount"
+      ref="slider"
+    >
+      <template slot="slides" v-for="(item, index) in item.detail_images">
+        <GallerySlide
+          :portrait="item.portrait"
+          :bgImage="item.image_desktop"
+          :key="`slide-gallery-${index}`"
+          ref="gallerySlides"
+        />
+      </template>
+    </SlideMaster>
+    <div class="gallery__support" ref="support">
+      <template v-for="(item, index) in item.detail_images">
+        <GallerySlide
+          className="gallery-slide--support"
+          :portrait="item.portrait"
+          :bgImage="item.image_desktop"
+          :key="`slide-gallery-${index}`"
+          ref="supportSlides"
+        />
+      </template>
+    </div>
+    <div class="gallery__titles">
+      <GalleryTitle v-for="(item, index) in item.detail_images"
+        :key="`gallery-title-${index}`"
+        :title="item.title"
+        ref="galleryTitles"
+      />
+    </div>
+    <div class="gallery__brand" ref="brand">{{ item.title }}</div>
+  </div>
+</template>
+
+<script>
+import TweenMax from 'gsap'
+
+import SlideMaster from '@/components/SlideMaster'
+import GallerySlide from '@/components/GallerySlide'
+import GalleryTitle from '@/components/GalleryTitle'
+
+export default {
+  name: 'Gallery',
+  props: {
+    item: Object
+  },
+  components: {
+    SlideMaster,
+    GallerySlide,
+    GalleryTitle,
+  },
+  data() {
+    return {
+      currentIndex: 0,
+      slider: {}
+    }
+  },
+  methods: {
+    init(index) {
+      this.currentIndex = index
+
+      TweenMax.to(this.$refs.gallery, 0.4, {
+        onStart: () => {
+          this.$refs.gallery.style.opacity = 0
+          this.$refs.gallery.style.zIndex = 1000
+        },
+        opacity: 1,
+        onComplete: () => {
+          // Get support ready
+          this.$refs.support.style.opacity = 1
+          // Show support slide
+          this.$refs.supportSlides[index].show('next')
+          // Show brand
+          TweenMax.to(this.$refs.brand, .8, { opacity: 1, ease: 'Sine.easeIn'})
+
+          setTimeout(() => {
+            // Show gallery photo
+            this.$refs.gallerySlides[index].init()
+            // Reset brand photo
+            this.$emit('resetClickedPhoto')
+            // Show title
+            this.$refs.galleryTitles[index].show()
+          }, 400)
+
+          this.slider.setCurrentSlide(null, index, null)
+          this.slider.toggleEvents()
+        }
+      })
+    },
+
+    onSliderMount(slider) {
+      slider.toggleEvents(false)
+      this.slider = slider
+    },
+
+    onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
+      if (e === null) return
+
+      this.currentIndex = nextIndex
+
+      Promise.all([
+        this.$refs.gallerySlides[currentIndex].hide(direction, true).then(() => {
+          this.$refs.gallerySlides[nextIndex].show(direction)
+          this.$refs.supportSlides[currentIndex].hide(direction)
+          this.$refs.supportSlides[nextIndex].show(direction)
+        }),
+        this.$refs.galleryTitles[currentIndex].hide().then(() => this.$refs.galleryTitles[nextIndex].show())
+      ])
+        .then(() => slider.toggleEvents())
+    }
+  }
+}
+</script>

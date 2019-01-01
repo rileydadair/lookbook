@@ -2,6 +2,7 @@
   <div class="main">
     <SlideMaster
       className="slider--main"
+      :swipe="swipe"
       @onSliderEvent="onSliderEvent"
       @onSliderMount="onSliderMount"
       ref="slider"
@@ -16,13 +17,13 @@
       </template>
       <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
       <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
-      <span slot="prevButton" class="controls__item">
+      <span slot="prevButton" class="controls__item js-hover" data-lock="controls">
         <span class="controls__text controls__text--prev js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in prevSplit" :key="`prev-part-${index}`" ref="prevParts">{{ part }}</span>
         </span>
         <span class="controls__plus">+</span>
       </span>
-      <span slot="nextButton" class="controls__item">
+      <span slot="nextButton" class="controls__item js-hover" data-lock="controls">
         <span class="controls__text controls__text--next js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in nextSplit" :key="`next-part-${index}`" ref="nextParts">{{ part }}</span>
         </span>

@@ -12,7 +12,7 @@
 .menu {
   @include full-fixed;
   backface-visibility: hidden;
-  background-color: #050505;
+  background-color: $color-black-darker;
   overflow: hidden;
   opacity: 0;
   transform: translate3d(0, -100%, 0);
