@@ -43,7 +43,7 @@ export default {
         onStart: () => {
           this.$refs.overlay.style.transformOrigin = '50% 0%'
           this.$refs.overlay.style.opacity = 1
-          this.$refs.overlay.style.zIndex = 200
+          this.$refs.overlay.style.zIndex = document.body.classList.contains('active-gallery') ? 1000 : 200
         },
         onComplete: () => {
           if (callback) callback()

@@ -1,0 +1,125 @@
+.gallery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: -1;
+
+  &__support {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 31.1%;
+    z-index: -1;
+    opacity: 0;
+
+    .gallery-slide {
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    .gallery-slide--portrait {
+      .gallery-slide__img {
+        background-size: 200%;
+      }
+    }
+
+    .gallery-slide--landscape {
+      .gallery-slide__img {
+        background-size: 270%;
+      }
+    }
+
+    .gallery-slide__wrap {
+      background-color: $color-black-darker;
+
+      &:after {
+        content: '';
+        @include full-absolute;
+        background-color: $color-black;
+        opacity: .67;
+        z-index: 100;
+        width: 101%;
+      }
+    }
+
+    .gallery-slide__img {
+      background-color: $color-black-darker;
+      background-size: 200%;
+      background-position: right center;
+      overflow: hidden;
+      // filter: blur(4px);
+
+    }
+  }
+
+  &__brand {
+    @include font-din;
+    font-size: 3.6rem;
+    color: $color-white;
+    position: absolute;
+    bottom: 7%;
+    right: 72px;
+    opacity: 0;
+    // transition: opacity .4s;
+  }
+}
+
+.gallery-slide {
+  @include center-x;
+  backface-visibility: hidden;
+  overflow-x: hidden;
+  pointer-events: none;
+  opacity: 0;
+  height: 66vh;
+  width: 56%;
+
+  &--portrait {
+    height: 100vh;
+    width: 38%;
+  }
+
+  &--landscape {
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  &__wrap {
+    backface-visibility: hidden;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__img {
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.gallery-title {
+  @include font-din;
+  color: $color-white;
+  font-size: 5.25vw;
+  position: absolute;
+  bottom: 11.4%;
+  left: 9%;
+  z-index: 100;
+
+  &__part {
+    opacity: 0;
+  }
+}

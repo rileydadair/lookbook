@@ -140,8 +140,8 @@ export default {
       }
 
       if (el.dataset.lock === 'controls') {
-        elX = Math.abs(elX - 3.95)
-        elY = Math.abs(elY + 1.25)
+        elX = Math.abs(elX - 4.1)
+        elY = Math.abs(elY + 1.1)
 
         this.toggleControlsText(el, 'show')
       }

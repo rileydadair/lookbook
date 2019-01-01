@@ -49,6 +49,7 @@ export default {
   methods: {
     onHoverNext(e) {
       const random = []
+      console.dir(e)
 
       !1 === this.oncePlay && (this.oncePlay = !0,
       this.$refs.nextParts.forEach(function(e) {
@@ -58,8 +59,8 @@ export default {
           return .5 - Math.random()
       }),
       TweenMax.staggerTo(random, .3, {
-          opacity: 0,
-          ease:' Power2.easeIn'
+        opacity: 0,
+        ease: 'Power2.easeIn'
       }, .05, this.allDoneNext))
     },
 

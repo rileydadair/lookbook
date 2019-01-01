@@ -7,30 +7,44 @@
     "main_image_desktop": "/images/made_wild/main.jpg",
     "detail_images": [
       {
+        "portrait": 1,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/detail_1_m.jpg",
         "image_desktop": "/images/made_wild/detail_1.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/detail_2_m.jpg",
         "image_desktop": "/images/made_wild/detail_2.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/detail_3_m.jpg",
         "image_desktop": "/images/made_wild/detail_3.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/detail_4_m.jpg",
         "image_desktop": "/images/made_wild/detail_4.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/detail_5_m.jpg",
         "image_desktop": "/images/made_wild/detail_5.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Slouchy Tank",
         "image_mobile": "/images/made_wild/detail_6_m.jpg",
         "image_desktop": "/images/made_wild/detail_6.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Flowy Tee",
         "image_mobile": "/images/made_wild/main_m.jpg",
         "image_desktop": "/images/made_wild/main.jpg"
       }
@@ -44,30 +58,44 @@
     "main_image_desktop": "/images/adidas/main.jpg",
     "detail_images": [
       {
+        "portrait": 1,
+        "title": "Training Pants",
         "image_mobile": "/images/adidas/detail_1_m.jpg",
         "image_desktop": "/images/adidas/detail_1.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Original Jersey",
         "image_mobile": "/images/adidas/detail_2_m.jpg",
         "image_desktop": "/images/adidas/detail_2.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Original Tee",
         "image_mobile": "/images/adidas/detail_3_m.jpg",
         "image_desktop": "/images/adidas/detail_3.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Original Jersey",
         "image_mobile": "/images/adidas/detail_4_m.jpg",
         "image_desktop": "/images/adidas/detail_4.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Training Hoodie",
         "image_mobile": "/images/adidas/detail_5_m.jpg",
         "image_desktop": "/images/adidas/main.jpg"
       },
       {
+        "portrait": 0,
+        "title": "HU Tennis Shoes",
         "image_mobile": "/images/adidas/detail_6_m.jpg",
         "image_desktop": "/images/adidas/detail_6.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Essential Sweatshirt",
         "image_mobile": "/images/adidas/main_m.jpg",
         "image_desktop": "/images/adidas/detail_5.jpg"
       }
@@ -81,30 +109,44 @@
     "main_image_desktop": "/images/vans/main.jpg",
     "detail_images": [
       {
+        "portrait": 1,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_1_m.jpg",
         "image_desktop": "/images/vans/detail_1.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_2_m.jpg",
         "image_desktop": "/images/vans/detail_2.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_3_m.jpg",
         "image_desktop": "/images/vans/detail_3.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_4_m.jpg",
         "image_desktop": "/images/vans/detail_4.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_5_m.jpg",
         "image_desktop": "/images/vans/detail_5.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/detail_6_m.jpg",
         "image_desktop": "/images/vans/detail_6.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Old Skool",
         "image_mobile": "/images/vans/main_m.jpg",
         "image_desktop": "/images/vans/main.jpg"
       }
@@ -118,30 +160,44 @@
     "main_image_desktop": "/images/nike/main.jpg",
     "detail_images": [
       {
+        "portrait": 1,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_1_m.jpg",
         "image_desktop": "/images/nike/detail_1.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_3_m.jpg",
         "image_desktop": "/images/nike/detail_3.jpg"
       },
       {
+        "portrait": 0,
+        "title": "SB Janoki Trainers",
         "image_mobile": "/images/nike/detail_2_m.jpg",
         "image_desktop": "/images/nike/detail_2.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_5_m.jpg",
         "image_desktop": "/images/nike/detail_5.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_4_m.jpg",
         "image_desktop": "/images/nike/detail_4.jpg"
       },
       {
+        "portrait": 0,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_6_m.jpg",
         "image_desktop": "/images/nike/detail_6.jpg"
       },
       {
+        "portrait": 1,
+        "title": "Air Jordan 1",
         "image_mobile": "/images/nike/detail_7_m.jpg",
         "image_desktop": "/images/nike/detail_7.jpg"
       }

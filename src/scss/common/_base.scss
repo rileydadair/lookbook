@@ -48,6 +48,15 @@ body {
 
     .main {
       background-color: $color-white;
+      transition: all .4s;
+    }
+
+    &.active-gallery {
+
+      .main {
+        background-color: $color-black-darker;
+        z-index: 999;
+      }
     }
   }
 

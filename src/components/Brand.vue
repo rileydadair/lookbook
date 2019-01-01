@@ -1,18 +1,22 @@
 <template>
-  <div class="main">
+  <div class="main" ref="main">
+    <Gallery
+      ref="gallery"
+      :item="item"
+      @resetClickedPhoto="resetClickedPhoto" />
     <div class="brand">
       <template v-for="(image, index) in item.detail_images">
 
         <template v-if="index === 1">
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(item.detail_images[1])" ref="reveal" @onPhotoClick="onPhotoClick" />
-            <Reveal :bgImage="bgImage(item.detail_images[2])" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(item.detail_images[1])" :index="1" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(item.detail_images[2])" :index="2" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(image)" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(image)" :index="index" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
       </template>
@@ -35,12 +39,14 @@
 <script>
 import imagesLoaded from 'imagesloaded'
 import TweenMax from 'gsap'
+import CustomEase from '@/services/CustomEase'
 import Custom from '@/services/scroll/Custom'
 import Smooth from '@/services/scroll/Smooth'
 
 import BrandLink from './BrandLink'
 import Reveal from './Reveal'
 import Scroll from '@/components/Scroll'
+import Gallery from '@/components/Gallery'
 
 export default {
   name: 'Brand',
@@ -54,12 +60,16 @@ export default {
   components: {
     BrandLink,
     Reveal,
-    Scroll
+    Scroll,
+    Gallery
   },
   data() {
     return {
+      activeGallery: false,
       current: 0,
-      hasScrolled: false
+      hasScrolled: false,
+      photoEase: CustomEase.create("custom", "M0,0 C0.29,0 0.321,0.105 0.348,0.166 0.378,0.234 0.42,0.348 0.464,0.49 0.484,0.58 0.544,0.776 0.634,0.882 0.712,0.974 0.784,1 1,1"),
+      revealInners: []
     }
   },
   watch: {
@@ -76,10 +86,12 @@ export default {
       if (this.initialLoad) {
         imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
       }
+      this.revealInners = document.querySelectorAll('.reveal__inner')
     })
   },
   destroyed() {
     this.smooth.destroy();
+    document.body.classList.remove('active-gallery')
   },
   methods: {
     init() {
@@ -166,16 +178,52 @@ export default {
       })
     },
 
-    onPhotoClick(e) {
-      // console.dir(e.currentTarget.parentNode)
-      // // const reveal = e.currentTarget.parentNode
-      // const elRect = e.currentTarget.getBoundingClientRect()
-      // const elCenterX = (window.innerWidth / 2) - elRect.x - (elRect.width / 2)
+    resetClickedPhoto() {
+      this.revealInners[this.clickedIndex].style = "transition: 0s"
+    },
 
-      // TweenMax.to(e.currentTarget, .6, {
-      //   x: `${elCenterX}px`,
-      //   // y: `${elCenterY}px`
-      // })
+    onPhotoClick(e, index) {
+      if (this.activeGallery) return
+      this.smooth.off()
+
+      // Set flag of can click current scroll is less than certain amount
+
+      const elRect = e.currentTarget.getBoundingClientRect()
+      const isPortrait = elRect.width <= elRect.height
+      const portraitWidth = .38
+      const landscapeWidth = .56
+      const elWidth = window.innerWidth * (isPortrait ? portraitWidth : landscapeWidth)
+      const elHeight= window.innerHeight * .66
+      const elCenterX = (window.innerWidth / 2) - elRect.x - (elWidth / 2)
+      const elCenterY = (window.innerHeight / 2) - elRect.y - (elHeight / 2)
+
+      const tween = {
+        onStart: () => {
+          this.revealInners[index].style.opacity = 1
+          this.revealInners[index].style.zIndex = 999
+          // this.$refs.main.style.zIndex = 999
+        },
+        x: `${elCenterX}px`,
+        width: `${elWidth}px`,
+        // zIndex: 999,
+        ease: this.photoEase
+      }
+
+      if (isPortrait) {
+        tween['y'] = '0%'
+        tween['top'] = '0%'
+        tween['height'] = '100vh'
+      } else {
+        tween['y'] = `${elCenterY}px`
+        tween['height'] = '66vh'
+      }
+
+      TweenMax.to(e.currentTarget, .8, tween)
+
+      this.$refs.gallery.init(index)
+      this.clickedIndex = index
+      this.activeGallery = true
+      document.body.classList.add('active-gallery')
     },
 
     bgImage(image) {

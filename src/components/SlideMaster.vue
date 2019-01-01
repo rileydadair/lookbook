@@ -61,27 +61,29 @@ export default {
   },
 
   mounted() {
-    // Check for slides
-    if (typeof this.$slots.slides === 'undefined') {
-      console.log('Must provide "slides" slot with an array of items') // eslint-disable-line
-      return
-    }
-    // Initialize wheel event.
-    if (this.wheel) {
-      this.initWheel()
-    }
-    // Initialize swipe event with Hammer.js.
-    if (this.swipe) this.initSwipe()
-    // Initialize keydown event.
-    if (this.keydown) this.initKeydown()
-
-    // Total length of slides.
-    this.totalSlides = this.$slots.slides.length
-
-    // Invoke callback function if provided or emit event to expose SlideMaster api.
-    // Receives component as argument.
-    this.onSliderMount ? this.onSliderMount(this) :
-      this.$emit('onSliderMount', this)
+    setTimeout(() => {
+      // Check for slides
+      if (typeof this.$slots.slides === 'undefined') {
+        console.log('Must provide "slides" slot with an array of items') // eslint-disable-line
+        return
+      }
+      // Initialize wheel event.
+      if (this.wheel) {
+        this.initWheel()
+      }
+      // Initialize swipe event with Hammer.js.
+      if (this.swipe) this.initSwipe()
+      // Initialize keydown event.
+      if (this.keydown) this.initKeydown()
+  
+      // Total length of slides.
+      this.totalSlides = this.$slots.slides.length
+  
+      // Invoke callback function if provided or emit event to expose SlideMaster api.
+      // Receives component as argument.
+      this.onSliderMount ? this.onSliderMount(this) :
+        this.$emit('onSliderMount', this)
+    }, 0)
   },
 
   beforeDestroy() {
@@ -242,20 +244,18 @@ export default {
       (
         <div class="controls">
           <button
-            class="controls__btn controls__btn--prev js-hover"
+            class="controls__btn controls__btn--prev"
             onClick={e => this.onClick(e, this.currentIndex - 1, 'prev')}
             type="button"
             ref="prevButton"
-            data-lock="controls"
           >
             {this.$slots.prevButton}
           </button>
           <button
-            class="controls__btn controls__btn--next js-hover"
+            class="controls__btn controls__btn--next"
             onClick={e => this.onClick(e, this.currentIndex + 1, 'next')}
             type="button"
             ref="nextButton"
-            data-lock="controls"
           >
             {this.$slots.nextButton}
           </button>
