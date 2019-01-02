@@ -1,8 +1,8 @@
-body.active-gallery {
-  .reveal__inner {
-    opacity: 0;
-  }
-}
+// body.active-gallery {
+//   .reveal__inner {
+//     opacity: 0;
+//   }
+// }
 
 .brand-wrap {
   display: inline-block;
@@ -110,13 +110,21 @@ body.active-gallery {
   height: 100%;
 
   &__inner {
+    cursor: pointer;
     backface-visibility: hidden;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     overflow: hidden;
-    transition: opacity .4s;
+
+    @media (min-width: $screen-lg-min) { cursor: none; }
+
+    // &.is-clickable:hover {
+    //   .reveal__img {
+    //     transform: scale
+    //   }
+    // }
   }
 
   &__img {

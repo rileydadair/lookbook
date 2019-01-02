@@ -3,20 +3,21 @@
     <Gallery
       ref="gallery"
       :item="item"
-      @resetClickedPhoto="resetClickedPhoto" />
+      @resetClickedPhoto="resetClickedPhoto"
+      @onGalleryReset="onGalleryReset" />
     <div class="brand">
       <template v-for="(image, index) in item.detail_images">
 
         <template v-if="index === 1">
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(item.detail_images[1])" :index="1" ref="reveal" @onPhotoClick="onPhotoClick" />
-            <Reveal :bgImage="bgImage(item.detail_images[2])" :index="2" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(item.detail_images[1])" :isPortrait="item.detail_images[1].portrait" :isClickable="isClickable" :index="1" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(item.detail_images[2])" :isPortrait="item.detail_images[2].portrait" :isClickable="isClickable" :index="2" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
         <template v-else-if="index === 2"></template>
         <template v-else>
           <div class="brand-wrap" :key="`brand-wrap-${index}`" ref="brandWraps">
-            <Reveal :bgImage="bgImage(image)" :index="index" ref="reveal" @onPhotoClick="onPhotoClick" />
+            <Reveal :bgImage="bgImage(image)" :isPortrait="image.portrait" :isClickable="isClickable" :index="index" ref="reveal" @onPhotoClick="onPhotoClick" />
           </div>
         </template>
       </template>
@@ -66,7 +67,10 @@ export default {
   data() {
     return {
       activeGallery: false,
+      isClickable: true,
+      clickedIndex: -1,
       current: 0,
+      cursor: {},
       hasScrolled: false,
       photoEase: CustomEase.create("custom", "M0,0 C0.29,0 0.321,0.105 0.348,0.166 0.378,0.234 0.42,0.348 0.464,0.49 0.484,0.58 0.544,0.776 0.634,0.882 0.712,0.974 0.784,1 1,1"),
       revealInners: []
@@ -75,9 +79,14 @@ export default {
   watch: {
     hasScrolled: function() {
       if (!this.scrolledDetail) {
-          this.$refs.scroll.toggle('hide', false)
-          setTimeout(() => this.$emit('disableScrollEl', 'scrolledDetail'), 800)
+        this.$refs.scroll.toggle('hide', false)
+        setTimeout(() => this.$emit('disableScrollEl', 'scrolledDetail'), 800)
       }
+    },
+    isClickable: function(boolean) {
+      console.log(boolean)
+      this.cursor.dataset.clickable = boolean
+      // if (!boolean) this.cursor.dataset.reveal = false
     }
   },
   mounted() {
@@ -87,6 +96,8 @@ export default {
         imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
       }
       this.revealInners = document.querySelectorAll('.reveal__inner')
+      this.cursor = document.querySelector('.cursor')
+      this.cursor.dataset.clickable = true
     })
   },
   destroyed() {
@@ -144,8 +155,18 @@ export default {
         ease: 'Power2.easeOut'
       })
 
-      this.current = current
+      // console.log(Math.abs(current - this.current))
 
+      if (Math.abs(current - this.current) > 1) {
+        this.isClickable = false
+      } else {
+        if (!this.isClickable) {
+          this.isClickable = true
+        }
+      }
+
+      this.current = current
+      
       if (!this.hasScrolled) this.hasScrolled = true
     },
 
@@ -179,17 +200,52 @@ export default {
     },
 
     resetClickedPhoto() {
-      this.revealInners[this.clickedIndex].style = "transition: 0s"
+      // Refactor duplicate code
+      setTimeout(() => {
+        const elRect = this.revealInners[this.clickedIndex].getBoundingClientRect()
+        const isPortrait = this.revealInners[this.clickedIndex].classList.contains('is-portrait')
+        const portraitWidth = .38
+        const landscapeWidth = .56
+        const elWidth = window.innerWidth * (isPortrait ? portraitWidth : landscapeWidth)
+        const elHeight= window.innerHeight * .66
+        const elCenterX = (window.innerWidth / 2) - elRect.x - (elWidth / 2)
+        const elCenterY = (window.innerHeight / 2) - elRect.y - (elHeight / 2)
+  
+        const tween = {
+          onStart: () => {
+            this.revealInners[this.clickedIndex].style.opacity = 0
+            this.revealInners[this.clickedIndex].style.zIndex = -1
+          },
+          onComplete: () => {
+            this.revealInners[this.clickedIndex].style = "opacity: 0"
+          },
+          x: `${elCenterX}px`,
+          width: `${elWidth}px`,
+          // zIndex: 999,
+          ease: this.photoEase
+        }
+  
+        if (isPortrait) {
+          tween['y'] = '0%'
+          tween['top'] = '0%'
+          tween['height'] = '100vh'
+        } else {
+          tween['y'] = `${elCenterY}px`
+          tween['height'] = '66vh'
+        }
+  
+        TweenMax.to(this.revealInners[this.clickedIndex], .8, tween)
+      })
     },
 
     onPhotoClick(e, index) {
-      if (this.activeGallery) return
       this.smooth.off()
+      this.revealInners[index].style = ""
 
       // Set flag of can click current scroll is less than certain amount
 
       const elRect = e.currentTarget.getBoundingClientRect()
-      const isPortrait = elRect.width <= elRect.height
+      const isPortrait = e.currentTarget.classList.contains('is-portrait')
       const portraitWidth = .38
       const landscapeWidth = .56
       const elWidth = window.innerWidth * (isPortrait ? portraitWidth : landscapeWidth)
@@ -197,15 +253,16 @@ export default {
       const elCenterX = (window.innerWidth / 2) - elRect.x - (elWidth / 2)
       const elCenterY = (window.innerHeight / 2) - elRect.y - (elHeight / 2)
 
+      this.revealInners.forEach((el, i) => {
+        if (i !== index) TweenMax.to(el, .4, { opacity: 0 })
+      })
+
       const tween = {
         onStart: () => {
-          this.revealInners[index].style.opacity = 1
           this.revealInners[index].style.zIndex = 999
-          // this.$refs.main.style.zIndex = 999
         },
         x: `${elCenterX}px`,
         width: `${elWidth}px`,
-        // zIndex: 999,
         ease: this.photoEase
       }
 
@@ -222,13 +279,18 @@ export default {
 
       this.$refs.gallery.init(index)
       this.clickedIndex = index
-      this.activeGallery = true
       document.body.classList.add('active-gallery')
     },
 
     bgImage(image) {
       return `url('${image.image_desktop}')`
     },
+
+    onGalleryReset() {
+      document.body.classList.remove('active-gallery')
+      TweenMax.to(this.revealInners, 0.4, { opacity: 1 })
+      this.smooth.on()
+    }
   }
 }
 </script>

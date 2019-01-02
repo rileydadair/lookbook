@@ -17,6 +17,7 @@ export default {
   mounted() {
     this.initEvents()
     this.$root.$on('cursorEnter', this.onEnter)
+    this.$root.$on('cursorReset', this.onReset)
 
     const innerWidth = window.innerWidth
     const innerHeight = window.innerHeight
@@ -55,7 +56,7 @@ export default {
 
       this.hoverEls.forEach(el => {
         el.removeEventListener('mouseenter', this.onHoverCursor)
-        el.removeEventListener('mouseenter', this.offHoverCursor)
+        el.removeEventListener('mouseleave', this.offHoverCursor)
       })
     },
 
@@ -68,6 +69,7 @@ export default {
     },
 
     onReset() {
+      console.log('resetCursor')
       this.removeEvents()
       this.hoverEls = document.querySelectorAll('.js-hover')
       this.$refs.cursor.dataset.fill = false
@@ -91,8 +93,10 @@ export default {
     },
 
     onHoverCursor(e) {
+      console.log('enter')
       this.isHovering = true
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
+      else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
       else if (e.target.dataset.lock) {
         this.setLockedPos(e.target)
         this.$refs.cursor.dataset.lock = e.target.dataset.lock
@@ -108,6 +112,7 @@ export default {
     offHoverCursor(e) {
       this.isHovering = false
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
+      else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
       else if (e.target.dataset.lock) {
         this.stopPositionEl = false
         this.$refs.cursor.dataset.lock = false
@@ -129,17 +134,23 @@ export default {
       let elX = (elRect.height * 0.5) + elRect.x
       let elY = (elRect.width * 0.5) + elRect.y
 
+      // Switch Statement
       if (el.dataset.lock === 'home') {
         elX = Math.abs(elX + 26.25)
         elY = Math.abs(elY - 26.85)
       }
 
-      if (el.dataset.lock === 'all') {
-        elX = Math.abs(elX + 20.75)
-        elY = Math.abs(elY - 20.5)
+      else if (el.dataset.lock === 'all') {
+        elX = Math.abs(elX + 20.65)
+        elY = Math.abs(elY - 20.65)
       }
 
-      if (el.dataset.lock === 'controls') {
+      else if (el.dataset.lock === 'back') {
+        elX = Math.abs(elX + 8)
+        elY = Math.abs(elY - 8.35)
+      }
+
+      else if (el.dataset.lock === 'controls') {
         elX = Math.abs(elX - 4.1)
         elY = Math.abs(elY + 1.1)
 

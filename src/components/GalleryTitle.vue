@@ -18,6 +18,10 @@ export default {
     }
   },
   methods: {
+    reset() {
+      TweenMax.set(this.$refs.titleParts, { opacity: 0 })
+    },
+
     hide() {
       return this.toggle('hide')
     },
@@ -28,7 +32,6 @@ export default {
 
     toggle(action) {
       return new Promise(resolve => {
-        console.log(action)
         const random = []
         this.$refs.titleParts.forEach(el => {
           return random.push(el)
