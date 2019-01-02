@@ -35,6 +35,9 @@
       />
     </div>
     <div class="gallery__brand" ref="brand">{{ item.title }}</div>
+    <div class="back-btn" ref="back">
+      <span class="back-btn__bar"></span><button class="back-btn__text js-hover" data-lock="back" v-on:click="onBackClick">Back</button>
+    </div>
   </div>
 </template>
 
@@ -76,8 +79,9 @@ export default {
           this.$refs.support.style.opacity = 1
           // Show support slide
           this.$refs.supportSlides[index].show('next')
-          // Show brand
+          // Show brand and back btn
           TweenMax.to(this.$refs.brand, .8, { opacity: 1, ease: 'Sine.easeIn'})
+          TweenMax.to(this.$refs.back, .8, { opacity: 1, ease: 'Sine.easeIn'})
 
           setTimeout(() => {
             // Show gallery photo
@@ -86,12 +90,35 @@ export default {
             this.$emit('resetClickedPhoto')
             // Show title
             this.$refs.galleryTitles[index].show()
-          }, 400)
 
-          this.slider.setCurrentSlide(null, index, null)
-          this.slider.toggleEvents()
+            this.slider.setCurrentSlide(null, index, null)
+            this.slider.toggleEvents()
+          }, 400)
         }
       })
+    },
+
+
+    onBackClick() {
+      this.slider.toggleEvents(false)
+      // Hide brand and back btn
+      TweenMax.to(this.$refs.brand, .6, { opacity: 0, ease: 'Sine.easeIn'})
+      TweenMax.to(this.$refs.back, .8, { opacity: 0, ease: 'Sine.easeIn'})
+
+      // Hide slides
+      Promise.all([
+        this.$refs.gallerySlides[this.currentIndex].hide('prev', true)
+          // Reset Gallery
+          .then(() => this.$refs.gallery.style = ""),
+        this.$refs.supportSlides[this.currentIndex].hide('prev', true),
+        this.$refs.galleryTitles[this.currentIndex].hide()
+      ])
+        .then(() => {
+          this.$emit('onGalleryReset')
+          this.$refs.gallerySlides.forEach(el => el.reset())
+          this.$refs.supportSlides.forEach(el => el.reset())
+          this.$refs.galleryTitles.forEach(el => el.reset())
+        })
     },
 
     onSliderMount(slider) {

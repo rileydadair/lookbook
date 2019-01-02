@@ -44,6 +44,12 @@ export default {
       TweenMax.set(this.$refs.slide, { opacity: 1 })
     },
 
+    reset() {
+      TweenMax.set(this.$refs.slide, { opacity: 0 })
+      TweenMax.set(this.$refs.wrap, { x: '0%' })
+      TweenMax.set(this.$refs.img, { x: '0%', scale: 1 })
+    },
+
     hide(direction, faster) {
       return this.toggle('hide', direction, faster)
     },

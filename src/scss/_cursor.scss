@@ -23,32 +23,24 @@
 
   &[data-fill="true"] {
     background-color: #fff;
-    height: 6vw;
-    width: 6vw;
-    margin-top: -3vw;
-    margin-left: -3vw;
+    height: 6rem;
+    width: 6rem;
+    margin-top: -3rem;
+    margin-left: -3rem;
 
     @media (min-width: $screen-xl-min) {
-      height: 5vw;
-      width: 5vw;
-      margin-top: -2.5vw;
-      margin-left: -2.5vw;
+      height: 4.5vw;
+      width: 4.5vw;
+      margin-top: -2.25vw;
+      margin-left: -2.25vw;
     }
 
     .cursor__inner { opacity: 0; }
   }
 
-  // &[data-title="true"] {
-  //   // mix-blend-mode: normal;
-  //   background-color: $color-white;
-  //   height: 7.5rem;
-  //   width: 7.5rem;
-  //   margin-top: -3.75rem;
-  //   margin-left: -3.75rem;
-
-  //   .cursor__inner { opacity: 0; }
-  //   .cursor__look { opacity: 1; }
-  // }
+  &[data-reveal="true"][data-clickable="true"] {
+    background-color: #fff;
+  }
 
   &[data-lock="home"] {
     height: 9rem;
@@ -60,10 +52,17 @@
 
   &[data-lock="all"],
   &[data-next="true"] {
-    height: 6.25rem;
-    width: 6.25rem;
-    margin-top: -3.175rem;
-    margin-left: -3.175rem;
+    height: 6rem;
+    width: 6rem;
+    margin-top: -3rem;
+    margin-left: -3rem;
+  }
+
+  &[data-lock="back"] {
+    height: 5.75rem;
+    width: 5.75rem;
+    margin-top: -2.875rem;
+    margin-left: -2.875rem;
   }
 
   &[data-lock="controls"] {

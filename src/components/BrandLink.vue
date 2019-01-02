@@ -49,7 +49,6 @@ export default {
   methods: {
     onHoverNext(e) {
       const random = []
-      console.dir(e)
 
       !1 === this.oncePlay && (this.oncePlay = !0,
       this.$refs.nextParts.forEach(function(e) {

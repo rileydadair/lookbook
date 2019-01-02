@@ -23,7 +23,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (min-width: $screen-lg-min) { cursor: none; }
+  @media (min-width: $screen-lg-min) { 
+    &>* {
+      cursor: none!important;
+    }
+  }
 
   &.mobile,
   &.tablet {
@@ -120,10 +124,10 @@ button {
   letter-spacing: inherit;
 }
 
-a,
-button {
-  @media (min-width: $screen-lg-min) { cursor: none; }
-}
+// a,
+// button {
+//   @media (min-width: $screen-lg-min) { cursor: none; }
+// }
 
 ol,
 ul {
