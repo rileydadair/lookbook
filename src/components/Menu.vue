@@ -96,14 +96,18 @@ export default {
     positionElement(e) {
       console.log('position El')
       let { clientX: x, clientY: y } = e
-      const walk = 150
+      const xSpeed = 50
+      const ySpeed = 150
       const elRect = this.$refs.imgs.getBoundingClientRect()
+      const elWidth = elRect.width
       const elHeight = elRect.height
 
       const { offsetWidth: width, offsetHeight: height } = this.$refs.menu
-      const yWalk = Math.round((y / height * walk) - (walk / 2) - (elHeight * .5))
+      const xWalk = Math.round((x / width * xSpeed) - (xSpeed / 2))
+      const yWalk = Math.round((y / height * ySpeed) - (ySpeed / 2) - (elHeight * .5))
 
       TweenMax.to(this.$refs.imgs, 2, {
+        x: xWalk,
         y: yWalk,
         ease: Expo.easeOut
       })
