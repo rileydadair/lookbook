@@ -21,7 +21,8 @@
     pointer-events: none; // Magic sauce
   }
 
-  &[data-fill="true"] {
+  &[data-fill="true"],
+  &[data-reveal="true"][data-clickable="true"] {
     background-color: #fff;
     height: 6rem;
     width: 6rem;
@@ -38,16 +39,12 @@
     .cursor__inner { opacity: 0; }
   }
 
-  &[data-reveal="true"][data-clickable="true"] {
-    background-color: #fff;
-  }
-
   &[data-lock="home"] {
     height: 9rem;
     width: 9rem;
     margin-top: -4.5rem;
     margin-left: -4.5rem;
-    transition: margin .5s, height .5s, width .5s, background-color .5s;
+    // transition: margin .5s, height .5s, width .5s, background-color .5s;
   }
 
   &[data-lock="all"],
