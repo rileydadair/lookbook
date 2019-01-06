@@ -64,10 +64,52 @@
     font-size: 3.6rem;
     color: $color-white;
     position: absolute;
-    bottom: 7%;
+    bottom: 6.8%;
     right: 49px;
     opacity: 0;
     @media (min-width: $screen-lg-min) { right: 4.3%; }
+  }
+
+  // &__section {
+  //   position: absolute;
+  //   top: 0;
+  //   height: 100%;
+  //   width: 50%;
+  //   z-index: 100;
+
+  //   &--left {
+  //     left: 0;
+  //   }
+
+  //   &--right {
+  //     right: 0;
+  //   }
+  // }
+
+  .controls {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: none;
+
+    &__arrow-section {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      z-index: 100;
+
+      &--prev {
+        left: 0;
+      }
+  
+      &--next {
+        right: 0;
+      }
+    }
   }
 }
 
@@ -135,6 +177,7 @@
   top: 40px;
   left: 36px;
   opacity: 0;
+  z-index: 200;
 
   @media (min-width: $screen-lg-min) { left: 3.2%; top: 4vw; }
   @media (min-width: $screen-xl-min) { top: 3.5vw; }

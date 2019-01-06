@@ -280,6 +280,7 @@ export default {
       this.$refs.gallery.init(index)
       this.clickedIndex = index
       document.body.classList.add('active-gallery')
+      document.body.classList.add('active-arrows')
     },
 
     bgImage(image) {
