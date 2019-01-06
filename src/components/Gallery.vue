@@ -15,6 +15,9 @@
           ref="gallerySlides"
         />
       </template>
+
+      <span slot="prevButton" class="controls__arrow-section controls__arrow-section--prev js-hover" data-arrow="prev"></span>
+      <span slot="nextButton" class="controls__arrow-section controls__arrow-section--next js-hover" data-arrow="next"></span>
     </SlideMaster>
     <div class="gallery__support" ref="support">
       <template v-for="(item, index) in item.detail_images">
@@ -38,6 +41,8 @@
     <div class="back-btn" ref="back">
       <span class="back-btn__bar"></span><button class="back-btn__text js-hover" data-lock="back" v-on:click="onBackClick">Back</button>
     </div>
+    <!-- <div class="gallery__section gallery__section--left js-hover" data-arrow="left"></div>
+    <div class="gallery__section gallery__section--right js-hover" data-arrow="right"></div> -->
   </div>
 </template>
 
@@ -100,6 +105,7 @@ export default {
 
 
     onBackClick() {
+      document.body.classList.remove('active-arrows')
       this.slider.toggleEvents(false)
       // Hide brand and back btn
       TweenMax.to(this.$refs.brand, .6, { opacity: 0, ease: 'Sine.easeIn'})

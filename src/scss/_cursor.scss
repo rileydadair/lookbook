@@ -12,9 +12,6 @@
   margin-top: -2rem;
   margin-left: -2rem;
   z-index: 999;
-  transition: margin .3s, height .3s, width .3s, background-color .3s;
-  transition-timing-function: ease-out;
-  opacity: 0;
 
   @media (min-width: $screen-lg-min) {
     display: block;
@@ -23,62 +20,58 @@
 
   &[data-fill="true"],
   &[data-reveal="true"][data-clickable="true"] {
-    background-color: #fff;
-    height: 6rem;
-    width: 6rem;
-    margin-top: -3rem;
-    margin-left: -3rem;
+    .cursor__inner {
+      background-color: #fff;
+      height: 6rem;
+      width: 6rem;
 
-    @media (min-width: $screen-xl-min) {
-      height: 4.5vw;
-      width: 4.5vw;
-      margin-top: -2.25vw;
-      margin-left: -2.25vw;
+      @media (min-width: $screen-xl-min) {
+        height: 4.48vw;
+        width: 4.48vw;
+      }
     }
-
-    .cursor__inner { opacity: 0; }
   }
 
   &[data-lock="home"] {
-    height: 9rem;
-    width: 9rem;
-    margin-top: -4.5rem;
-    margin-left: -4.5rem;
-    transition: margin .5s, height .5s, width .5s, background-color .5s;
+    .cursor__inner {
+      height: 9rem;
+      width: 9rem;
+      transition: height .5s, width .5s;
+    }
   }
 
   &[data-lock="all"],
   &[data-next="true"] {
-    height: 6rem;
-    width: 6rem;
-    margin-top: -3rem;
-    margin-left: -3rem;
+    .cursor__inner {
+      height: 6rem;
+      width: 6rem;
+    }
   }
 
   &[data-lock="back"] {
-    height: 5.75rem;
-    width: 5.75rem;
-    margin-top: -2.875rem;
-    margin-left: -2.875rem;
+    .cursor__inner {
+      height: 5.75rem;
+      width: 5.75rem;
+    }
   }
 
   &[data-lock="controls"] {
-    height: 5.5rem;
-    width: 5.5rem;
-    margin-top: -2.75rem;
-    margin-left: -2.75rem;
+    .cursor__inner {
+      height: 5.5rem;
+      width: 5.5rem;
+    }
   }
 
   &__inner {
     backface-visibility: hidden;
-    // @include center-xy;
+    @include center-xy;
     border-radius: 50%;
     border: 2px solid #fff;
-    height: 100%;
-    width: 100%;
-    opacity: 1;
-    transition: opacity .2s;
+    height: 4rem;
+    width: 4rem;
+    transition: height .3s, width .3s, background-color .3s;
     transition-timing-function: ease-out;
+    opacity: 0;
   }
 
   &__look {
@@ -91,11 +84,59 @@
     justify-content: center;
     align-items: center;
     color: $color-black;
-    // position: relative;
     height: 100%;
     width: 100%;
     opacity: 0;
     transition: opacity .3s ease-out;
+  }
+
+  &__arrows {
+    @include center-xy;
+    height: 4rem;
+    width: 4rem;
+    overflow: hidden;
+  }
+}
+
+.active-arrows {
+  .cursor {
+    &[data-arrow="prev"],
+    &[data-arrow="next"] {
+      .cursor__inner {
+        height: 4.8rem;
+        width: 4.8rem;
+      }
+  
+      .arrow { opacity: 1; }
+    }
+  
+    &[data-arrow="prev"] {
+      .arrow--prev {
+        transform: translate3d(-50%, -50%, 0) rotate(180deg);
+      }
+    }
+  
+    &[data-arrow="next"] {
+      .arrow--next {
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+  }
+}
+
+.arrow {
+  @include center-xy;
+  height: 10px;
+  width: 24px;
+  opacity: 0;
+  transition: all .35s ease-out;
+
+  &--prev {
+    transform: translate3d(-200%, -50%, 0) rotate(180deg);
+  }
+
+  &--next {
+    transform: translate3d(150%, -50%, 0);
   }
 }
 

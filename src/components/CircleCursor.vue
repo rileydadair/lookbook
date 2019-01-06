@@ -1,6 +1,20 @@
 <template>
   <div class="cursor" ref="cursor" data-fill="false" data-next="false" data-lock="false">
-    <div class="cursor__inner"></div>
+    <div class="cursor__inner" ref="inner"></div>
+    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 6">
+      <symbol id="arrow">
+        <title>arrow</title>
+        <polygon points="24.2 5 19 5 16.5 0 24.2 5 19 5 16.5 9.9 24.2 5" style="fill:#fff" /><line x1="21" y1="5" y2="5" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/>
+      </symbol>
+    </svg>
+    <div class="cursor__arrows">
+      <svg class="arrow arrow--prev">
+        <use xlink:href="#arrow"></use>
+      </svg>
+      <svg class="arrow arrow--next">
+        <use xlink:href="#arrow"></use>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -61,11 +75,11 @@ export default {
     },
 
     onEnter() {
-      TweenMax.fromTo(this.$refs.cursor, 0.6, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1 })
+      TweenMax.fromTo(this.$refs.inner, 0.6, { scale: 0, x:'-50%', y:'-50%', opacity: 0 }, { scale: 1, opacity: 1 })
     },
 
     onLeave() {
-      TweenMax.to(this.$refs.cursor, 0.4, { scale: 0, onComplete: () => this.$refs.cursor.style.opacity = 0 })
+      TweenMax.to(this.$refs.inner, 0.4, { scale: 0, x:'-50%', y:'-50%', onComplete: () => this.$refs.inner.style.opacity = 0 })
     },
 
     onReset() {
@@ -97,6 +111,7 @@ export default {
       this.isHovering = true
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
       else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
+      else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = e.target.dataset.arrow
       else if (e.target.dataset.lock) {
         this.setLockedPos(e.target)
         this.$refs.cursor.dataset.lock = e.target.dataset.lock
@@ -106,13 +121,14 @@ export default {
     },
 
     onMousedown() {
-      TweenMax.to(this.$refs.cursor, 0.3, { scale: 0.88, ease: 'Power3.easeOut' })
+      TweenMax.to(this.$refs.inner, 0.3, { scale: 0.88, x:'-50%', y:'-50%', ease: 'Power3.easeOut' })
     },
 
     offHoverCursor(e) {
       this.isHovering = false
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
       else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
+      else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = false
       else if (e.target.dataset.lock) {
         this.stopPositionEl = false
         this.$refs.cursor.dataset.lock = false
@@ -124,7 +140,7 @@ export default {
     },
 
     onMouseup() {
-      TweenMax.to(this.$refs.cursor, 0.3, { scale: 1, ease: 'Power3.easeOut' })
+      TweenMax.to(this.$refs.inner, 0.3, { scale: 1, x:'-50%', y:'-50%', ease: 'Power3.easeOut' })
     },
 
     setLockedPos(el) {
@@ -141,18 +157,18 @@ export default {
       }
 
       else if (el.dataset.lock === 'all') {
-        elX = Math.abs(elX + 20.65)
+        elX = Math.abs(elX + 20.55)
         elY = Math.abs(elY - 20.65)
       }
 
       else if (el.dataset.lock === 'back') {
-        elX = Math.abs(elX + 8)
+        elX = Math.abs(elX + 7.95)
         elY = Math.abs(elY - 8.35)
       }
 
       else if (el.dataset.lock === 'controls') {
-        elX = Math.abs(elX - 4.1)
-        elY = Math.abs(elY + 1.1)
+        elX = Math.abs(elX - 3.65)
+        elY = Math.abs(elY + 1.3)
 
         this.toggleControlsText(el, 'show')
       }
