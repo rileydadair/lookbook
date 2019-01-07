@@ -9,6 +9,7 @@
       <div class="hover-imgs" ref="imgs">
         <HoverReveal v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
       </div>
+      <About :deviceType="deviceType" ref="about" />
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@ import CustomEase from '@/services/CustomEase'
 
 import HoverReveal from './HoverReveal'
 import NavLink from './NavLink'
+import About from './About'
 
 export default {
   name: 'Menu',
@@ -29,7 +31,8 @@ export default {
   },
   components: {
     HoverReveal,
-    NavLink
+    NavLink,
+    About
   },
   data() {
     return {
@@ -94,7 +97,6 @@ export default {
     },
 
     positionElement(e) {
-      console.log('position El')
       let { clientX: x, clientY: y } = e
       const xSpeed = 50
       const ySpeed = 150
@@ -124,6 +126,9 @@ export default {
 
     toggleNav(action) {
       if (action === 'show') {
+        this.$refs.nav.style.display = 'block'
+        this.$refs.imgs.style.display = 'block'
+
         TweenMax.set(this.$refs.items, {opacity: 0, yPercent: -60})
         
         setTimeout(() => {
@@ -136,14 +141,25 @@ export default {
       
       else {
         this.removeMousemove()
-        TweenMax.to(this.$refs.items, 0.3, { ease: Power1.easeIn , opacity: 0, yPercent: -80 })
+        TweenMax.to(this.$refs.items, 0.3, {
+          ease: Power1.easeIn ,
+          opacity: 0, yPercent: -80,
+          onComplete: () => {
+            this.$refs.nav.style.display = 'none'
+            this.$refs.imgs.style.display = 'none'
+          }
+        })
       }
     },
 
-    toggleMenu(action) {
+    toggleMenu(action, about) {
       return new Promise(resolve => {
-        this.toggleNav(action)
-        this.$root.$emit('toggleAll', action)
+        if (about) {
+          this.$refs.about.toggle(action)
+        } else {
+          this.toggleNav(action)
+        }
+        this.$root.$emit('toggleHeaderBtns', action, about)
         if (action === 'show') document.body.classList.add('menu-active')
 
         // Menu animation

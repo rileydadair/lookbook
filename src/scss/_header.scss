@@ -6,6 +6,8 @@ $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
     mix-blend-mode: exclusion;
     color: #fff;
   }
+
+  .header__item--about { display: none; }
 }
 
 .header {
@@ -18,7 +20,7 @@ $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
   &__item {
     position: absolute;
     top: 25px;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
 
     @media (min-width: $screen-sm-min) { top: 40px; }
 
@@ -41,7 +43,7 @@ $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
   }
 
   &__item--about {
-    left: 130px;
+    left: 118px;
 
     @media (min-width: $screen-sm-min) { left: 180px; }
 
@@ -69,19 +71,30 @@ $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
     transform: translate(0%, -30%); // weird styling to match links
     height: 43px;
     width: 83px;
+
+    &--about {
+      width: 84px;
+    }
   }
 
   &__btn-text {
     display: inline-block;
     @include center-y;
     right: 13px;
-    text-align: right;
+    // text-align: right;
 
     @media (min-width: $screen-lg-min) {
       right: auto;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
-      text-align: center;
+      // text-align: center;
+    }
+
+    &--about {
+      right: auto;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      // left: 13px;
     }
   }
 

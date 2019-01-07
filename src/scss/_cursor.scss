@@ -48,6 +48,13 @@
     }
   }
 
+  &[data-lock="about"] {
+    .cursor__inner {
+      height: 6.5rem;
+      width: 6.5rem;
+    }
+  }
+
   &[data-lock="back"] {
     .cursor__inner {
       height: 5.75rem;

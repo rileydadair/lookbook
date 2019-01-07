@@ -156,7 +156,7 @@ export default {
         elY = Math.abs(elY - 26.85)
       }
 
-      else if (el.dataset.lock === 'all') {
+      else if (el.dataset.lock === 'all' || el.dataset.lock === 'about') {
         elX = Math.abs(elX + 20.55)
         elY = Math.abs(elY - 20.65)
       }

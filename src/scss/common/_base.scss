@@ -16,7 +16,8 @@ html {
 body {
   background-color: $color-black;
   color: $color-white;
-  font-family: $font-avenir-demi;
+  font-family: 'AvenirNext';
+  font-weight: 600;
   font-size: 1.4rem;
   min-height: 100vh;
   width: 100%;
@@ -110,9 +111,7 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
-
-  
+  color: inherit;  
 }
 
 button {
@@ -124,10 +123,10 @@ button {
   letter-spacing: inherit;
 }
 
-// a,
-// button {
-//   @media (min-width: $screen-lg-min) { cursor: none; }
-// }
+a,
+button {
+  font-weight: 600;
+}
 
 ol,
 ul {
@@ -194,4 +193,9 @@ ul {
 
 .hidden {
   display: none;
+}
+
+// replace this everywhere
+.thin {
+  font-weight: 400;
 }

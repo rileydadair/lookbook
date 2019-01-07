@@ -16,6 +16,7 @@
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
     <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
+    <!-- <About :deviceType="deviceType" ref="about" /> -->
   </div>
 </template>
 
@@ -30,6 +31,8 @@ import Menu from './components/Menu'
 import OverlayMobile from './components/OverlayMobile'
 import Overlay from './components/Overlay'
 
+import About from './components/About'
+
 export default {
   name: 'app',
   components: {
@@ -39,6 +42,8 @@ export default {
     Menu,
     OverlayMobile,
     Overlay,
+
+    About
   },
   data() {
     return {

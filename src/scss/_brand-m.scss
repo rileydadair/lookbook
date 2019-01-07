@@ -1,69 +1,49 @@
 .brand-m {
   background-color: $color-white;
-  padding: 0 3.4rem;
   padding: 0 2.6rem;
 
-  @media (min-width: $screen-sm-min) {
-    padding: 0 5rem;
-  }
+  @media (min-width: $screen-sm-min) { padding: 0 5rem; }
 
-  @media (min-width: $screen-lg-min) {
-    padding: 0 4.2%;
-  }
+  @media (min-width: $screen-lg-min) { padding: 0 4.2%; }
 
   &__hero {
     padding-top: 42.5%;
     padding-left: $offset;
     margin-bottom: 32%;
 
-    @media (min-width: $screen-sm-min) {
-      padding-top: 34.5%;
-    }
+    @media (min-width: $screen-sm-min) { padding-top: 34.5%; }
 
-    @media (min-width: $screen-sm-min) {
-      padding-top: 30%;
-      margin-bottom: 28%;
-    }
+    @media (min-width: $screen-md-min) { padding-top: 30%; margin-bottom: 28%; }
 
-    @media (min-width: $screen-lg-min) {
-      padding-top: 17.5%;
-      margin-bottom: 13%;
-    }
+    @media (min-width: $screen-lg-min) { padding-top: 17.5%; margin-bottom: 13%; }
   }
   
   &__title {
-    font-family: $font-din;
+    font-family: 'Din';
     font-weight: 400;
     font-size: 13vw;
     line-height: 0.9;
     text-transform: uppercase;
 
-    @media (min-width: $screen-lg-min) {
-      font-size: 8vw;
-    }
+    @media (min-width: $screen-lg-min) { font-size: 8vw; }
   }
 
   &__description {
-    font-family: $font-avenir-regular;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
     margin: 24px 0 0;
     max-width: 252px;
 
     &--hero {
-      line-height: 1.7em;
+      line-height: 1.9em;
     }
 
-    @media (min-width: $screen-sm-min) {
-      padding-left: 0.5%;
-    }
+    @media (min-width: $screen-sm-min) { padding-left: 0.5%; }
   }
 
   &__link {
     display: block;
     margin: 37.5% $offset 42%;
 
-    @media (min-width: $screen-md-min) {
-      margin: 30% $offset;
-    }
+    @media (min-width: $screen-md-min) { margin: 30% $offset; }
   }
 }
