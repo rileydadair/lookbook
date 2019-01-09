@@ -77,6 +77,16 @@
     }
   }
 
+  &__logo {
+    @include center-xy;
+    left: 25%;
+    // position: absolute;
+    // top: 23%;
+    // left: 14%;
+    height: auto;
+    width: 18%;
+  }
+
   &__body {
     margin-left: $offset;
     padding-bottom: 14%;
@@ -87,7 +97,7 @@
     @media (min-width: $screen-sm-min) { max-width: none; padding-bottom: 8%; }
 
     @media (min-width: $screen-lg-min) {
-      padding-top: 49vh;
+      padding-top: 49.5vh;
       padding-bottom: 6%;
       // margin-left: 50%;
       margin-left: 50%;
@@ -111,7 +121,7 @@
       font-size: 1.8vw;
       line-height: 3vw;
       // max-width: 39vw;
-      max-width: 37vw;
+      max-width: 38vw;
     }
   }
 
