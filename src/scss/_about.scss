@@ -16,6 +16,8 @@
   opacity: 0;
   display: none;
 
+  @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+
   &__wrap {
     position: fixed;
     top: 0;
@@ -24,8 +26,6 @@
     padding: 0 2.6rem;
   
     color: #fff;
-
-    @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; }
   
     @media (min-width: $screen-sm-min) { padding: 0 5rem; }
 
