@@ -30,6 +30,11 @@ export default {
     }
   },
   methods: {
+    kill() {
+      TweenMax.killTweensOf(this.$refs.wrap)
+      TweenMax.killTweensOf(this.$refs.img)
+    },
+
     hide(direction) {
       return this.toggle('hide', direction)
     },

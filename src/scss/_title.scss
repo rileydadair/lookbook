@@ -13,7 +13,12 @@
     }
 
     &.is-active {
+      z-index: $zIndex-mid;
+    }
+
+    &.is-clicked {
       z-index: $zIndex-title;
+      pointer-events: none;
     }
   }
 
@@ -40,9 +45,10 @@
 }
 
 .desktop {
-  .title:hover,
+  .titles:hover,
   .title__link.is-active:active,
-  .title__link.is-active:focus,{
+  .title__link.is-active:focus,
+  .title__link.is-clicked, {
     .title__wrap {
       opacity: 0;
     }

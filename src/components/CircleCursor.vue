@@ -102,7 +102,6 @@ export default {
     },
 
     onReset() {
-      console.log('resetCursor')
       this.removeEvents()
       this.hoverEls = document.querySelectorAll('.js-hover')
       this.$refs.cursor.dataset.fill = false
@@ -127,7 +126,6 @@ export default {
     },
 
     onHoverCursor(e) {
-      console.log('enter')
       this.isHovering = true
       // if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
       if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true

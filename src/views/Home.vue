@@ -41,9 +41,11 @@
       </template>
     </div>
 
-    <div class="title">
-      <template v-for="item in items">
-        <Title :titleVal="item.title" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
+    <div class="titles">
+      <template v-for="(item, index) in items">
+        <div class="title__index" @click="handleTitleClick(index)">
+          <Title :titleVal="item.title" :titleIndex="titleIndex" :index="index" :slug="item.slug" :key="`title-${item.slug}`" ref="titles" />
+        </div>
       </template>
     </div>
 
@@ -90,7 +92,9 @@ import Scroll from '@/components/Scroll'
         next: {},
         nextSplit: 'Next'.split(''),
         prevSplit: 'Prev'.split(''),
+        previousIndex: 0,
         slider: {},
+        titleIndex: -1
       }
     },
     watch: {
@@ -101,6 +105,31 @@ import Scroll from '@/components/Scroll'
     },
     beforeCreate() {
       document.body.classList.add('home')
+    },
+    beforeRouteLeave(to, from, next) {
+      if (this.menuActive) {
+        next()
+        return
+      }
+
+      this.$refs.mainSlides[this.previousIndex].kill()
+      this.$refs.sectionSlides[this.previousIndex].kill()
+      this.$refs.mainSlides[this.currentIndex].kill()
+      this.$refs.sectionSlides[this.currentIndex].kill()
+
+      setTimeout(() => {
+        function handleTitle(component) {
+          if (component.titleIndex > -1) {
+            const titlePromise = component.$refs.titles[component.titleIndex].hide()
+            titlePromise.then(() => next())
+          } else {
+            next()
+          }
+        }
+        this.slider.toggleEvents(false)
+        this.$root.$emit('hideCursor')
+        this.$root.$emit('toggleOverlay', 'show', () => handleTitle(this))
+      }, 0)
     },
     mounted() {
       if (this.deviceType === 'desktop') this.$emit('resetCursor')
@@ -161,6 +190,7 @@ import Scroll from '@/components/Scroll'
       },
 
       onSliderEvent(e, slider, currentIndex, nextIndex, direction) {
+        this.previousIndex = currentIndex
         this.currentIndex = nextIndex
         // Progress animation
         this.$refs.progress.setCurrent(nextIndex + 1, direction);
@@ -191,6 +221,10 @@ import Scroll from '@/components/Scroll'
 
       bgPosition(item) {
         return item.main_image_desktop.includes('vans/main') ? '50% 100%' : '';
+      },
+
+      handleTitleClick(index) {
+        this.titleIndex = index
       }
     }
   }
