@@ -87,9 +87,11 @@ body.active-gallery {
     backface-visibility: hidden;
     font-weight: 400;
     letter-spacing: 0.2px;
-    top: 58.5%;
+    top: 57.5%;
     transform: translate3d(-65%, 0%, 0);
     transition: transform .4s cubic-bezier(.14,.64,.44,1);
+
+    @media (min-width: $screen-xl-min) { top: 58%; }
 
     &.is-active {
       transform: translate3d(-50%, 0%, 0);
@@ -128,6 +130,9 @@ body.active-gallery {
   letter-spacing: -2px;
   font-size: 7vw;
   z-index: $zIndex-title;
+
+  @media (min-width: $screen-lg-min) { cursor: none; }
+  @media (min-width: $screen-xl-min) { font-size: 6vw; }
 
   &__wrap {
     @include center-xy;
