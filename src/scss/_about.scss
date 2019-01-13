@@ -1,3 +1,7 @@
+.about-active {
+  .about__logo { pointer-events: auto; }
+}
+
 .about-cover {
   background: linear-gradient($color-black-darker, 80%, rgba(0, 0, 0, 0));
   position: fixed;
@@ -39,6 +43,7 @@
     font-size: 12vw;
     padding-top: 58.5%;
     padding-bottom: 38.5%;
+    width: 100vh;
 
     @media (min-width: $screen-sm-min) { padding-top: 46%; padding-bottom: 31%; }
 
@@ -84,6 +89,7 @@
     height: auto;
     width: 18%;
     overflow: hidden;
+    pointer-events: none;
 
     @media (min-width: $screen-lg-min) { display: block; }
   }
@@ -123,6 +129,10 @@
       line-height: 3vw;
       // max-width: 39vw;
       max-width: 38vw;
+    }
+
+    br {
+      @media (min-width: $screen-lg-min) { display: none; }
     }
   }
 
