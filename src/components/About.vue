@@ -111,6 +111,7 @@ export default {
 
     toggle(action) {
       const delay = window.innerWidth > 1199 ? .55 : .45
+      const bodydelay = window.innerWidth > 1199 ? .55 : .45
 
       if (action === 'show') {
         this.$refs.about.style.display = 'block'
@@ -122,18 +123,24 @@ export default {
             opacity: 1,
             delay: delay,
             ease: 'Sine.easeIn'
-          }, .085)
+          }, .075)
 
           TweenMax.staggerTo(this.paths, .8, {
             y: '0%',
             delay: delay,
             ease: 'Power2.easeOut'
-          }, .085)
+          }, .075)
 
-        TweenMax.to(this.$refs.body, .8, {
+        TweenMax.to(this.$refs.body, .7, {
           opacity: 1,
-          delay: delay,
-          ease: 'Sine.easeIn',
+          delay: window.innerWidth > 1199 ? delay + .35 : delay,
+          ease: 'Sine.easeIn'
+        })
+
+        TweenMax.to(this.$refs.body, .9, {
+          y: '0%',
+          delay: window.innerWidth > 1199 ? delay + .35 : delay,
+          ease: 'Power2.easeOut',
           onComplete(about) {
             if (!about.smoothInit) {
               about.smooth.init();
@@ -144,12 +151,6 @@ export default {
             about.initHoverEvents()
           },
           onCompleteParams: [this]
-        })
-
-        TweenMax.to(this.$refs.body, 1, {
-          y: '0%',
-          delay: delay,
-          ease: 'Power2.easeOut'
         })
       }
 

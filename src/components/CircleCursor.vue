@@ -128,8 +128,8 @@ export default {
     onHoverCursor(e) {
       console.log('enter')
       this.isHovering = true
-      if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
-      else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
+      // if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
+      if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
       else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = e.target.dataset.arrow
       else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.showImage()
       else if (e.target.dataset.lock) {
@@ -146,8 +146,8 @@ export default {
 
     offHoverCursor(e) {
       this.isHovering = false
-      if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
-      else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
+      // if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
+      if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
       else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = false
       else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.hideImage()
       else if (e.target.dataset.lock) {

@@ -1,6 +1,6 @@
 <template>
   <div class="brand__cta">
-    <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="link js-hover" data-next ref="link">
+    <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="link" ref="link">
       <span class="link__wrap link__wrap--title">
         <span class="link__part link__part--title" v-for="(part, index) in splitTitle" :key="`part-title-${index}`" ref="titleParts">{{ part }}</span>
       </span>
