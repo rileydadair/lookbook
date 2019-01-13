@@ -14,7 +14,7 @@
     width: 100%;
     z-index: 10;
 
-    @media (min-width: $screen-lg-min) { background: transparent; }
+    @media (min-width: $screen-lg-min) { display: none; }
   }
 
   &__wrap {
@@ -36,14 +36,10 @@
   &__header {
     @include font-din;
     font-size: 12vw;
-    padding-top: 43.5%;
-    margin-left: $offset;
-    // margin-bottom: 26%;
-    margin-bottom: 28%;
+    padding-top: 58%;
+    padding-bottom: 38%;
 
-    @media (min-width: $screen-sm-min) { padding-top: 30.5%; margin-bottom: 16%; }
-
-    @media (min-width: $screen-md-min) { padding-top: 26.5%; }
+    @media (min-width: $screen-sm-min) { padding-top: 46%; padding-bottom: 31%; }
 
     @media (min-width: $screen-lg-min) {
       display: none;
@@ -79,12 +75,16 @@
 
   &__logo {
     @include center-xy;
+    display: none;
     left: 25%;
     // position: absolute;
     // top: 23%;
     // left: 14%;
     height: auto;
     width: 18%;
+    overflow: hidden;
+
+    @media (min-width: $screen-lg-min) { display: block; }
   }
 
   &__body {
@@ -97,8 +97,8 @@
     @media (min-width: $screen-sm-min) { max-width: none; padding-bottom: 8%; }
 
     @media (min-width: $screen-lg-min) {
-      padding-top: 49.5vh;
-      padding-bottom: 6%;
+      padding-top: 50vh;
+      padding-bottom: 5.5%;
       // margin-left: 50%;
       margin-left: 50%;
 
@@ -140,6 +140,48 @@
   }
 
   &__link {
+    display: inline-block;
+    position: relative;
+    // opacity: 0;
+
+    // &:hover:after,
+    // &:focus:after {
+    //   transform: scale3d(1,1,1);
+    // }
+
+    // &:after {
+    //   content: '';
+    //   z-index: -1;
+    //   width: 100%;
+    //   bottom: 0.65rem;
+    //   left: 0;
+    //   position: absolute;
+    //   height: 2px;
+    //   background: $color-white;
+    //   transform: scale3d(0,1,1);
+    //   transform-origin: 0% 50%;
+    //   transition: transform 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    // }
+
     @media (min-width: $screen-lg-min) { cursor: none; }
+  }
+
+  &__border {
+    display: none;
+    transform: scaleX(0);
+    width: 100%;
+    bottom: 20%;
+    left: 0;
+    position: absolute;
+    height: 2px;
+    background: $color-white;
+    transform: scale3d(0,1,1);
+    pointer-events: none;
+
+    @media (min-width: $screen-lg-min) { display: block; }
+
+    &--dribbble {
+      bottom: 12%;
+    }
   }
 }

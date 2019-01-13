@@ -120,7 +120,7 @@ export default {
     },
 
     leaveNav() {
-      TweenMax.to(this.$refs.items, 0.3, { ease: Power1.easeIn , opacity: 0, yPercent: -80 })
+      TweenMax.to(this.$refs.items, 0.3, { ease: 'Power1.easeIn' , opacity: 0, y: '-130%' })
       this.$refs.img.forEach(img => img.leaveImage())
     },
 
@@ -129,11 +129,11 @@ export default {
         this.$refs.nav.style.display = 'block'
         this.$refs.imgs.style.display = 'block'
 
-        TweenMax.set(this.$refs.items, {opacity: 0, yPercent: -60})
+        TweenMax.set(this.$refs.items, {opacity: 0, y: '100%'})
         
         setTimeout(() => {
-          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Sine.easeIn, opacity: 1 }, 0.095)
-          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: Expo.easeOut, yPercent: 0 }, 0.095)
+          TweenMax.staggerTo(this.$refs.items, 0.5, { ease: 'Sine.easeIn', opacity: 1 }, .085)
+          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: 'Power2.easeOut', y: '0%' }, .085)
         }, this.deviceType === 'desktop' ? 550 : 450)
 
         if (this.deviceType === 'desktop') this.initMousemove()
@@ -142,8 +142,9 @@ export default {
       else {
         this.removeMousemove()
         TweenMax.to(this.$refs.items, 0.3, {
-          ease: Power1.easeIn ,
-          opacity: 0, yPercent: -80,
+          ease: 'Power1.easeIn',
+          opacity: 0, 
+          y: '-130%',
           onComplete: () => {
             this.$refs.nav.style.display = 'none'
             this.$refs.imgs.style.display = 'none'
@@ -156,6 +157,7 @@ export default {
       return new Promise(resolve => {
         if (about) {
           this.$refs.about.toggle(action)
+          document.body.classList.toggle('about-active')
         } else {
           this.toggleNav(action)
         }

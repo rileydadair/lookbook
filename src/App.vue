@@ -12,7 +12,7 @@
       :scrolledDetail="scrolledDetail"
       @disableScrollEl="disableScrollEl"
       @resetCursor="resetCursor" />
-    <CircleCursor v-if="deviceType === 'desktop'" ref="cursor" />
+    <CircleCursor v-if="deviceType === 'desktop'" ref="cursor" :menuActive="menuActive" />
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
     <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
@@ -42,7 +42,6 @@ export default {
     Menu,
     OverlayMobile,
     Overlay,
-
     About
   },
   data() {

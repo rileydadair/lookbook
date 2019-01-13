@@ -68,8 +68,8 @@
       &.is-active,
       &:focus,
       &:hover {
-        // .nav__title { opacity: 0; }
-        // .nav__title--stroke { opacity: 1; }
+        .nav__title { opacity: 0; }
+        .nav__title--stroke { opacity: 1; }
       }
     }
     

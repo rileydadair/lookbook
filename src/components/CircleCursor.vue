@@ -15,17 +15,36 @@
         <use xlink:href="#arrow"></use>
       </svg>
     </div>
+    
+    <template v-if="menuActive && this.$route.name === 'home'">
+      <div class="cursor__reveal">
+        <CursorReveal
+          img="/images/look_at_it.gif"
+          :totalImages="5"
+          ref="reveal"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
+import CursorReveal from './CursorReveal'
+
 export default {
   name: 'CircleCursor',
+  props: {
+    menuActive: Boolean
+  },
+  components: {
+    CursorReveal
+  },
   data() {
     return {
       hoverEls: [],
       isHovering: false,
-      stopPositionEl: false
+      stopPositionEl: false,
+      totalImages: 5
     }
   },
   mounted() {
@@ -112,6 +131,7 @@ export default {
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = true
       else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
       else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = e.target.dataset.arrow
+      else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.showImage()
       else if (e.target.dataset.lock) {
         this.setLockedPos(e.target)
         this.$refs.cursor.dataset.lock = e.target.dataset.lock
@@ -129,6 +149,7 @@ export default {
       if (e.target.hasAttribute('data-next')) this.$refs.cursor.dataset.next = false
       else if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
       else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = false
+      else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.hideImage()
       else if (e.target.dataset.lock) {
         this.stopPositionEl = false
         this.$refs.cursor.dataset.lock = false

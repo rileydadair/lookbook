@@ -143,7 +143,7 @@ export default {
       const skew = (current - this.current) * 0.25
 
       this.$refs.reveal.forEach(ref => {
-          TweenMax.to(ref.$el, 1.4, {
+        TweenMax.to(ref.$el, 1.4, {
           scaleX: scale,
           ease: 'Power2.easeOut'
         })
