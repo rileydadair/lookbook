@@ -12,7 +12,7 @@
           <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/crnacura" target="_blank" class="about__link">Mary Lou<span class="about__border" ref="border"></span></a></li>
         </ul>
         <p class="about__text"><span class="thin">Images from </span><a href="https://unsplash.com/" target="_blank" class="about__link">unsplash.com<span class="about__border" ref="border"></span></a></p>
-        <p class="about__text"><span class="thin">Have a design and need someone to bring it to life? <br/>Hit me up </span><a href="mailto:hello@rileyadair.com" class="about__link">hello@rileyadair.com<span class="about__border" ref="border"></span></a><span class="about__peace">✌</span></p>
+        <p class="about__text"><span class="thin">Have a design but need someone to bring it to life? <br/>Hit me up </span><a href="mailto:hello@rileyadair.com" class="about__link">hello@rileyadair.com<span class="about__border" ref="border"></span></a><span class="about__peace">✌</span></p>
       </div>
     </div>
     <svg class="about__logo js-hover" ref="logo" data-gif width="260px" height="466px" viewBox="0 0 260 466" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#FFFFFF">
