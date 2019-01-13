@@ -1,5 +1,5 @@
 <template>
-  <div class="cursor" ref="cursor" data-fill="false" data-next="false" data-lock="false">
+  <div class="cursor" ref="cursor" data-fill="false" data-lock="false" data-reveal="false" data-clickable="false" data-arrow="false">
     <div class="cursor__inner" ref="inner"></div>
     <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 6">
       <symbol id="arrow">
@@ -106,8 +106,9 @@ export default {
       this.removeEvents()
       this.hoverEls = document.querySelectorAll('.js-hover')
       this.$refs.cursor.dataset.fill = false
-      this.$refs.cursor.dataset.next = false
       this.$refs.cursor.dataset.lock = false
+      this.$refs.cursor.dataset.reveal = false
+      this.$refs.cursor.dataset.clickable = false
       this.initEvents()
     },
 

@@ -32,7 +32,7 @@ body {
 
   &.mobile,
   &.tablet {
-    background-color: $color-white;
+    background-color: $color-beige;
     position: fixed;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@ body {
   }
 
   &.detail {
-    background-color: $color-white;
+    background-color: $color-beige;
     color: #03070D;
 
     &.mobile,
@@ -52,7 +52,7 @@ body {
     }
 
     .main {
-      background-color: $color-white;
+      background-color: $color-beige;
       transition: all .4s;
     }
 
@@ -148,7 +148,7 @@ ul {
 
 // Hide transparency of mobile URL bar
 .top-overlay {
-  background-color: $color-white;
+  background-color: $color-beige;
   position: fixed;
   top: -400px;
   left: 0;

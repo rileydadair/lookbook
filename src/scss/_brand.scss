@@ -112,7 +112,7 @@ body.active-gallery {
     &:after {
       content: '';
       @include full-absolute;
-      background-color: $color-white;
+      background-color: $color-beige;
       transform: scaleX(1);
       transform-origin: left;
       transition: transform .4s cubic-bezier(.14,.64,.44,1), background-color .4s;
