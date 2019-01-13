@@ -10,6 +10,7 @@
         <HoverReveal v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
       </div>
       <About :deviceType="deviceType" ref="about" />
+      <div v-if="deviceType !== 'desktop'" class="about-cover"></div>
     </div>
   </div>
 </template>

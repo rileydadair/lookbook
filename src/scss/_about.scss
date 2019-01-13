@@ -1,21 +1,22 @@
+.about-cover {
+  background: linear-gradient($color-black-darker, 80%, rgba(0, 0, 0, 0));
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  z-index: 10;
+
+  @media (min-width: $screen-lg-min) { display: none; }
+}
+
 .about {
   position: relative;
   height: 100%;
   opacity: 0;
   display: none;
 
-  &:after {
-    content: '';
-    background: linear-gradient($color-black-darker, 80%, rgba(0, 0, 0, 0));
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 80px;
-    width: 100%;
-    z-index: 10;
-
-    @media (min-width: $screen-lg-min) { display: none; }
-  }
+  @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; }
 
   &__wrap {
     position: fixed;
@@ -36,8 +37,8 @@
   &__header {
     @include font-din;
     font-size: 12vw;
-    padding-top: 58%;
-    padding-bottom: 38%;
+    padding-top: 58.5%;
+    padding-bottom: 38.5%;
 
     @media (min-width: $screen-sm-min) { padding-top: 46%; padding-bottom: 31%; }
 
