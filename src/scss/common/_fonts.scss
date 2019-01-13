@@ -1,17 +1,19 @@
 @font-face {
-  font-family: 'AvenirNext-Demi';
+  font-family: 'AvenirNext';
   src: url('/fonts/AvenirNext-Demi.woff') format('woff'),
        url('/fonts/AvenirNext-Demi.ttf')  format('truetype');
+  font-weight: 600;
 }
 
 @font-face {
-  font-family: 'AvenirNext-Regular';
+  font-family: 'AvenirNext';
   src: url('/fonts/AvenirNext-Regular.woff') format('woff'),
        url('/fonts/AvenirNext-Regular.ttf')  format('truetype');
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Din1451';
+  font-family: 'Din';
   src: url('/fonts/Din1451.woff') format('woff'),
        url('/fonts/Din1451.ttf')  format('truetype');
 }

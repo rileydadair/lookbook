@@ -39,9 +39,9 @@ export default {
         random.sort(() => {
           return .5 - Math.random()
         })
-        TweenMax.staggerTo(random, .35, {
+        TweenMax.staggerTo(random, .2, {
           opacity: action === 'hide' ? 0 : 1,
-          ease: 'Power2.easeOut',
+          ease: action === 'hide' ? 'Power2.easeOut' : 'Power2.easeIn',
         }, .04, resolve)
       })
     }

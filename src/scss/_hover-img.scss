@@ -6,6 +6,7 @@
 
 .hover-imgs {
   backface-visibility: hidden;
+  display: none;
   position: absolute;
   top: 50%;
   left: 15.4%;
@@ -21,8 +22,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  opacity: 0;
-  overflow-y: hidden;  
+  opacity: 0; 
 
   &__inner,
   &__img {

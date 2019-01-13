@@ -2,7 +2,7 @@
   <div class="brand-m">
     <div class="brand-m__hero">
       <h1 class="brand-m__title">{{ item.title }}</h1>
-      <p class="brand-m__description brand-m__description--hero" ref="description">{{ item.description }}</p>
+      <p class="brand-m__description brand-m__description--hero thin" ref="description">{{ item.description }}</p>
     </div>
     <div class="brand-m__section">
       <template v-for="(image, index) in item.detail_images">
@@ -13,7 +13,7 @@
       <template v-if="nextSlug">
         <router-link :to="{ name: 'detail', params: { slug: nextSlug } }" class="brand-m__link" :aria-label="nextTitle">
           <h2 class="brand-m__title">{{ nextTitle }}</h2>
-          <p class="brand-m__description">Next lookbook</p>
+          <p class="brand-m__description thin">Next lookbook</p>
         </router-link>
       </template>
   </div>

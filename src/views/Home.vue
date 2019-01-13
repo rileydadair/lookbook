@@ -179,7 +179,7 @@ import Scroll from '@/components/Scroll'
         ])
           .then(() => slider.toggleEvents())
 
-        if (!this.scrolledHome && e.type === 'wheel') {
+        if (!this.scrolledHome && e.type === 'wheel' || !this.scrolledHome && e.type.includes('swipe')) {
           this.$refs.scroll.toggle('hide', false)
           setTimeout(() => this.$emit('disableScrollEl', 'scrolledHome'), 800)
         }

@@ -85,8 +85,8 @@ body.active-gallery {
   &__text {
     @include center-x;
     backface-visibility: hidden;
-    font-family: $font-avenir-regular;
-    letter-spacing: 0.3px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
     top: 58.5%;
     transform: translate3d(-65%, 0%, 0);
     transition: transform .4s cubic-bezier(.14,.64,.44,1);
@@ -119,7 +119,6 @@ body.active-gallery {
 
   &__next-part {
     display: inline-block;
-    // opacity: 0;
   }
 }
 

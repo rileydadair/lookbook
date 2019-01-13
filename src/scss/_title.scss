@@ -1,10 +1,8 @@
 .title {
-  // z-index: $zIndex-title;
 
   &__link {
     @include center-xy;
     @include font-din;
-    // cursor: pointer;
     font-size: 14vw;
     line-height: 0.9;
     z-index: 0;

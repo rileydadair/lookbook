@@ -33,9 +33,8 @@
   transform: translate3d(-50%, -50%, 0);
 }
 
-// Fonts
 @mixin font-din {
-  font-family: $font-din;
+  font-family: 'Din';
   font-weight: 400;
   text-transform: uppercase;
 }
