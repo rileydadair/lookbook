@@ -16,7 +16,7 @@
   opacity: 0;
   display: none;
 
-  @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+  @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; position: relative; }
 
   &__wrap {
     position: fixed;
@@ -26,12 +26,12 @@
     padding: 0 2.6rem;
   
     color: #fff;
+
+    @media (max-width: $screen-md-max) { overflow-y: scroll; -webkit-overflow-scrolling: touch; position: relative; }
   
     @media (min-width: $screen-sm-min) { padding: 0 5rem; }
 
-    @media (min-width: $screen-lg-min) {
-      padding: 0;
-    }
+    @media (min-width: $screen-lg-min) { padding: 0; }
   }
 
   &__header {
