@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link js-hover" :class="{ 'is-active': active }" ref="title" event="" v-on:click.native="route" :tabindex="tabIndex" :aria-label="title">
+  <router-link :to="{ name: 'detail', params: { slug: slug } }" class="title__link js-hover" :class="[titleIndex === index ? 'is-clicked' : '', { 'is-active': active }]" ref="title" :tabindex="tabIndex" :aria-label="title">
     <span class="title__wrap">
       <span class="title__part" v-for="(part, index) in splitTitle" :key="`title-part-${index}`" ref="titleParts">{{ part }}</span>
     </span>
@@ -16,6 +16,8 @@ import TweenMax from 'gsap'
 export default {
   name: 'Title',
   props: {
+    index: Number,
+    titleIndex: Number,
     titleVal: String,
     slug: String
   },

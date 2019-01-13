@@ -92,7 +92,7 @@ export default {
       })
     },
 
-    // kind of distracting
+    // Distracting
     scaleLogo(vars) {
       const current = Math.round(vars.current)
       const scale = ((current - this.current) / 70) + 1
@@ -114,7 +114,6 @@ export default {
       const bodydelay = window.innerWidth > 1199 ? .55 : .45
 
       if (action === 'show') {
-        // const aboutEl = document.querySelector('.about')
         setTimeout(() => this.$refs.about.scrollTo(0, 0), 0)
 
         this.$refs.about.style.display = 'block'
@@ -131,7 +130,7 @@ export default {
           TweenMax.staggerTo(this.paths, .8, {
             y: '0%',
             delay: delay,
-            ease: 'Power2.easeOut'
+            ease: 'Power3.easeOut'
           }, .075)
 
         TweenMax.to(this.$refs.body, .7, {

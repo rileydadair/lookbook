@@ -42,16 +42,16 @@ export default {
           }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.inner, .9, {
-          ease: Expo.easeOut,
+      .add(new TweenMax(this.$refs.inner, .8, {
+          ease: 'Power3.easeOut',
           startAt: {opacity: 0, y: '50%', rotation: -15, scale:0},
           y: '0%',
           rotation: 0,
           opacity: 1,
           scale: 1
       }), 'begin')
-      .add(new TweenMax(this.$refs.img, .9, {
-          ease: Expo.easeOut,
+      .add(new TweenMax(this.$refs.img, .8, {
+          ease: 'Power3.easeOut',
           startAt: {rotation: 15, scale: 2},
           rotation: 0,
           scale: 1

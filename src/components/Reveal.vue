@@ -31,38 +31,12 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log(this.isPortrait)
-  },
-  // mounted() {
-  //   if (States.deviceType === 'desktop') {
-  //     this.$refs.inner.addEventListener('mouseover', this.onHoverInner)
-  //     this.$refs.inner.addEventListener('mouseout', this.offHoverInner)
-  //   }
-  // },
-  // destroyed() {
-  //   if (States.deviceType === 'desktop') {
-  //     this.$refs.inner.removeEventListener('mouseover', this.onHoverInner)
-  //     this.$refs.inner.removeEventListener('mouseout', this.offHoverInner)
-  //   }
-  // },
   computed: {
     className() {
       return States.deviceType !== 'desktop' ? 'reveal-m' : 'reveal'
     }
   },
   methods: {
-    // onHoverInner(e) {
-    //   console.log('over')
-    //   // console.dir(e);
-    //   // TweenMax.to(this.$refs.img, .6, { scale: 1.1, ease: 'Power2.easeOut' })
-    // },
-
-    // offHoverInner(e) {
-    //   console.log('out');
-    //   // TweenMax.to(this.$refs.img, .6, { scale: 1, ease: 'Power2.easeOut' })
-    // },
-
     onPhotoClick(e) {
       if (!this.isClickable) return
       this.$emit('onPhotoClick', e, this.index)

@@ -25,7 +25,7 @@
   &[data-fill="true"],
   &[data-reveal="true"][data-clickable="true"] {
     .cursor__inner {
-      background-color: #fff;
+      background-color: $color-white;
       height: 6rem;
       width: 6rem;
 
@@ -33,6 +33,19 @@
         height: 4.48vw;
         width: 4.48vw;
       }
+    }
+  }
+
+  &[data-clickable="true"] {
+    .cursor__inner {
+      transition: height .3s .2s, width .3s .2s, background-color .3s .2s;
+    }
+  }
+
+  &[data-clickable="true"],
+  &[data-fill="true"] {
+    .cursor__inner {
+      transition: height .3s, width .3s, background-color .3s;
     }
   }
 
@@ -77,7 +90,7 @@
     backface-visibility: hidden;
     @include center-xy;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 2px solid $color-white;
     height: 4rem;
     width: 4rem;
     transition: height .3s, width .3s, background-color .3s;
@@ -114,8 +127,6 @@
     position: fixed;
     top: -100px;
     left: -60px;
-    // top: 0;
-    // left: 60px;
     z-index: 999;
   }
 }

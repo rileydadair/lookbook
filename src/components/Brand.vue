@@ -84,9 +84,7 @@ export default {
       }
     },
     isClickable: function(boolean) {
-      console.log(boolean)
-      this.cursor.dataset.clickable = boolean
-      // if (!boolean) this.cursor.dataset.reveal = false
+      setTimeout(() => this.cursor.dataset.clickable = boolean, 0)
     }
   },
   mounted() {
@@ -154,8 +152,6 @@ export default {
         skewType: 'simple',
         ease: 'Power2.easeOut'
       })
-
-      // console.log(Math.abs(current - this.current))
 
       if (Math.abs(current - this.current) > 1) {
         this.isClickable = false

@@ -7,7 +7,7 @@
         </div>
       </nav>
       <div class="hover-imgs" ref="imgs">
-        <HoverReveal v-for="(item, index) in itemsList" :class="`hover-reveal--${index + 1}`" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
+        <HoverReveal v-for="(item, index) in itemsList" :key="`hover-img-${index}`" :img="item.main_image_desktop" ref="img" />
       </div>
       <About :deviceType="deviceType" ref="about" />
       <div class="about-cover"></div>
@@ -41,6 +41,7 @@ export default {
         duration: this.deviceType === 'desktop' ? 0.95 : 0.85,
         ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
       },
+      canHover: true,
       deviceType: States.deviceType,
       headerBtn: {},
       itemsList: this.items,
@@ -52,17 +53,20 @@ export default {
   },
   methods: {
     showHoverImg(index) {
-      if (this.menuActive) this.$refs.img[index].showImage()
+      if (this.canHover) this.$refs.img[index].showImage()
     },
 
     hideHoverImg(index) {
-      if (this.menuActive) this.$refs.img[index].hideImage()
+      if (this.canHover) this.$refs.img[index].hideImage()
     },
 
     route(slug, index) { // eslint-disable-line
+      this.canHover = false
+
       if (this.$refs.links[index].$el.classList.contains('router-link-exact-active')) {
         this.toggleMenu('hide').then(() => this.hide())
         this.$refs.img.forEach(img => img.leaveImage())
+        this.$emit('toggleMenuState')
       } 
 
       else if (this.$route.name === 'detail') {
@@ -75,8 +79,6 @@ export default {
         this.$root.$emit('hideCursor')
         this.$root.$emit('toggleOverlay', 'show', () => this.$router.push(`/${slug}`))
       }
-
-      this.$emit('toggleMenuState')
     },
 
     hide() {
@@ -121,20 +123,21 @@ export default {
     },
 
     leaveNav() {
-      TweenMax.to(this.$refs.items, 0.3, { ease: 'Power1.easeIn' , opacity: 0, y: '-130%' })
       this.$refs.img.forEach(img => img.leaveImage())
+      TweenMax.to(this.$refs.items, 0.3, { ease: 'Power1.easeIn' , opacity: 0, y: '-130%' })
     },
 
     toggleNav(action) {
       if (action === 'show') {
+        this.canHover = true
         this.$refs.nav.style.display = 'block'
         this.$refs.imgs.style.display = 'block'
 
         TweenMax.set(this.$refs.items, {opacity: 0, y: '100%'})
         
         setTimeout(() => {
-          TweenMax.staggerTo(this.$refs.items, 0.5, { ease: 'Sine.easeIn', opacity: 1 }, .085)
-          TweenMax.staggerTo(this.$refs.items, 0.7, { ease: 'Power2.easeOut', y: '0%' }, .085)
+          TweenMax.staggerTo(this.$refs.items, 0.6, { ease: 'Sine.easeIn', opacity: 1 }, .085)
+          TweenMax.staggerTo(this.$refs.items, 0.8, { ease: 'Power3.easeOut', y: '0%' }, .085)
         }, this.deviceType === 'desktop' ? 550 : 450)
 
         if (this.deviceType === 'desktop') this.initMousemove()
