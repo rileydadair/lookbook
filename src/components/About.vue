@@ -114,6 +114,9 @@ export default {
       const bodydelay = window.innerWidth > 1199 ? .55 : .45
 
       if (action === 'show') {
+        // const aboutEl = document.querySelector('.about')
+        setTimeout(() => this.$refs.about.scrollTo(0, 0), 0)
+
         this.$refs.about.style.display = 'block'
         TweenMax.set(this.$refs.about, {opacity: 1, y: '0%'})
         TweenMax.set(this.paths, {opacity: 0, y: '200%'})
@@ -142,13 +145,16 @@ export default {
           delay: window.innerWidth > 1199 ? delay + .35 : delay,
           ease: 'Power2.easeOut',
           onComplete(about) {
-            if (!about.smoothInit) {
-              about.smooth.init();
-              about.smoothInit = true
-            } else {
-              about.smooth.on()
+            if (window.innerWidth > 1199) {
+              if (!about.smoothInit) {
+                about.smooth.init();
+                about.smoothInit = true
+              } else {
+                about.smooth.on()
+              }
+
+              about.initHoverEvents()
             }
-            about.initHoverEvents()
           },
           onCompleteParams: [this]
         })
@@ -160,13 +166,15 @@ export default {
           y: '-20%',
           ease: 'Power1.easeIn',
           onComplete: (about) => {
-            this.$refs.about.style.display = 'none'
-            about.smooth.off()
-            about.smooth.vars.current = 0
-            about.smooth.vars.last = 0
-            about.smooth.vars.target = 0
-            this.$refs.wrap.style.transform = 'translate3d(0px, 0px, 0px)'
-            about.removeHoverEvents()
+            about.$refs.about.style.display = 'none'
+            if (window.innerWidth > 1199) {
+              about.smooth.off()
+              about.smooth.vars.current = 0
+              about.smooth.vars.last = 0
+              about.smooth.vars.target = 0
+              about.$refs.wrap.style.transform = 'translate3d(0px, 0px, 0px)'
+              about.removeHoverEvents()
+            }
             // this.current = 0
             // if (window.innerWidth > 1200) {
             //   TweenMax.set(this.$refs.logo, { scaleY: 1 })
