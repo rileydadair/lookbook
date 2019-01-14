@@ -113,9 +113,11 @@ import Scroll from '@/components/Scroll'
       }
 
       this.$refs.mainSlides[this.previousIndex].kill()
-      this.$refs.sectionSlides[this.previousIndex].kill()
       this.$refs.mainSlides[this.currentIndex].kill()
-      this.$refs.sectionSlides[this.currentIndex].kill()
+      if (this.deviceType === 'desktop') {
+        this.$refs.sectionSlides[this.previousIndex].kill()
+        this.$refs.sectionSlides[this.currentIndex].kill()
+      }
 
       setTimeout(() => {
         function handleTitle(component) {
