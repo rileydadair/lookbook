@@ -86,12 +86,6 @@ body {
     }
   }
 
-  &.active-menu {
-    .header {
-      // z-index: $zIndex-menu;
-    }
-  }
-
   .header,
   .progress,
   .controls {
@@ -195,7 +189,9 @@ ul {
   display: none;
 }
 
-// replace this everywhere
-.thin {
-  font-weight: 400;
+::selection {
+  background: transparent;
+}
+::-moz-selection {
+  background: transparent;
 }

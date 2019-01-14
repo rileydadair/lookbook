@@ -182,7 +182,7 @@ export default {
       }
 
       else if (el.dataset.lock === 'back') {
-        elX = Math.abs(elX + 7.95)
+        elX = Math.abs(elX + 7.85)
         elY = Math.abs(elY - 8.35)
       }
 

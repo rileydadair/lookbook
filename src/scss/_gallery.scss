@@ -177,6 +177,7 @@
   top: 40px;
   left: 36px;
   opacity: 0;
+  pointer-events: none;
   z-index: 200;
 
   @media (min-width: $screen-lg-min) { left: 3.2%; top: 4vw; }
@@ -189,11 +190,12 @@
     width: 30px;
     width: 60px;
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 
   &__text {
     display: inline-block;
     padding: 13px;
+    pointer-events: auto;
   }
 }

@@ -69,6 +69,9 @@ export default {
       slider: {}
     }
   },
+  // mounted() {
+  //   window.addEventListener('keydown', this.onBackClick)
+  // },
   methods: {
     init(index) {
       this.currentIndex = index
@@ -101,8 +104,13 @@ export default {
           }, 400)
         }
       })
+
+      window.addEventListener('keydown', this.onKeydown)
     },
 
+    onKeydown(e) {
+      if (e.keyCode === 27) this.onBackClick(e)
+    },
 
     onBackClick() {
       document.body.classList.remove('active-arrows')
@@ -125,6 +133,8 @@ export default {
           this.$refs.supportSlides.forEach(el => el.reset())
           this.$refs.galleryTitles.forEach(el => el.reset())
         })
+      
+      window.removeEventListener('keydown', this.onKeydown)
     },
 
     onSliderMount(slider) {
