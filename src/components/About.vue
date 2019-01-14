@@ -3,7 +3,7 @@
     <div class="about__wrap" ref="wrap">
       <div class="about__body" ref="body">
         <h1 class="about__header">Just Look At It</h1>
-        <p class="about__text about__text--main">Lookbook is a creative outlet - <br />an exploration of interactions and animations. Inspired by prototypes on <a href="https://dribbble.com/" class="about__link">dribbble.com<span class="about__border about__border--dribbble" ref="border"></span></a></p>
+        <p class="about__text about__text--main">Lookbook is a creative outlet - <br />an exploration of interactions and animations. Inspired by prototypes on <a href="https://dribbble.com/" target="_blank" class="about__link">dribbble.com<span class="about__border about__border--dribbble" ref="border"></span></a></p>
         <ul class="about__list">
           <li class="about__list-item"><span class="thin">Nike SB Lookbook by </span><a href="https://dribbble.com/shots/4884140-Nike-SB-Lookbook" target="_blank" class="about__link">Craig Gittins<span class="about__border" ref="border"></span></a></li>
           <li class="about__list-item"><span class="thin">Max Colt VFX by </span><a href="https://dribbble.com/shots/5449199-Maxcolt-VFX-Producer" target="_blank" class="about__link">Advanced Group<span class="about__border" ref="border"></span></a></li>
