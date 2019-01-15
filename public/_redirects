@@ -1,2 +1,3 @@
 # Redirect domain aliases to primary domain
 http://www.lookbook.rileyadair.com/* http://lookbook.rileyadair.com/:splat 301!
+https://www.lookbook.rileyadair.com/* https://lookbook.rileyadair.com/:splat 301!
