@@ -195,53 +195,9 @@ export default {
       })
     },
 
-    resetClickedPhoto() {
-      // Refactor duplicate code
-      setTimeout(() => {
-        const elRect = this.revealInners[this.clickedIndex].getBoundingClientRect()
-        const isPortrait = this.revealInners[this.clickedIndex].classList.contains('is-portrait')
-        const portraitWidth = .38
-        const landscapeWidth = .56
-        const elWidth = window.innerWidth * (isPortrait ? portraitWidth : landscapeWidth)
-        const elHeight= window.innerHeight * .66
-        const elCenterX = (window.innerWidth / 2) - elRect.x - (elWidth / 2)
-        const elCenterY = (window.innerHeight / 2) - elRect.y - (elHeight / 2)
-  
-        const tween = {
-          onStart: () => {
-            this.revealInners[this.clickedIndex].style.opacity = 0
-            this.revealInners[this.clickedIndex].style.zIndex = -1
-          },
-          onComplete: () => {
-            this.revealInners[this.clickedIndex].style = "opacity: 0"
-          },
-          x: `${elCenterX}px`,
-          width: `${elWidth}px`,
-          // zIndex: 999,
-          ease: this.photoEase
-        }
-  
-        if (isPortrait) {
-          tween['y'] = '0%'
-          tween['top'] = '0%'
-          tween['height'] = '100vh'
-        } else {
-          tween['y'] = `${elCenterY}px`
-          tween['height'] = '66vh'
-        }
-  
-        TweenMax.to(this.revealInners[this.clickedIndex], .8, tween)
-      })
-    },
-
-    onPhotoClick(e, index) {
-      this.smooth.off()
-      this.revealInners[index].style = ""
-
-      // Set flag of can click current scroll is less than certain amount
-
-      const elRect = e.currentTarget.getBoundingClientRect()
-      const isPortrait = e.currentTarget.classList.contains('is-portrait')
+    getClickedTween(el, reset) {
+      const elRect = el.getBoundingClientRect()
+      const isPortrait = el.classList.contains('is-portrait')
       const portraitWidth = .38
       const landscapeWidth = .56
       const elWidth = window.innerWidth * (isPortrait ? portraitWidth : landscapeWidth)
@@ -249,21 +205,28 @@ export default {
       const elCenterX = (window.innerWidth / 2) - elRect.x - (elWidth / 2)
       const elCenterY = (window.innerHeight / 2) - elRect.y - (elHeight / 2)
 
-      this.revealInners.forEach((el, i) => {
-        if (i !== index) TweenMax.to(el, .4, { opacity: 0 })
-      })
-
       const tween = {
-        onStart: () => {
-          this.revealInners[index].style.zIndex = 999
-        },
         x: `${elCenterX}px`,
         width: `${elWidth}px`,
         ease: this.photoEase
       }
 
+      if (reset) {
+        tween['onStart'] = () => {
+          el.style.opacity = 0
+          el.style.zIndex = -1
+        }
+        tween['onComplete'] = () => {
+          el.style = "opacity: 0"
+        }
+      } else {
+        tween['onStart'] = () => {
+          el.style.zIndex = 999
+        }
+      }
+
       if (isPortrait) {
-        tween['y'] = '0%'
+        tween['y'] = reset && this.clickedIndex === 0 ? '-50%' : '0%'
         tween['top'] = '0%'
         tween['height'] = '100vh'
       } else {
@@ -271,12 +234,29 @@ export default {
         tween['height'] = '66vh'
       }
 
-      TweenMax.to(e.currentTarget, .8, tween)
+      return tween
+    },
+
+    onPhotoClick(e, index) {
+      this.smooth.off()
+      e.currentTarget.style = ""
+
+      this.revealInners.forEach((el, i) => {
+        if (i !== index) TweenMax.to(el, .4, { opacity: 0 })
+      })
+
+      TweenMax.to(e.currentTarget, .8, this.getClickedTween(e.currentTarget))
 
       this.$refs.gallery.init(index)
       this.clickedIndex = index
       document.body.classList.add('active-gallery')
       document.body.classList.add('active-arrows')
+    },
+
+    resetClickedPhoto() {
+      setTimeout(() => {
+        TweenMax.to(this.revealInners[this.clickedIndex], .8, this.getClickedTween(this.revealInners[this.clickedIndex], true))
+      })
     },
 
     bgImage(image) {
