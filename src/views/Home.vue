@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.3 10.6">
+      <symbol id="chevron">
+        <polyline points="0.7 9.9 9.1 1.4 17.6 9.9" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/>
+      </symbol>
+    </svg>
     <SlideMaster
       className="slider--main"
       :swipe="swipe"
@@ -15,19 +20,17 @@
           ref="mainSlides"
         />
       </template>
-      <!-- <span slot="prevButton" class="controls__item controls__item--minus">-</span>
-      <span slot="nextButton" class="controls__item controls__item--plus">+</span> -->
-      <span slot="prevButton" class="controls__item js-hover" data-lock="controls">
+      <span slot="prevButton" class="controls__item js-hover" data-lock="controls" data-lock-prev>
         <span class="controls__text controls__text--prev js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in prevSplit" :key="`prev-part-${index}`" ref="prevParts">{{ part }}</span>
         </span>
-        <span class="controls__plus">+</span>
+        <svg class="controls__arrow controls__arrow--prev"><use xlink:href="#chevron"></use></svg>
       </span>
       <span slot="nextButton" class="controls__item js-hover" data-lock="controls">
         <span class="controls__text controls__text--next js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in nextSplit" :key="`next-part-${index}`" ref="nextParts">{{ part }}</span>
         </span>
-        <span class="controls__plus">+</span>
+        <svg class="controls__arrow controls__arrow--next"><use xlink:href="#chevron"></use></svg>
       </span>
     </SlideMaster>
 

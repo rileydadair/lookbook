@@ -16,7 +16,6 @@
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
     <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
-    <!-- <About :deviceType="deviceType" ref="about" /> -->
   </div>
 </template>
 

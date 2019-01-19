@@ -1,19 +1,14 @@
 <template>
   <div class="cursor" ref="cursor" data-fill="false" data-lock="false" data-reveal="false" data-clickable="false" data-arrow="false">
     <div class="cursor__inner" ref="inner"></div>
-    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 6">
+    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 15.6">
       <symbol id="arrow">
-        <title>arrow</title>
-        <polygon points="24.2 5 19 5 16.5 0 24.2 5 19 5 16.5 9.9 24.2 5" style="fill:#fff" /><line x1="21" y1="5" y2="5" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="29" y1="7.8" y2="7.8" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/><polyline points="21.9 0.7 29 7.8 21.9 14.9" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/>
       </symbol>
     </svg>
     <div class="cursor__arrows">
-      <svg class="arrow arrow--prev">
-        <use xlink:href="#arrow"></use>
-      </svg>
-      <svg class="arrow arrow--next">
-        <use xlink:href="#arrow"></use>
-      </svg>
+      <svg class="arrow arrow--prev"><use xlink:href="#arrow"></use></svg>
+      <svg class="arrow arrow--next"><use xlink:href="#arrow"></use></svg>
     </div>
     
     <template v-if="menuActive && this.$route.name === 'home'">
@@ -170,7 +165,6 @@ export default {
       let elX = (elRect.height * 0.5) + elRect.x
       let elY = (elRect.width * 0.5) + elRect.y
 
-      // Switch Statement
       if (el.dataset.lock === 'home') {
         elX = Math.abs(elX + 26.25)
         elY = Math.abs(elY - 26.85)
@@ -187,8 +181,13 @@ export default {
       }
 
       else if (el.dataset.lock === 'controls') {
-        elX = Math.abs(elX - 3.65)
-        elY = Math.abs(elY + 1.3)
+        if (el.hasAttribute('data-lock-prev')) {
+          elX = Math.abs(elX - 10.2)
+          elY = Math.abs(elY + 11.1)
+        } else {
+          elX = Math.abs(elX - 10.2)
+          elY = Math.abs(elY + 8)
+        }
 
         this.toggleControlsText(el, 'show')
       }
