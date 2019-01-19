@@ -148,8 +148,6 @@ export default {
       })
       TweenMax.to(this.$refs.brandTitleWrap, 1.4, {
         skewX: skew,
-        force3D: true,
-        skewType: 'simple',
         ease: 'Power2.easeOut'
       })
 

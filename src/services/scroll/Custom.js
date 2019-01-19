@@ -1,5 +1,6 @@
 /* eslint-disable */
 import Smooth from './Smooth'
+import TweenMax from 'gsap'
 
 class Custom extends Smooth {
   constructor(opt) {
@@ -56,7 +57,7 @@ class Custom extends Smooth {
   run() {
     this.dom.section.style[this.prefix] = this.getTransform(this.vars.current * -1)
     // Brand Title
-    this.dom.title.style[this.prefix] = this.getTransform(this.vars.current * -.5)
+    TweenMax.to(this.dom.title, .8, { x: `${this.vars.current * -.5}px` })
     this.inViewport()
     super.run()
   }
