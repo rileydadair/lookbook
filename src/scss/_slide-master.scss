@@ -46,6 +46,13 @@
   &__btn {
     display: block;
     margin: 0 auto;
+
+    @media (min-width: $screen-lg-min) {
+      position: relative;
+      padding: 30px 20px;
+      width: 58px;
+      height: 77px;
+    }
   }
 
   &__item {
@@ -54,7 +61,12 @@
     position: relative;
 
     padding: 24px 26px;
-    @media (min-width: $screen-lg-min) { padding: 30px 20px; }
+    @media (min-width: $screen-lg-min) {
+      @include center-xy;
+      padding: 30px 20px;
+      width: 58px;
+      height: 77px;
+    }
   }
 
   &__text {
