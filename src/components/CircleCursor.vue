@@ -182,15 +182,20 @@ export default {
 
       else if (el.dataset.lock === 'controls') {
         if (el.hasAttribute('data-lock-prev')) {
-          elX = Math.abs(elX - 10.15)
+          console.log('prev')
+          elX = Math.abs(elX - 9.8)
           elY = Math.abs(elY + 11.1)
         } else {
-          elX = Math.abs(elX - 10.2)
+          console.log('next')
+          elX = Math.abs(elX - 9.8)
           elY = Math.abs(elY + 8)
         }
 
         this.toggleControlsText(el, 'show')
       }
+
+      console.dir(elX)
+      console.dir(elY)
 
       setTimeout(() => {
         TweenMax.to(this.$refs.cursor, 0.8, {
