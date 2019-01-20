@@ -150,7 +150,7 @@ export default {
       Promise.all([
         this.$refs.gallerySlides[currentIndex].hide(direction, true).then(() => {
           this.$refs.gallerySlides[nextIndex].show(direction)
-          this.$refs.supportSlides[currentIndex].hide(direction)
+          this.$refs.supportSlides[currentIndex].hide(direction, false, true)
           this.$refs.supportSlides[nextIndex].show(direction)
         }),
         this.$refs.galleryTitles[currentIndex].hide().then(() => this.$refs.galleryTitles[nextIndex].show())

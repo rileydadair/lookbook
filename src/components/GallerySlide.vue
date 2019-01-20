@@ -50,17 +50,17 @@ export default {
       TweenMax.set(this.$refs.img, { x: '0%', scale: 1 })
     },
 
-    hide(direction, faster) {
-      return this.toggle('hide', direction, faster)
+    hide(direction, faster, still) {
+      return this.toggle('hide', direction, faster, still)
     },
 
-    show(direction, faster) {
+    show(direction, faster, still) {
       setTimeout(() => this.$refs.slide.style.zIndex = 100)
 
-      return this.toggle('show', direction, faster)
+      return this.toggle('show', direction, faster, still)
     },
 
-    toggle(action, direction, faster) {
+    toggle(action, direction, faster, still) {
       return new Promise(resolve => {
         if (action === 'show') {
           TweenMax.to(this.$refs.wrap, faster ? this.animation.hideDuration : this.animation.duration, {
@@ -68,17 +68,16 @@ export default {
             startAt: { x: direction === 'next' ? '-100%' : '100%' },
             x: '0%'
           })
-        } else {
+        } else if (action === 'hide' && !still) {
           TweenMax.to(this.$refs.wrap, faster ? this.animation.hideDuration : this.animation.duration, {
             ease: this.animation.ease,
             x: direction === 'next' ? '100%' : '-100%'
           })
         }
 
-        TweenMax.to(this.$refs.img, faster ? this.animation.hideDuration : this.animation.duration, {
+        const tween = {
           ease: this.animation.ease,
           startAt: action === 'hide' ? {} : { x: direction === 'next' ? '100%' : '-100%'},
-          x: action === 'hide' ? direction === 'next' ? '-100%' : '100%' : '0%',
           onStart: () => {
             this.$refs.img.style.transformOrigin = action === 'hide' ?
               direction === 'next' ? '100% 50%' : '0% 50%' :
@@ -89,7 +88,15 @@ export default {
             this.$refs.slide.style.zIndex = 99
             this.$refs.slide.style.opacity = action === 'hide' ? 0 : 1
           }
-        })
+        }
+
+        if (!still) {
+          tween['x'] = action === 'hide' ? direction === 'next' ? '-100%' : '100%' : '0%'
+        } else {
+          tween['x'] = '0%'
+        }
+
+        TweenMax.to(this.$refs.img, faster ? this.animation.hideDuration : this.animation.duration, tween)
 
         TweenMax.to(this.$refs.img, (faster ? this.animation.hideDuration : this.animation.duration + .2), {
           ease: this.animation.ease,
