@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import TweenMax from 'gsap'
 import CursorReveal from './CursorReveal'
 
 export default {
@@ -200,7 +201,6 @@ export default {
     },
 
     toggleControlsText(el, action) {
-      const text = el.querySelector('.js-controls-text')
       const parts = el.querySelectorAll('.js-controls-part')
       
       TweenMax.staggerFromTo(parts, 0.5, {

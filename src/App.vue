@@ -16,6 +16,11 @@
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
     <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
+    <template v-if="this.$route.name === 'detail' && deviceType === 'desktop'">
+      <div class="mobile-message">
+        <p class="mobile-message__text">Please view on a mobile device.</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -30,8 +35,6 @@ import Menu from './components/Menu'
 import OverlayMobile from './components/OverlayMobile'
 import Overlay from './components/Overlay'
 
-import About from './components/About'
-
 export default {
   name: 'app',
   components: {
@@ -40,8 +43,7 @@ export default {
     Header, // eslint-disable-line
     Menu,
     OverlayMobile,
-    Overlay,
-    About
+    Overlay
   },
   data() {
     return {
@@ -96,7 +98,7 @@ export default {
     },
   },
   watch: {
-    '$route' (to, from) {
+    '$route' (to, from) { // eslint-disable-line
       document.body.classList.remove('enter')
       this.$refs.header.resetAll()
 

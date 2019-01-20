@@ -151,25 +151,6 @@ ul {
   z-index: 999;
 }
 
-// Intro animations
-// .home {
-  // .header,
-  // .progress,
-  // .controls {
-  //   opacity: 0;
-  //   transition: opacity 0s;
-  // }
-
-  // &.enter {
-  //   .header,
-  //   .progress,
-  //   .controls {
-  //     opacity: 1;
-  //     transition: opacity 1.2s;
-  //   }
-  // }
-// }
-
 .gutters {
   padding: 0 33px;
   padding: 0 3.3rem;
@@ -191,6 +172,26 @@ ul {
 
 .thin {
   font-weight: 400;
+}
+
+.mobile-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-beige;
+  color: $color-white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 999;
+
+  &__text {
+    mix-blend-mode: exclusion;
+  }
+
+  @media (min-width: $screen-sm-min) { display: none; }
 }
 
 ::selection {
