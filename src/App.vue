@@ -17,8 +17,13 @@
     <Overlay v-else :active="activeOverlay" />
     <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
     <template v-if="this.$route.name === 'detail' && deviceType === 'desktop'">
-      <div class="mobile-message">
-        <p class="mobile-message__text">Please view on a mobile device.</p>
+      <div class="message message--mobile">
+        <p class="message__text message__text--mobile">Please view on a mobile device.</p>
+      </div>
+    </template>
+    <template v-if="isIE">
+      <div class="message">
+        <p class="message__text">Please view this site in a modern browser.</p>
       </div>
     </template>
   </div>
@@ -51,6 +56,7 @@ export default {
       items: items,
       initialMount: false,
       initialLoad: false,
+      isIE: States.isIE,
       menuActive: false,
       progress: 0,
       transitioning: false,

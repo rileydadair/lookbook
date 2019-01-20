@@ -25,8 +25,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   @media (min-width: $screen-lg-min) { 
-    &>* {
-      cursor: none!important;
+    & > * {
+      cursor: none;
     }
   }
 
@@ -174,11 +174,11 @@ ul {
   font-weight: 400;
 }
 
-.mobile-message {
+.message {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $color-beige;
+  background-color: $color-black;
   color: $color-white;
   position: fixed;
   top: 0;
@@ -187,11 +187,13 @@ ul {
   width: 100%;
   z-index: 999;
 
-  &__text {
-    mix-blend-mode: exclusion;
+  &--mobile {
+    background-color: $color-beige;
+
+    @media (min-width: $screen-sm-min) { display: none; }
   }
 
-  @media (min-width: $screen-sm-min) { display: none; }
+  &__text--mobile { mix-blend-mode: exclusion; }
 }
 
 ::selection {
