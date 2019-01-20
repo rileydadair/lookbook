@@ -59,8 +59,8 @@
     color: $color-white;
     display: inline-block;
     position: relative;
-
     padding: 24px 26px;
+    
     @media (min-width: $screen-lg-min) {
       @include center-xy;
       padding: 30px 20px;

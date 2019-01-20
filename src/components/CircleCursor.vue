@@ -183,11 +183,11 @@ export default {
       else if (el.dataset.lock === 'controls') {
         if (el.hasAttribute('data-lock-prev')) {
           console.log('prev')
-          elX = Math.abs(elX - 9.8)
+          elX = Math.abs(elX - 9.65)
           elY = Math.abs(elY + 11.1)
         } else {
           console.log('next')
-          elX = Math.abs(elX - 9.8)
+          elX = Math.abs(elX - 9.65)
           elY = Math.abs(elY + 8)
         }
 
