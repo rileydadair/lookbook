@@ -42,7 +42,6 @@ import imagesLoaded from 'imagesloaded'
 import TweenMax from 'gsap'
 import CustomEase from '@/services/CustomEase'
 import Custom from '@/services/scroll/Custom'
-import Smooth from '@/services/scroll/Smooth'
 
 import BrandLink from './BrandLink'
 import Reveal from './Reveal'
