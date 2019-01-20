@@ -43,7 +43,7 @@ body {
 
   &.detail {
     background-color: $color-beige;
-    color: #03070D;
+    color: $color-black-text;
 
     &.mobile,
     &.tablet {

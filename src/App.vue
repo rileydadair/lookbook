@@ -98,7 +98,7 @@ export default {
     },
   },
   watch: {
-    '$route' (to, from) { // eslint-disable-line
+    '$route'(to, from) { // eslint-disable-line
       document.body.classList.remove('enter')
       this.$refs.header.resetAll()
 

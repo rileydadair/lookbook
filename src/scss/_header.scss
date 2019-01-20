@@ -1,7 +1,7 @@
 $cubic-bezier: cubic-bezier(.04,.22,.15,.99);
 
 // Need to check if it's IE or Edge
-.detail {
+.detail:not(.is-IE) {
   .header {
     mix-blend-mode: exclusion;
     color: #fff;
