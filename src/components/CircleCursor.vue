@@ -124,11 +124,17 @@ export default {
     onHoverCursor(e) {
       this.isHovering = true
       if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = true
-      else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = e.target.dataset.arrow
       else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.showImage()
       else if (e.target.dataset.lock) {
         this.setLockedPos(e.target)
         this.$refs.cursor.dataset.lock = e.target.dataset.lock
+      }
+      else if (e.target.children[0].dataset.lock) {
+        this.setLockedPos(e.target)
+        this.$refs.cursor.dataset.lock = e.target.children[0].dataset.lock
+      }
+      else if (e.target.children[0].hasAttribute('data-arrow')) {
+        this.$refs.cursor.dataset.arrow = e.target.children[0].dataset.arrow
       } else {
         this.$refs.cursor.dataset.fill = true
       }
@@ -139,16 +145,21 @@ export default {
     },
 
     offHoverCursor(e) {
+    
       this.isHovering = false
       if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
-      else if (e.target.hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = false
       else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.hideImage()
       else if (e.target.dataset.lock) {
         this.stopPositionEl = false
         this.$refs.cursor.dataset.lock = false
-
-        if (e.target.dataset.lock === 'controls') this.toggleControlsText(e.target, 'hide')
-      } else {
+      }
+      else if (e.target.children[0].dataset.lock) {
+        this.stopPositionEl = false
+        this.$refs.cursor.dataset.lock = false
+        this.toggleControlsText(e.target, 'hide')
+      } 
+      else if (e.target.children[0].hasAttribute('data-arrow')) this.$refs.cursor.dataset.arrow = false
+      else {
         this.$refs.cursor.dataset.fill = false
       }
     },
@@ -179,8 +190,8 @@ export default {
         elY = Math.abs(elY - 8.35)
       }
 
-      else if (el.dataset.lock === 'controls') {
-        if (el.hasAttribute('data-lock-prev')) {
+      else if (el.children[0].dataset.lock === 'controls') {
+        if (el.children[0].hasAttribute('data-lock-prev')) {
           elX = Math.abs(elX - 9.65)
           elY = Math.abs(elY + 11.1)
         } else {

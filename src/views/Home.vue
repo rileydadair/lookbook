@@ -20,13 +20,13 @@
           ref="mainSlides"
         />
       </template>
-      <span slot="prevButton" class="controls__item js-hover" data-lock="controls" data-lock-prev>
+      <span slot="prevButton" class="controls__item" data-lock="controls" data-lock-prev>
         <span class="controls__text controls__text--prev js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in prevSplit" :key="`prev-part-${index}`" ref="prevParts">{{ part }}</span>
         </span>
         <svg class="controls__arrow controls__arrow--prev"><use xlink:href="#chevron"></use></svg>
       </span>
-      <span slot="nextButton" class="controls__item js-hover" data-lock="controls">
+      <span slot="nextButton" class="controls__item" data-lock="controls">
         <span class="controls__text controls__text--next js-controls-text">
           <span class="controls__part js-controls-part" v-for="(part, index) in nextSplit" :key="`next-part-${index}`" ref="nextParts">{{ part }}</span>
         </span>

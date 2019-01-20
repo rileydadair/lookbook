@@ -16,8 +16,8 @@
         />
       </template>
 
-      <span slot="prevButton" class="controls__arrow-section controls__arrow-section--prev js-hover" data-arrow="prev"></span>
-      <span slot="nextButton" class="controls__arrow-section controls__arrow-section--next js-hover" data-arrow="next"></span>
+      <span slot="prevButton" class="controls__arrow-section controls__arrow-section--prev" data-arrow="prev"></span>
+      <span slot="nextButton" class="controls__arrow-section controls__arrow-section--next" data-arrow="next"></span>
     </SlideMaster>
     <div class="gallery__support" ref="support">
       <template v-for="(item, index) in item.detail_images">

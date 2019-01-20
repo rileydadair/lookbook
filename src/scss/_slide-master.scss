@@ -48,6 +48,7 @@
     margin: 0 auto;
 
     @media (min-width: $screen-lg-min) {
+      cursor: none;
       position: relative;
       padding: 30px 20px;
       width: 58px;
