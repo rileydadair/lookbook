@@ -149,6 +149,7 @@ import Scroll from '@/components/Scroll'
       function componentEnter(component) { component.enter() }
 
       if (this.initialLoad) {
+        console.log('imagesLoaded')
         imagesLoaded(document.querySelectorAll('.slide__img'), {background: true}, () => componentEnter(this))
       }
     },
@@ -162,6 +163,7 @@ import Scroll from '@/components/Scroll'
     },
     methods: {
       enter() {
+        console.log('Home init')
         const delay = 600
         setTimeout(() => {
           Promise.all([

@@ -30,16 +30,16 @@ export default {
     loadAssets(slug) {
       const assets = [];
       // else push mains
-      this.items.forEach((item) => {
-        assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
-      })
-
       // this.items.forEach((item) => {
       //   assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
-      //   item.detail_images.forEach((detail) => {
-      //     assets.push(this.deviceType === 'mobile' ? detail.image_mobile : detail.image_desktop)
-      //   })
       // })
+
+      this.items.forEach((item) => {
+        assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
+        item.detail_images.forEach((detail) => {
+          assets.push(this.deviceType === 'mobile' ? detail.image_mobile : detail.image_desktop)
+        })
+      })
 
       const progressLoaderService = new ProgressLoaderService(assets)
       progressLoaderService.on('complete', () => {
