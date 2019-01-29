@@ -24,15 +24,12 @@ export default {
     }
   },
   mounted() {
-    console.log('loader mounted')
     setTimeout(() => this.show(), 600)
   },
 
   methods: {
     loadAssets(slug) {
       const assets = [];
-      // else push mains
-      console.dir(this.$route)
 
       if (this.$route.name === 'home') {
         this.isHome = true
@@ -41,20 +38,11 @@ export default {
         })
       } else {
         const filtered = this.items.filter(item => item.slug === this.$route.params.slug)
-        console.dir(filtered)
+
         filtered[0].detail_images.forEach(detail => {
           assets.push(this.deviceType === 'mobile' ? detail.image_mobile : detail.image_desktop)
         })
       }
-
-      console.dir(assets)
-
-      // this.items.forEach((item) => {
-      //   assets.push(this.deviceType === 'mobile' ? item.main_image_mobile : item.main_image_desktop)
-      //   item.detail_images.forEach((detail) => {
-      //     assets.push(this.deviceType === 'mobile' ? detail.image_mobile : detail.image_desktop)
-      //   })
-      // })
 
       const progressLoaderService = new ProgressLoaderService(assets)
       progressLoaderService.on('complete', () => {
@@ -111,6 +99,7 @@ export default {
           delay: 0.6
         }, .02, () => {
           this.$refs.loader.style.zIndex = -1
+          this.$refs.loader.style.display = 'none'
           resolve()
         })
       })
