@@ -15,7 +15,8 @@ class ProgressLoader {
   init() {
     this.elements.forEach(element => {
       this.requests.push({
-        element: this.location + element,
+        // element: this.location + element,
+        element: element,
         progress: 0
       });
     });
