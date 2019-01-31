@@ -108,7 +108,9 @@ export default {
       setTimeout(() => {
         document.body.classList.add('enter')
         this.$root.$emit('cursorEnter')
-        this.$refs.scroll.toggle('show', true)
+        if (!this.scrolledDetail) {
+          this.$refs.scroll.toggle('show', true)
+        }
       }, 1600)
     },
 

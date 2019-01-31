@@ -15,7 +15,7 @@
     <CircleCursor v-if="deviceType === 'desktop'" ref="cursor" :menuActive="menuActive" />
     <OverlayMobile v-if="deviceType === 'mobile'" :active="activeOverlay" />
     <Overlay v-else :active="activeOverlay" />
-    <Loader v-if="!initialLoad" ref="loader" :items="items" @setInitialLoad="setInitialLoad" />
+    <Loader v-if="!allAssetsLoaded" ref="loader" :items="items" @setInitialLoad="setInitialLoad" @setAllAssetsLoaded="setAllAssetsLoaded" />
     <template v-if="this.$route.name === 'detail' && deviceType === 'desktop'">
       <div class="message message--mobile">
         <p class="message__text message__text--mobile">Please view on a mobile device.</p>
@@ -52,6 +52,7 @@ export default {
   },
   data() {
     return {
+      allAssetsLoaded: false,
       deviceType: States.deviceType,
       items: items,
       initialMount: false,
@@ -59,9 +60,9 @@ export default {
       isIE: States.isIE,
       menuActive: false,
       progress: 0,
-      transitioning: false,
       scrolledHome: false,
-      scrolledDetail: false
+      scrolledDetail: false,
+      transitioning: false
     }
   },
   beforeCreate() {
@@ -84,6 +85,11 @@ export default {
   methods: {
     setInitialLoad() {
       this.initialLoad = true
+    },
+
+    setAllAssetsLoaded() {
+      this.allAssetsLoaded = true
+      console.log('all assets loaded')
     },
 
     resetCursor() {

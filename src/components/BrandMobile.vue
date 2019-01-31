@@ -42,12 +42,13 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      function componentInit(component) { component.init() }
-      if (this.initialLoad) {
-        imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
-      }
-    })
+    init()
+    // setTimeout(() => {
+    //   function componentInit(component) { component.init() }
+    //   if (this.initialLoad) {
+    //     imagesLoaded(document.querySelectorAll('.brand-img'), {background: true}, () => componentInit(this))
+    //   }
+    // })
   },
   methods: {
     init() {
