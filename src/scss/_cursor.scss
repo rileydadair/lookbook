@@ -36,6 +36,13 @@
     }
   }
 
+  // Detail - view
+  &[data-reveal="true"][data-clickable="true"] {
+    .cursor__text {
+      opacity: 1;
+    }
+  }
+
   &[data-clickable="true"] {
     .cursor__inner {
       transition: height .3s .2s, width .3s .2s, background-color .3s .2s;
@@ -97,12 +104,13 @@
     transition-timing-function: ease-out;
     opacity: 0;
   }
+  
 
-  &__look {
+  &__text {
     backface-visibility: hidden;
     @include font-din;
     @include center-y;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.4px;
     font-size: 2.2rem;
     display: flex;
     justify-content: center;

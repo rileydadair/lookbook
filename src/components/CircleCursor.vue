@@ -1,6 +1,6 @@
 <template>
   <div class="cursor" ref="cursor" data-fill="false" data-lock="false" data-reveal="false" data-clickable="false" data-arrow="false">
-    <div class="cursor__inner" ref="inner"></div>
+    <div class="cursor__inner" ref="inner"><span class="cursor__text">View</span></div>
     <svg class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 15.6">
       <symbol id="arrow">
         <line x1="29" y1="7.8" y2="7.8" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/><polyline points="21.9 0.7 29 7.8 21.9 14.9" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2px"/>
