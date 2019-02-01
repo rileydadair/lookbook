@@ -87,15 +87,14 @@ export default {
           TweenMax.to(this.$refs.back, .8, { opacity: 1, ease: 'Sine.easeIn'})
 
           setTimeout(() => {
+            this.slider.setCurrentSlide(null, index, null)
             // Show gallery photo
             this.$refs.gallerySlides[index].init()
             // Reset brand photo
             this.$emit('resetClickedPhoto')
             // Show title
             this.$refs.galleryTitles[index].show()
-
-            this.slider.setCurrentSlide(null, index, null)
-            this.slider.toggleEvents()
+              .then(() => this.slider.toggleEvents())
           }, 400)
         }
       })
