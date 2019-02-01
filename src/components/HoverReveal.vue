@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TweenMax from 'gsap'
+import { TweenMax, TimelineMax } from 'gsap'
 import CustomEase from '@/services/CustomEase'
 
 export default {
@@ -21,7 +21,6 @@ export default {
       animation: {
         duration: 0.65,
         ease: CustomEase.create("custom", "M0,0 C0.134,0.12 0.21,0.197 0.256,0.282 0.31,0.382 0.356,0.552 0.386,0.632 0.429,0.747 0.461,0.816 0.564,0.912 0.652,0.994 0.806,1 1,1"),
-        // ease: Power2.easeOut,
         opacity: 1
       }
     }
@@ -63,20 +62,20 @@ export default {
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
-          onComplete: () => {
-              TweenMax.set(this.$refs.reveal, {opacity: 0});
-          }
+        onComplete: () => {
+          TweenMax.set(this.$refs.reveal, {opacity: 0});
+        }
       })
       .add('begin')
       .add(new TweenMax(this.$refs.inner, 0.3, {
-          ease: Sine.easeOut,
+          ease: 'Sine.easeOut',
           y: '-40%',
           rotation: 10,
           scale: 0.9,
           opacity: 0
       }), 'begin')
       .add(new TweenMax(this.$refs.img, 0.3, {
-          ease: Sine.easeOut,
+          ease: 'Sine.easeOut',
           rotation: -10,
           scale: 1.5
       }), 'begin')
@@ -86,7 +85,7 @@ export default {
       TweenMax.killTweensOf(this.$refs.inner);
       TweenMax.killTweensOf(this.$refs.img);
 
-      TweenMax.to(this.$refs.reveal, 0.6, {ease: Power2.easeOut, opacity: 0})
+      TweenMax.to(this.$refs.reveal, 0.6, {ease: 'Power2.easeOut', opacity: 0})
     }
   }
 }

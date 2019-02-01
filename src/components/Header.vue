@@ -25,7 +25,9 @@
     </div>
   </header>
 </template>
+
 <script>
+import TweenMax from 'gsap'
 
 export default {
   name: 'Header',
@@ -63,8 +65,6 @@ export default {
       }
 
       this.$emit('toggleMenuState')
-
-      // this.$refs.btn.classList.toggle('is-active')
     },
 
     resetAll() {

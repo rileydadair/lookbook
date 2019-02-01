@@ -104,7 +104,6 @@ export default {
       const xSpeed = 50
       const ySpeed = 150
       const elRect = this.$refs.imgs.getBoundingClientRect()
-      const elWidth = elRect.width
       const elHeight = elRect.height
 
       const { offsetWidth: width, offsetHeight: height } = this.$refs.menu
@@ -114,7 +113,7 @@ export default {
       TweenMax.to(this.$refs.imgs, 2, {
         x: xWalk,
         y: yWalk,
-        ease: Expo.easeOut
+        ease: 'Expo.easeOut'
       })
     },
 

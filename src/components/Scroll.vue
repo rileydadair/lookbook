@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import TweenMax from 'gsap'
+import { TweenMax, TimelineMax } from 'gsap'
+
 export default {
   name: 'Scroll',
   data() {

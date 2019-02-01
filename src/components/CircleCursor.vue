@@ -146,8 +146,8 @@ export default {
     },
 
     offHoverCursor(e) {
-    
       this.isHovering = false
+      
       if (e.target.hasAttribute('data-reveal')) this.$refs.cursor.dataset.reveal = false
       else if (e.target.hasAttribute('data-gif')) this.$refs.reveal.hideImage()
       else if (e.target.dataset.lock) {

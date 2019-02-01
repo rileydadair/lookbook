@@ -113,7 +113,6 @@ export default {
 
     toggle(action) {
       const delay = window.innerWidth > 1199 ? .55 : .45
-      const bodydelay = window.innerWidth > 1199 ? .55 : .45
 
       if (action === 'show') {
         setTimeout(() => this.$refs.about.scrollTo(0, 0), 0)

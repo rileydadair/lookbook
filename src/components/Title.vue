@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import States from '@/services/States'
 import TweenMax from 'gsap'
 
 export default {

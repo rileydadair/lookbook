@@ -47,7 +47,7 @@ export default {
   },
 
   methods: {
-    onHoverNext(e) {
+    onHoverNext() {
       const random = []
 
       !1 === this.oncePlay && (this.oncePlay = !0,

@@ -28,7 +28,7 @@ export default {
   },
 
   methods: {
-    loadAssets(slug) {
+    loadAssets() {
       const assets = [];
 
       if (this.$route.name === 'home') {

@@ -141,18 +141,18 @@ export default {
       if (e === null) return
 
       this.currentIndex = nextIndex
-      
 
-      Promise.all([
-        this.$refs.galleryTitles[currentIndex].hide(),
-        this.$refs.gallerySlides[currentIndex].hide(direction, true).then(() => {
-          this.$refs.galleryTitles[nextIndex].show()
-          this.$refs.gallerySlides[nextIndex].show(direction)
-          this.$refs.supportSlides[currentIndex].hide(direction, false, true)
-          this.$refs.supportSlides[nextIndex].show(direction)
-        })
-      ])
-        .then(() => slider.toggleEvents())
+      this.$refs.galleryTitles[currentIndex].hide()
+      this.$refs.gallerySlides[currentIndex].hide(direction, true)
+        .then(() => 
+          Promise.all([
+            this.$refs.galleryTitles[nextIndex].show(),
+            this.$refs.gallerySlides[nextIndex].show(direction),
+            this.$refs.supportSlides[currentIndex].hide(direction, false, true),
+            this.$refs.supportSlides[nextIndex].show(direction)
+          ])
+            .then(() => slider.toggleEvents())
+        )
     }
   }
 }

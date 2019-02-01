@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import States from '@/services/States'
 import TweenMax from 'gsap'
 import CustomEase from '@/services/CustomEase'
 
