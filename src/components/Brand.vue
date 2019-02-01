@@ -94,7 +94,6 @@ export default {
       }
       this.revealInners = document.querySelectorAll('.reveal__inner')
       this.cursor = document.querySelector('.cursor')
-      this.cursor.dataset.clickable = true
     })
   },
   destroyed() {
@@ -108,6 +107,7 @@ export default {
       setTimeout(() => {
         document.body.classList.add('enter')
         this.$root.$emit('cursorEnter')
+        this.cursor.dataset.clickable = true
         if (!this.scrolledDetail) {
           this.$refs.scroll.toggle('show', true)
         }

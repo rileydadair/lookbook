@@ -41,8 +41,6 @@
     <div class="back-btn" ref="back">
       <span class="back-btn__bar"></span><button class="back-btn__text js-hover" data-lock="back" v-on:click="onBackClick">Back</button>
     </div>
-    <!-- <div class="gallery__section gallery__section--left js-hover" data-arrow="left"></div>
-    <div class="gallery__section gallery__section--right js-hover" data-arrow="right"></div> -->
   </div>
 </template>
 
@@ -69,9 +67,6 @@ export default {
       slider: {}
     }
   },
-  // mounted() {
-  //   window.addEventListener('keydown', this.onBackClick)
-  // },
   methods: {
     init(index) {
       this.currentIndex = index
@@ -146,14 +141,16 @@ export default {
       if (e === null) return
 
       this.currentIndex = nextIndex
+      
 
       Promise.all([
+        this.$refs.galleryTitles[currentIndex].hide(),
         this.$refs.gallerySlides[currentIndex].hide(direction, true).then(() => {
+          this.$refs.galleryTitles[nextIndex].show()
           this.$refs.gallerySlides[nextIndex].show(direction)
           this.$refs.supportSlides[currentIndex].hide(direction, false, true)
           this.$refs.supportSlides[nextIndex].show(direction)
-        }),
-        this.$refs.galleryTitles[currentIndex].hide().then(() => this.$refs.galleryTitles[nextIndex].show())
+        })
       ])
         .then(() => slider.toggleEvents())
     }

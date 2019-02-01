@@ -22,12 +22,11 @@
     pointer-events: none; // Magic sauce
   }
 
-  &[data-fill="true"],
-  &[data-reveal="true"][data-clickable="true"] {
+  &[data-fill="true"] {
     .cursor__inner {
       background-color: $color-white;
-      height: 6rem;
-      width: 6rem;
+        height: 5vw;
+        width: 5vw;
 
       @media (min-width: $screen-xl-min) {
         height: 4.48vw;
@@ -38,6 +37,16 @@
 
   // Detail - view
   &[data-reveal="true"][data-clickable="true"] {
+    .cursor__inner {
+      background-color: $color-white;
+      height: 7.3rem;
+      width: 7.3rem;
+
+      @media (min-width: $screen-xl-min) {
+        height: 4.48vw;
+        width: 4.48vw;
+      }
+    }
     .cursor__text {
       opacity: 1;
     }
@@ -119,7 +128,11 @@
     height: 100%;
     width: 100%;
     opacity: 0;
-    transition: opacity .3s ease-out;
+    transition: opacity .3s;
+
+    @media (min-width: $screen-xxl-min) {
+      font-size: 1.3vw;
+    }
   }
 
   &__arrows {

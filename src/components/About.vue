@@ -4,16 +4,18 @@
       <div class="about__body" ref="body">
         <h1 class="about__header">Just Look At It</h1>
         <p class="about__text about__text--main">Lookbook is a creative outlet - <br />an exploration of interactions and animations. Inspired by prototypes on <a href="https://dribbble.com/" target="_blank" class="about__link">dribbble.com<span class="about__border about__border--dribbble" ref="border"></span></a></p>
-        <ul class="about__list">
-          <li class="about__list-item"><span class="thin">Nike SB Lookbook by </span><a href="https://dribbble.com/shots/4884140-Nike-SB-Lookbook" target="_blank" class="about__link">Craig Gittins<span class="about__border" ref="border"></span></a></li>
-          <li class="about__list-item"><span class="thin">Max Colt VFX by </span><a href="https://dribbble.com/shots/5449199-Maxcolt-VFX-Producer" target="_blank" class="about__link">Advanced Group<span class="about__border" ref="border"></span></a></li>
-          <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/nathanriley" target="_blank" class="about__link">Nathan Riley<span class="about__border" ref="border"></span></a></li>
-          <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/Zhenya_Artem" target="_blank" class="about__link">Zhenya Rynzhuk<span class="about__border" ref="border"></span></a></li>
-          <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/crnacura" target="_blank" class="about__link">Mary Lou<span class="about__border" ref="border"></span></a></li>
-        </ul>
-        <p class="about__text"><span class="thin">Images from </span><a href="https://unsplash.com/" target="_blank" class="about__link">unsplash.com<span class="about__border" ref="border"></span></a></p>
-        <!-- <p class="about__text"><span class="thin">Have a design but need someone to bring it to life? <br/>Hit me up </span><a href="mailto:hello@rileyadair.com" class="about__link">hello@rileyadair.com<span class="about__border" ref="border"></span></a><span class="about__peace">✌</span></p> -->
-        <p class="about__text"><a href="https://rileyadair.com/" target="_blank" class="about__link">rileyadair.com<span class="about__border" ref="border"></span></a></p>
+        <div class="about__credits js-credits">
+          <ul class="about__list">
+            <li class="about__list-item"><span class="thin">Nike SB Lookbook by </span><a href="https://dribbble.com/shots/4884140-Nike-SB-Lookbook" target="_blank" class="about__link">Craig Gittins<span class="about__border" ref="border"></span></a></li>
+            <li class="about__list-item"><span class="thin">Max Colt VFX by </span><a href="https://dribbble.com/shots/5449199-Maxcolt-VFX-Producer" target="_blank" class="about__link">Advanced Group<span class="about__border" ref="border"></span></a></li>
+            <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/nathanriley" target="_blank" class="about__link">Nathan Riley<span class="about__border" ref="border"></span></a></li>
+            <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/Zhenya_Artem" target="_blank" class="about__link">Zhenya Rynzhuk<span class="about__border" ref="border"></span></a></li>
+            <li class="about__list-item"><span class="thin">Various works of </span><a href="https://dribbble.com/crnacura" target="_blank" class="about__link">Mary Lou<span class="about__border" ref="border"></span></a></li>
+          </ul>
+          <p class="about__text"><span class="thin">Images from </span><a href="https://unsplash.com/" target="_blank" class="about__link">unsplash.com<span class="about__border" ref="border"></span></a></p>
+          <!-- <p class="about__text"><span class="thin">Have a design but need someone to bring it to life? <br/>Hit me up </span><a href="mailto:hello@rileyadair.com" class="about__link">hello@rileyadair.com<span class="about__border" ref="border"></span></a><span class="about__peace">✌</span></p> -->
+          <p class="about__text"><a href="https://rileyadair.com/" target="_blank" class="about__link">rileyadair.com<span class="about__border" ref="border"></span></a></p>
+        </div>
       </div>
     </div>
     <svg class="about__logo js-hover" ref="logo" data-gif width="260px" height="466px" viewBox="0 0 260 466" fill="#FFFFFF">
@@ -38,15 +40,18 @@ export default {
   },
   data() {
     return {
+      credits: {},
       current: 0,
       links: [],
+      paths: [],
       smoothInit: false
     }
   },
   mounted() {
     this.links = document.querySelectorAll('.about__link')
+    this.credits = document.querySelector('.js-credits')
     this.paths = document.querySelectorAll('.js-path')
-    this.initSmooth()
+    if (this.deviceType === 'desktop') this.initSmooth()
   },
   destroyed() {
     if (this.smoothInit) this.smooth.destroy()
@@ -84,7 +89,7 @@ export default {
 
     initSmooth() {
       this.smooth = new Smooth({
-        // callback: this.scaleLogo.bind(this),
+        // callback: this.scale.bind(this),
         preload: false,
         native: false,
         noscrollbar: true,
@@ -94,18 +99,14 @@ export default {
     },
 
     // Distracting
-    scaleLogo(vars) {
+    scale(vars) {
       const current = Math.round(vars.current)
-      const scale = ((current - this.current) / 70) + 1
-      // const scale = Math.abs(current - this.current) / 30 + 1
-      // const scale = Math.abs(current - this.current) / 200 + 1 < 1.3 ? Math.abs(current - this.current) / 200 + 1 : 1.3
+      const scale = ((current - this.current) / 130) + 1
 
-      if (window.innerWidth > 1200) {
-        TweenMax.to(this.$refs.logo, 4, {
-          scaleY: scale,
-          ease: 'Power2.easeOut'
-        })
-      }
+      TweenMax.to(this.$refs.body, 1.6, {
+        scaleY: scale,
+        ease: 'Power2.easeOut'
+      })
 
       this.current = current
     },
@@ -145,7 +146,7 @@ export default {
           delay: window.innerWidth > 1199 ? delay + .35 : delay,
           ease: 'Power2.easeOut',
           onComplete(about) {
-            if (window.innerWidth > 1199) {
+            if (about.deviceType === 'desktop') {
               if (!about.smoothInit) {
                 about.smooth.init();
                 about.smoothInit = true
@@ -167,7 +168,7 @@ export default {
           ease: 'Power1.easeIn',
           onComplete: (about) => {
             about.$refs.about.style.display = 'none'
-            if (window.innerWidth > 1199) {
+            if (about.deviceType === 'desktop') {
               about.smooth.off()
               about.smooth.vars.current = 0
               about.smooth.vars.last = 0
