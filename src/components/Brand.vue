@@ -103,7 +103,7 @@ export default {
   methods: {
     init() {
       setTimeout(() => this.$root.$emit('toggleOverlay', 'hide'), 100)
-      setTimeout(() => this.revealImages(), 800)
+      setTimeout(() => this.revealImages(), 850)
       setTimeout(() => {
         document.body.classList.add('enter')
         this.$root.$emit('cursorEnter')
@@ -111,7 +111,7 @@ export default {
         if (!this.scrolledDetail) {
           this.$refs.scroll.toggle('show', true)
         }
-      }, 1400)
+      }, 1450)
     },
 
     revealImages() {
