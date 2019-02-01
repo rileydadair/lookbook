@@ -56,7 +56,6 @@ export default {
     this.$root.$on('assetsLoaded', () => {
       this.deviceType === 'mobile' ? this.$refs.brandMobile.init() : this.$refs.brand.init()
     })
-
     // Get item object
     items.forEach((item, index, array) => {
       if (item.slug === this.$route.params.slug) {
@@ -69,7 +68,6 @@ export default {
         this.nextSlug = array[nextIndex].slug
         return
       }
-      // else - set data to render 404 page
     })
 
     if (this.deviceType === 'desktop') this.$emit('resetCursor')

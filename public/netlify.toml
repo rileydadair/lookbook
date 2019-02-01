@@ -3,9 +3,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "https://lookbook.rileyadair.com"
-  status = 404
-  force = true
