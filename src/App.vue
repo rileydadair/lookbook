@@ -66,7 +66,7 @@ export default {
     }
   },
   beforeCreate() {
-    document.body.className = States.deviceType
+    document.body.className = `is-${States.deviceType}`
     if (States.isIE) document.body.classList.add('is-IE')
   },
   mounted() {
@@ -89,7 +89,6 @@ export default {
 
     setAllAssetsLoaded() {
       this.allAssetsLoaded = true
-      console.log('all assets loaded')
     },
 
     resetCursor() {

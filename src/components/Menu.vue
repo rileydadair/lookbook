@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       animation: {
-        duration: this.deviceType === 'desktop' ? 0.95 : 0.85,
+        duration: this.deviceType === 'desktop' ? 0.9 : 0.85,
         ease: CustomEase.create("custom", "M0,0 C0.29,0 0.312,0.111 0.348,0.166 0.381,0.216 0.414,0.34 0.446,0.48 0.466,0.57 0.492,0.756 0.582,0.862 0.66,0.954 0.704,1 1,1")
       },
       canHover: true,
@@ -133,12 +133,12 @@ export default {
         this.$refs.nav.style.display = 'block'
         this.$refs.imgs.style.display = 'block'
 
-        TweenMax.set(this.$refs.items, {opacity: 0, y: '100%'})
+        TweenMax.set(this.$refs.items, {opacity: 0, y: '160%'})
         
         setTimeout(() => {
-          TweenMax.staggerTo(this.$refs.items, 0.6, { ease: 'Sine.easeIn', opacity: 1 }, .085)
-          TweenMax.staggerTo(this.$refs.items, 0.8, { ease: 'Power3.easeOut', y: '0%' }, .085)
-        }, this.deviceType === 'desktop' ? 550 : 450)
+          TweenMax.staggerTo(this.$refs.items, this.deviceType === 'desktop' ? .7 : .6, { ease: 'Sine.easeIn', opacity: 1 }, .085)
+          TweenMax.staggerTo(this.$refs.items, this.deviceType === 'desktop' ? .9 : .8, { ease: 'Power3.easeOut', y: '0%' }, .085)
+        }, this.deviceType === 'desktop' ? 500 : 450)
 
         if (this.deviceType === 'desktop') this.initMousemove()
       }

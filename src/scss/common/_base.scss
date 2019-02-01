@@ -30,8 +30,8 @@ body {
     }
   }
 
-  &.mobile,
-  &.tablet {
+  &.is-mobile,
+  &.is-tablet {
     background-color: $color-beige;
     position: fixed;
     top: 0;
@@ -45,8 +45,8 @@ body {
     background-color: $color-beige;
     color: $color-black-text;
 
-    &.mobile,
-    &.tablet {
+    &.is-mobile,
+    &.is-tablet {
       position: relative;
       min-height: auto;
     }
@@ -65,7 +65,7 @@ body {
     }
   }
 
-  &.desktop {
+  &.is-desktop {
     overflow: hidden;
 
     .main:after {

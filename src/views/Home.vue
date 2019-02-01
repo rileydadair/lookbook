@@ -46,7 +46,7 @@
 
     <div class="titles">
       <template v-for="(item, index) in items">
-        <div class="title__index" @click="handleTitleClick(index)" :key="`title-${item.slug}`">
+        <div class="title" @click="handleTitleClick(index)" :key="`title-${item.slug}`">
           <Title :titleVal="item.title" :titleIndex="titleIndex" :index="index" :slug="item.slug" ref="titles" />
         </div>
       </template>
