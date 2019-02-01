@@ -1,11 +1,11 @@
 # The following redirect is intended for use with most SPA's that handles routing internally.
 [[redirects]]
   from = "/*"
-  to = "/"
-  status = 404
-  force = true
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "https://lookbook.rileyadair.com"
+  status = 404
+  force = true
