@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     showImage() {
-      TweenMax.killTweensOf(this.$refs.inner);
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
@@ -41,7 +40,8 @@ export default {
         }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.img, .3, {
+      .add(new TweenMax(this.$refs.img, .2, {
+          ease: 'Sine.easeOut',
           opacity: 1,
       }), 'begin')
       .add(new TweenMax(this.$refs.img, 1.8, {
@@ -52,7 +52,6 @@ export default {
     },
 
     hideImage() {
-      TweenMax.killTweensOf(this.$refs.inner);
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
@@ -61,17 +60,15 @@ export default {
         }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.img, 0.2, {
+      .add(new TweenMax(this.$refs.img, .2, {
           ease: 'Sine.easeOut',
           opacity: 0,
       }), 'begin')
     },
 
     leaveImage() {
-      TweenMax.killTweensOf(this.$refs.inner);
       TweenMax.killTweensOf(this.$refs.img);
-
-      TweenMax.to(this.$refs.reveal, 0.6, {ease: 'Power2.easeOut', opacity: 0})
+      TweenMax.to(this.$refs.img, 0.6, {ease: 'Power2.easeOut', opacity: 0})
     }
   }
 }
