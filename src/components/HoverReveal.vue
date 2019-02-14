@@ -36,23 +36,17 @@ export default {
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
-          onStart: () => {
-              this.$refs.reveal.style.opacity = 1;
-          }
+        onStart: () => {
+          this.$refs.reveal.style.zIndex = 1;
+        }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.inner, .8, {
-          ease: 'Power3.easeOut',
-          startAt: {opacity: 0, y: '50%', rotation: -15, scale:0},
-          y: '0%',
-          rotation: 0,
+      .add(new TweenMax(this.$refs.img, .3, {
           opacity: 1,
-          scale: 1
       }), 'begin')
-      .add(new TweenMax(this.$refs.img, .8, {
-          ease: 'Power3.easeOut',
-          startAt: {rotation: 15, scale: 2},
-          rotation: 0,
+      .add(new TweenMax(this.$refs.img, 1.8, {
+          ease: 'Power2.easeOut',
+          startAt: {scale: 1.3},
           scale: 1
       }), 'begin')
     },
@@ -62,22 +56,14 @@ export default {
       TweenMax.killTweensOf(this.$refs.img);
 
       this.tl = new TimelineMax({
-        onComplete: () => {
-          TweenMax.set(this.$refs.reveal, {opacity: 0});
+        onStart: () => {
+          this.$refs.reveal.style.zIndex = 0;
         }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.inner, 0.3, {
+      .add(new TweenMax(this.$refs.img, 0.2, {
           ease: 'Sine.easeOut',
-          y: '-40%',
-          rotation: 10,
-          scale: 0.9,
-          opacity: 0
-      }), 'begin')
-      .add(new TweenMax(this.$refs.img, 0.3, {
-          ease: 'Sine.easeOut',
-          rotation: -10,
-          scale: 1.5
+          opacity: 0,
       }), 'begin')
     },
 
