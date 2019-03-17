@@ -98,7 +98,7 @@ export default {
 
         TweenMax.to(this.$refs.img, faster ? this.animation.hideDuration : this.animation.duration, tween)
 
-        TweenMax.to(this.$refs.img, (faster ? this.animation.hideDuration : this.animation.duration + .35), {
+        TweenMax.to(this.$refs.img, (faster ? this.animation.hideDuration : this.animation.duration + .3), {
           ease: this.animation.ease,
           startAt: action === 'hide' ? {} : {scale: 1.15 },
           scale: action === 'hide' ? 1.15 : 1,
