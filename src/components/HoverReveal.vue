@@ -40,7 +40,7 @@ export default {
         }
       })
       .add('begin')
-      .add(new TweenMax(this.$refs.img, .2, {
+      .add(new TweenMax(this.$refs.img, .1, {
           ease: 'Sine.easeOut',
           opacity: 1,
       }), 'begin')
