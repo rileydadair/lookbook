@@ -97,7 +97,7 @@ export default {
   methods: {
     initWheel() {
       // Create instance of Lethargy to handle wheel event check.
-      this.lethargy = new Lethargy()
+      this.lethargy = new Lethargy(6, 5, 0.03, 50)
 
       // Quick fix for Chrome update: passive event listener on window or document
       this.scrollEl = this.$parent.$el
