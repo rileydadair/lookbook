@@ -1,9 +1,11 @@
 <template>
   <div :class="className" ref="reveal">
-    <div :class="[`${className}__inner`, 'js-hover', { 'is-portrait': isPortrait }, { 'is-clickable': isClickable }]" data-reveal ref="inner" v-on:click="onPhotoClick">
-      <div :class="`${className}__img`" class="brand-img" :style="{ backgroundImage: bgImage }" ref="img"></div>
-      <div :class="`${className}__overlay ${className}__overlay--top`" ref="overlayTop"></div>
-      <div :class="`${className}__overlay ${className}__overlay--bottom`" ref="overlayBottom"></div>
+    <div :class="`${className}__wrap`">
+      <div :class="[`${className}__inner`, 'js-hover', { 'is-portrait': isPortrait }, { 'is-clickable': isClickable }]" data-reveal ref="inner" v-on:click="onPhotoClick">
+        <div :class="`${className}__img`" class="brand-img" :style="{ backgroundImage: bgImage }" ref="img"></div>
+        <div :class="`${className}__overlay ${className}__overlay--top`" ref="overlayTop"></div>
+        <div :class="`${className}__overlay ${className}__overlay--bottom`" ref="overlayBottom"></div>
+      </div>
     </div>
   </div>
 </template>

@@ -16,9 +16,39 @@
   &:nth-child(1) {
     width: 25.8%;
 
-    .reveal__inner {
+    .reveal__wrap {
       @include center-y;
       height: 51.5%;
+      width: 100%;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: $color-beige;
+        z-index: 100;
+      }
+
+      &:before {
+        content: '';
+        top: -2px;
+      }
+
+      &:after {
+        bottom: -2px;
+        background: $color-beige;
+      }
+    }
+
+    .reveal__inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
     }
   }
 
