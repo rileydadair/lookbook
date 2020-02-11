@@ -100,7 +100,7 @@ export default {
       this.lethargy = new Lethargy()
 
       // Quick fix for Chrome update: passive event listener on window or document
-      this.scrollEl = this.$parent.$el;
+      this.scrollEl = this.$parent.$el
 
       this.scrollEl.addEventListener('mousewheel', this.onWheel)
       this.scrollEl.addEventListener('wheel', this.onWheel)
