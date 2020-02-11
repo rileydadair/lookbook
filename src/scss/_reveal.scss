@@ -29,7 +29,7 @@
         height: 3px;
         width: 100%;
         background: $color-beige;
-        z-index: 100;
+        z-index: 1;
       }
 
       &:before {
@@ -40,6 +40,12 @@
       &:after {
         bottom: -2px;
         background: $color-beige;
+      }
+
+      &.has-entered:before,
+      &.has-entered:after {
+        opacity: 0;
+        transition: opacity .2s linear;
       }
     }
 
