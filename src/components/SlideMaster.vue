@@ -56,6 +56,7 @@ export default {
     return {
       canEvent: true,
       currentIndex: this.initialSlide,
+      scrollEl: null,
       totalSlides: 0
     }
   },
@@ -98,10 +99,13 @@ export default {
       // Create instance of Lethargy to handle wheel event check.
       this.lethargy = new Lethargy()
 
-      window.addEventListener('mousewheel', this.onWheel)
-      window.addEventListener('wheel', this.onWheel)
-      window.addEventListener('DOMMouseScroll', this.onWheel)
-      window.addEventListener('MozMousePixelScroll', this.onWheel)
+      // Quick fix for Chrome update: passive event listener on window or document
+      this.scrollEl = this.$parent.$el;
+
+      this.scrollEl.addEventListener('mousewheel', this.onWheel)
+      this.scrollEl.addEventListener('wheel', this.onWheel)
+      this.scrollEl.addEventListener('DOMMouseScroll', this.onWheel)
+      this.scrollEl.addEventListener('MozMousePixelScroll', this.onWheel)
     },
 
     initSwipe() {
@@ -122,10 +126,10 @@ export default {
     },
 
     removeWheel() {
-      window.removeEventListener('mousewheel', this.onWheel)
-      window.removeEventListener('wheel', this.onWheel)
-      window.removeEventListener('DOMMouseScroll', this.onWheel)
-      window.removeEventListener('MozMousePixelScroll', this.onWheel)
+      this.scrollEl.removeEventListener('mousewheel', this.onWheel)
+      this.scrollEl.removeEventListener('wheel', this.onWheel)
+      this.scrollEl.removeEventListener('DOMMouseScroll', this.onWheel)
+      this.scrollEl.removeEventListener('MozMousePixelScroll', this.onWheel)
     },
 
     removeSwipe() {
