@@ -1,5 +1,5 @@
 # Lookbook
 
-An exploration of interactions and animations inspired by prototypes on dribbble.com. Built with Vue.js and GSAP.
+An exploration of interactions and animations inspired by prototypes on dribbble.com. Built with [Vue.js](https://vuejs.org/) and [GSAP](https://greensock.com/).
 
-<a href="https://lookbook.rileyadair.com/" target="_blank">Just Look At It</a>
+[Just Look At It](https://lookbook.rileyadair.com/)
